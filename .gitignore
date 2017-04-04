@@ -1,0 +1,8 @@
+bin
+lib
+bwapi-data
+ecj
+.settings
+.classpath
+.proyect
+*.dll
