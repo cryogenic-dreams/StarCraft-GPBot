@@ -1,0 +1,153 @@
+Here we're back again.
+
+It seems I was wrong all along
+I don't need to implement concurrency
+What a relief...
+
+I'm going to write a couple
+of very basic macros
+Such as collect resources and build a
+building (maybe, just maybe
+train units).
+
+
+I deleted any threads so far
+so now the bot is single-
+threaded.
+
+i'm going to clean all that
+messy code, too.
+
+Let's start!
+
+ok, so the tutorial at bwmirror
+and sscait had this code.
+It basically collects resources
+and trains an SCV when
+resources reach certain levels
+
+Breaking the actions, it could be:
+
+- well, maybe just find and 
+collect (I don't want to make
+really big macros, keep it simple)
+- train a specific unit
+
+Sorry, lost my project browser
+
+
+Say, we want an SCV to start 
+collecting. That would be the whole
+instruction.
+Now, we want to know, in terms of
+GP: is it terminal? or non-terminal?
+
+Basically, we decide.
+
+
+Usually, bot's actions will be terminals
+I'm going to take a look at it, 
+i don't want to have so many terminals
+
+
+So here we have two errors marking two variables that aren't declared.
+
+I'm going to take a look at DoubleData to see how defining data in GP works.
+
+
+As you can see I'm a big fan of copypasting
+That's never good T_T
+
+
+
+Our unit is not a double, it's a... well, unit class.
+
+
+
+
+
+
+
+Wait a sec, I'm just doing something wrong
+Very wrong
+come on
+
+
+thank you mozilla
+wrong docu
+
+
+
+no need of cloning, yet
+
+
+Ok, I'm idiot
+let's extend from the parent class and pretend we haven't seen anything
+
+
+
+There's also this, "game" variable
+Let's do the same and see how it works
+
+
+First things first
+
+
+I love Gametal!
+
+
+
+Now, all our variables inside ecj are written, I'll call them. I'm not sure how, let me see again Add.java
+
+
+mmmm
+mmmmmmmmmm
+mmmmmmmmmmm
+m
+I guess it could work...
+
+
+Ok, from what I've seen:
+
+1st we create the GPdata so ecj can manage internally the data
+
+2nd instance it inside the problem
+(just like in the tutorial)
+(yes)
+son, that's gonna be a lot of variables.
+
+
+
+
+
+
+
+
+
+
+
+
+ECLIPSE PLISSSS
+
+
+
+
+
+
+
+
+
+
+
+FATALITY
+
+
+
+
+
+
+
+
+
+That's all for today
+Bye!

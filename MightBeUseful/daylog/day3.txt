@@ -1,0 +1,114 @@
+Helloooo
+
+Yesterday I tried to make this big gpnode called CollectMinerals.
+
+I thought I had to write every single type of data as a GPData. I was wrong. I'm glad I was wrong.
+
+Finally, after some... time I launched both game and bot. But it failed, just when I stopped streaming I realized I had 2 things wrong, let see them:
+
+1st THERE'S ALWAYS A CONFIGURATION FILE
+
+2nd The GPData type GameData was instantiated but it was null as it is "completely" setted when a game starts, no when I call the problem.
+I set an event that gets triggered when gimmeIt is called in TestBot1.
+
+
+Let's see it running
+It should be collecting minerals.
+
+Waiting for BW to open
+
+
+Btw, I was thinking about making a co-existing GP.
+That means two GP generated bots will be fighting.
+
+Well, that's working.
++1
+
+Let's write more macros.
+Man, alll those debuging prints
+
+This is a training macro
+Let's train marines
+Sounds like a plan
+
+
+But first, let's build the barracks
+
+
+
+Copypasting, what could go wrong?
+
+
+
+
+I'm guessing it's all set
+
+
+I'm not seeing barracks
+
+:(
+
+Why u not building?
+
+
+I guess because I have many terminals
+
+
+???
+I'll put 5 children for the moment
+
+
+
+
+No, you're not building barracks, you liar
+
+At least it's having more nodes
+
+
+
+Let's see if it's going slower now
+
+
+
+WOAH, my cpu is at 93%
+whoops
+
+
+OMG
+Finally!!!!
+YESSSSSSSSSSSSSSSSSSSSSSS
+IT'S ALIVEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+
+Buring the CPU!!!!!!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GG
+
+
+
+
+
+
+
+The proof of concept is done.

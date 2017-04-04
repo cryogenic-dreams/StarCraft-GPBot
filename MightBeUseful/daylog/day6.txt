@@ -1,0 +1,9 @@
+I'll be reading a little docu right now.
+
+For today:
+
+- See if implementing ADM will help at build plan.
+- Parsimony to reduce depth of the tree
+- Incluse grammar, this will help for sure!
+
+OK, this is some hard shit, I'll be back when I have some clear acknowledgements of it

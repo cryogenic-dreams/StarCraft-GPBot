@@ -1,0 +1,38 @@
+For today:
+
+Find a way to indicate an individual has more than one trees.->Done
+Find a way to "define" those trees.->Done!!!!
+
+The idea is figuring out how does a function set work and if it's going to help me "defining" the trees.
+
+Each GPTree subscribes to a GPFunctionSet which defines the GPNodes legally permitted in the tree. GPFunctionSets store, in a variety of redundant tables, the relevant GPNodes. When an algorithm needs to generate a tree, it does so by finding the appropriate GPFunctionSet choosing GPNodes from the set, and cloning them to produce nodes to hang in the tree. How do I indicate the GPFunction associated to which GPTree??? -->> In the conf file
+
+
+
+
+
+We're running
+Let's expect the worst
+
+
+no build plan 
+still, it doesn't crash
+neither builds anything
+
+
+OMg, it's running
+
+HOLY SHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEET
+
+Those are a lot of nodes
+
+
+OMGGGGGGGGGGGGGGGGGGGGGGGGG
+IT WORKSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+HOPE
+ESPOIRU
+
+Still...
+too many nodes
+zawa zawa zawa

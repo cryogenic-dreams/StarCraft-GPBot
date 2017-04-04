@@ -1,0 +1,62 @@
+Last day we finally made a bot that was able to collect+build+train.
+
+Btw, this is the BWAPI conf file.
+I'm going to reduce the game's speed a little.
+
+Also, lats day I made my processor go 99%.
+Yeah
+
+We're going to make today a very simple build plan.
+
+
+this documentation is wrong, build arguments' positions are switched.
+
+i'm going to take a random building from this file and send it to the building class.
+because there's no easy way of talling apart which buildings are Terran or not or which units are buildings I'll just create a file a put them there.
+
+I guess I'l put a unit.canBuild() before each building action
+
+
+Here I'm having some trouble
+In order to let ecj (the GP framework) control the build plan I have to give it the classes that extend from GPNode, like this one.
+
+However, ecj does not control the random building I'm getting inside BuildMeAbuilding, so each time the game starts there'll be different build plans but the bot didn't "learn" from them (I'm trying to explain this, and I'm failing so hard).
+
+
+
+I think I might need to create a node for each build command.
+Which i don't like, bc there're many.
+
+
+
+For the next time, I'll make a script to make things faster
+
+
+I'm going to finish this stream sooner because I'm feeling quite sick.
+Before that I'll set all building classes with this 2 lines.
+
+
+
+
+
+
+
+
+Our build plan would end looking like a list of tuples:
+
+List = (UnitType, int supply),
+	(UnitType, int supply)...etc
+
+the list will have 5 elements (if I wrote everything right).
+
+then, insde onFrame() i'll execute it (still don't know how).
+
+
+
+
+
+Well, that's all for today.
+Sorry if it was more boring and slow than usual.
+
+
+Bye

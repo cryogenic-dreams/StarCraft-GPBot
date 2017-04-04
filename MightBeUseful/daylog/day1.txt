@@ -1,0 +1,160 @@
+Hi!
+I'm starting this bot as a
+final career project.
+
+I'm not so good at Genetic
+Programing, and ecj.
+
+Let's take a look at some methods
+from Problem.
+
+Let's launch this shit!
+
+Chaoslauncher is opening StarCraft
+It usually takes from 30 sec 
+to 60 secs.
+
+There we go.
+
+Gotta go fast.
+
+I want to know if a method gets called
+and how it behaves when the game ends.
+
+Whoops
+
+That is... unexpected
+
+Maybe I left the sleep method on
+nope
+I just broke something xD
+
+This mess is the "bot"
+It's from the tutorial+the ecj
+tutorial.
+I've just fused them together
+
+Damn, this looks terrible.
+
+Let's go full diogenes
+And debug using system prints
+Niiiiiiiiice
+
+Ecj is running, partially
+
+
+I should have gone here
+
+
+I'm looking at the shutting down
+
+HAhahaha
+I knew
+It was one of my first problems
+
+
+
+
+YOLO
+
+Let's watch them die.
+And see if they exit properly.
+I'm (how do you say it..)
+Considering concurrency
+
+
+
+guess today is not my day
+
+okay
+break point time
+
+
+not sure if Stacraft will help
+But Windows already f**
+
+
+
+
+great
+
+it wasn't a great idea to start with
+
+
+
+oh god
+
+
+
+wait for death
+
+So let's consider concurrency
+
+This can only be either great 
+or terrible
+I'm guessing terrible
+
+
+
+
+NOW this is a wild guess
+by that point game shouldn't exist or
+is already ended and you
+cannot pause it.
+
+Let's give it a chance before
+I go to bed, damn it
+
+
+
+
+
+
+
+
+           /|\
+          / | \
+         /  |  \
+         |  |  |
+         |  |  |
+          \ | /
+PLEASE
+
+
+Interesting
+Not as expected 
+But if I wasn't so bad it'll work
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Let's call it a day
+Or not
+Bye
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

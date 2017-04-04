@@ -1,0 +1,27 @@
+OK, time has come
+It's time to make a tech tree
+Using grammar
+
+#wikipedia is your friend
+#do i need an erc as supply?
+#erc is Ephemeral Random Constant
+#i'm guessing it's a yes
+oh yes
+
+
+Yeap, basically, we'll operate our build plan with supply (not time, because, the game is gonna be fasssst)
+
+i need like 34634343 gpnodes
+
+
+ok, i'll have finished before the next stream a working script that writes all those tiring GPnodes and also adds the parameters to the params file
+
+ah
+almost forgot
+I'll upload it to github
+
+finally...(shame to me)
+
+and, that's all I guess
+
+Bye
