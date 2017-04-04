@@ -1,0 +1,54 @@
+#This is my dear conf file
+#I completely forgot about it yesterday
+#Never again
+parent.0 = ecj\\ec\\gp\\koza\\koza.params
+
+
+# the next four items are already defined in koza.params, but we
+# put them here to be clear.
+
+pop.subpop.0.species.ind.numtrees = 2
+
+pop.subpop.0.species.ind.tree.0 = ec.gp.GPTree
+
+pop.subpop.0.species.ind.tree.0.tc = tc0
+pop.subpop.0.species.ind.tree.1 = ec.gp.GPTree
+
+pop.subpop.0.species.ind.tree.1.tc = tc1
+
+
+# We have one function set, of class GPFunctionSet
+gp.fs.size = 2
+gp.fs.0 = ec.gp.GPFunctionSet
+gp.fs.1 = ec.gp.build.PTCFunctionSet
+# We'll call the function set "f0"and "f1".
+gp.fs.0.name = f0
+gp.fs.1.name = f1
+
+#functionset0:
+gp.fs.0.size = 2
+gp.fs.0.func.0 = terminals.CollectMinerals 
+gp.fs.0.func.0.nc = nc0
+gp.fs.0.func.1 = terminals.TrainMarine
+gp.fs.0.func.1.nc = nc0
+#where nc is the name of the node in koza.params
+
+#functionset1:
+gp.fs.1.size = 6
+gp.fs.1.func.0 = terminals.BuildBarracks
+gp.fs.1.func.0.nc = nc80
+gp.fs.1.func.1 = terminals.BuildBunker
+gp.fs.1.func.1.nc = nc25
+gp.fs.1.func.2 = terminals.BuildCommandCenter
+gp.fs.1.func.2.nc = nc10
+gp.fs.1.func.3 = terminals.BuildRefinery
+gp.fs.1.func.3.nc = nc65
+gp.fs.1.func.4 = terminals.BuildSupplyDepot
+gp.fs.1.func.4.nc = nc50
+gp.fs.1.func.5 = nonTerminal.BuildPlan
+gp.fs.1.func.5.nc = nc90
+#here, the number near nc is the probability of 
+
+#I also forgot this part completely
+eval.problem = problem.StarCraftBot
+eval.problem.data = data.GameData

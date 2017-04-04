@@ -1,0 +1,46 @@
+#This is my Terran Tech Tree, it'll define a buildplan
+#<> words are GPNodes that are non-terminal 
+#() are terminals
+# and (world<hello>) define nodes with childs a la Lisp
+
+#this tech tree should work!
+
+#JUST FLIP THE DAMN TREE
+
+<buildplan> ::= <basicbuildings> <buildings>
+#refinery and supply depot (specially supply depots) need a higher probability
+<basicbuildings> ::= (supply_depot) | (command_center) | (refinery)
+<buildings> ::= <building> (supply) | <building> (supply) <buildings>
+<building> ::= <barracks> | <engineering_bay> | <factory> | <bunker> | <academy> | <missile_turret> | <starport> | <armory> | <machine_shop> | <comsat_station> | <science_facility> | <control_tower> | <physics_lab> | <covert_ops> | <nuclear_silo>
+
+<barracks> ::= (command_center)
+<engineering_bay> ::= (command_center)
+
+<factory> ::= <barracks>
+<bunker> ::= <barracks>
+<academy> ::= <barracks>
+
+<missile_turret> ::= <engineering_bay>
+
+<starport> ::= <factory>
+<armory> ::= <factory>
+#add-on, might need to know this in the future
+<machine_shop> ::= <factory> 
+
+#add-on
+<comsat_station> ::= <academy> (command_center)
+<science_facility> ::= <starport>
+#add-on
+<control_tower> ::= <starport>
+
+<physics_lab> ::= <science_facility>
+#add-on
+<covert_ops> ::= <science_facility>
+
+#add-on
+<nuclear_silo> ::= <covert_ops> (command_center)
+
+#I think the individual will evaluate the tree and, inside the nodes it'll check if the buildings are
+#already built, if not, add to the build plan; now, that's done in the node, don't look here, nope
+
+
