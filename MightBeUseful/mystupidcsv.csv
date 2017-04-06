@@ -17,8 +17,3 @@ ControlTower,control_tower,1,UnitType.Terran_Control_Tower,1
 PhysicsLab,physics_lab,1,UnitType.Terran_Physics_Lab,1
 CovertOps,covert_ops,1,UnitType.Terran_Covert_Ops,1
 NuclearSilo,nuclear_silo,2,UnitType.Terran_Nuclear_Silo,1
-Supply,supply,0,removethisone,1
-Building,building,1,removethisone,1
-Buildings,buildings,3,removethisone,1
-BuildPlan,buildplan,2,removethisone,1
-BasicBuildings,basicbuildings,1,removethisone,1

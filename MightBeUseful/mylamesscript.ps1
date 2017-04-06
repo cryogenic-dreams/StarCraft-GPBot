@@ -11,7 +11,6 @@ param($File, $classFile)
 
 
 #calm down, scv are from starcraft, csv from powershell -_-
-
 $csv = import-csv $File
 
 #now, let's replace
@@ -24,16 +23,22 @@ Foreach($row in $csv){
     $children = $row.Children
     $unitType = $row.UnitType
     $funcNo = $row.FuncNo
-    $javaFileName = $nameOfYourClass + ".java"
+
     $wholeText= Get-Content $classFile
+    $package = "nonTerminal"
+    if ($children -eq 0) {$package = "terminals"}
+
+    $javaFileName = "..\GPBot\src\"+$package+'\'+$nameOfYourClass + ".java"
+
     #let's think this works
-    $wholeText.replace('$nameOfYourClass', $nameOfYourClass) | $wholeText.replace('$name', $name) | $wholeText.replace('$children', $children) | $wholeText.replace('$unitType', $unitType) > $javaFileName #magic or stackoverflow
-    #one more thing
-    #well, that'll be for tomorrow
-    #also generate the gpnode params
-    if($children>0){$package = "nonterminal"}
-    else {$package="terminal"}
-    $line1 = 'gp.fs.'+$funcNo+'.func.'+$count+' = '+$package+'.' + $nameOfYourClass + '`r`n' 
-    $line2 = 'gp.fs.'+$funcNo+'.func.'+$count+'.nc = nc'+$children+'`r`n'
-    $line1 + $line2 >> 'allmynodes.params'
+    $wholeText = $wholeText.replace('$package', $package) 
+    $wholeText = $wholeText.replace('$nameOfYourClass', $nameOfYourClass) 
+    $wholeText = $wholeText.replace('$name', $name) 
+    $wholeText = $wholeText.replace('$children', $children) 
+    $wholeText = $wholeText.replace('$unitType', $unitType) 
+    $wholeText > $javaFileName #magic or stackoverflow, magicflow
+    
+    'gp.fs.'+$funcNo+'.func.'+$count+' = '+$package+'.' + $nameOfYourClass >> '..\GPBot\allmynodes.params'
+    'gp.fs.'+$funcNo+'.func.'+$count+'.nc = nc'+$children >> '..\GPBot\allmynodes.params'
+    $count = $count + 1
     }

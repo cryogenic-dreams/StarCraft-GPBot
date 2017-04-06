@@ -1,4 +1,4 @@
-package terminals;
+package $package;
 
 import bwapi.UnitType;
 import data.GameData;
@@ -17,7 +17,7 @@ public class $nameOfYourClass extends GPNode {
 	 */
 
 	//OO gods forbid me
-	private String name = $name;
+	private String name = "$name";
 	private int noChildren = $children;
 	private UnitType unit = $unitType;
 	
