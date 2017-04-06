@@ -10,10 +10,8 @@ parent.0 = ecj\\ec\\gp\\koza\\koza.params
 pop.subpop.0.species.ind.numtrees = 2
 
 pop.subpop.0.species.ind.tree.0 = ec.gp.GPTree
-
 pop.subpop.0.species.ind.tree.0.tc = tc0
 pop.subpop.0.species.ind.tree.1 = ec.gp.GPTree
-
 pop.subpop.0.species.ind.tree.1.tc = tc1
 
 
@@ -26,28 +24,60 @@ gp.fs.0.name = f0
 gp.fs.1.name = f1
 
 #functionset0:
-gp.fs.0.size = 2
-gp.fs.0.func.0 = terminals.CollectMinerals 
+gp.fs.0.size = 1
+gp.fs.0.func.0 = terminals.TrainMarine
 gp.fs.0.func.0.nc = nc0
-gp.fs.0.func.1 = terminals.TrainMarine
-gp.fs.0.func.1.nc = nc0
 #where nc is the name of the node in koza.params
 
 #functionset1:
-gp.fs.1.size = 6
-gp.fs.1.func.0 = terminals.BuildBarracks
-gp.fs.1.func.0.nc = nc80
-gp.fs.1.func.1 = terminals.BuildBunker
-gp.fs.1.func.1.nc = nc25
-gp.fs.1.func.2 = terminals.BuildCommandCenter
-gp.fs.1.func.2.nc = nc10
-gp.fs.1.func.3 = terminals.BuildRefinery
-gp.fs.1.func.3.nc = nc65
-gp.fs.1.func.4 = terminals.BuildSupplyDepot
-gp.fs.1.func.4.nc = nc50
-gp.fs.1.func.5 = nonTerminal.BuildPlan
-gp.fs.1.func.5.nc = nc90
-#here, the number near nc is the probability of 
+gp.fs.1.size = 23
+gp.fs.1.func.0 = terminals.Refinery
+gp.fs.1.func.0.nc = nc0
+gp.fs.1.func.1 = terminals.CommandCenter
+gp.fs.1.func.1.nc = nc0
+gp.fs.1.func.2 = terminals.SupplyDepot
+gp.fs.1.func.2.nc = nc0
+gp.fs.1.func.3 = nonTerminal.Barracks
+gp.fs.1.func.3.nc = nc1
+gp.fs.1.func.4 = nonTerminal.Bunker
+gp.fs.1.func.4.nc = nc1
+gp.fs.1.func.5 = nonTerminal.EngineeringBay
+gp.fs.1.func.5.nc = nc1
+gp.fs.1.func.6 = nonTerminal.MissileTurret
+gp.fs.1.func.6.nc = nc1
+gp.fs.1.func.7 = nonTerminal.Academy
+gp.fs.1.func.7.nc = nc1
+gp.fs.1.func.8 = nonTerminal.Factory
+gp.fs.1.func.8.nc = nc1
+gp.fs.1.func.9 = nonTerminal.Starport
+gp.fs.1.func.9.nc = nc1
+gp.fs.1.func.10 = nonTerminal.Armory
+gp.fs.1.func.10.nc = nc1
+gp.fs.1.func.11 = nonTerminal.MachineShop
+gp.fs.1.func.11.nc = nc1
+gp.fs.1.func.12 = nonTerminal.ComsatStation
+gp.fs.1.func.12.nc = nc2
+gp.fs.1.func.13 = nonTerminal.ScienceFacility
+gp.fs.1.func.13.nc = nc1
+gp.fs.1.func.14 = nonTerminal.ControlTower
+gp.fs.1.func.14.nc = nc1
+gp.fs.1.func.15 = nonTerminal.PhysicsLab
+gp.fs.1.func.15.nc = nc1
+gp.fs.1.func.16 = nonTerminal.CovertOps
+gp.fs.1.func.16.nc = nc1
+gp.fs.1.func.17 = nonTerminal.NuclearSilo
+gp.fs.1.func.17.nc = nc2
+gp.fs.1.func.18 = terminals.Supply
+gp.fs.1.func.18.nc = nc0
+gp.fs.1.func.19 = nonTerminal.Building
+gp.fs.1.func.19.nc = nc1
+gp.fs.1.func.20 = nonTerminal.Buildings
+gp.fs.1.func.20.nc = nc3
+gp.fs.1.func.21 = nonTerminal.BuildPlan
+gp.fs.1.func.21.nc = nc2
+gp.fs.1.func.22 = nonTerminal.BasicBuildings
+gp.fs.1.func.22.nc = nc1
+
 
 #I also forgot this part completely
 eval.problem = problem.StarCraftBot
