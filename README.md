@@ -8,5 +8,5 @@
 　　　,∠-‐/ 　 |.　　|　 :::＼:::.　ｰ--‐　  /!ヽ.ヽ　　　　　　　て　つ　　¨¨　　 v　 、
 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　て　つ　¨¨ 
 StarCraft:Brood War Genetic Programmed with Koza fitness Artificial Intelligence using a Java Implementation 
-( or  SCBWGPKaiji  ([>provisional name<]))
+( or  SCBWGPKAIJI  ([->provisional name<-]))
 Is a bot that is currently under development, it should play StarCraft at some point in time.
