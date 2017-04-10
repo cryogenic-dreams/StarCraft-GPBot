@@ -2,6 +2,7 @@
 #I completely forgot about it yesterday
 #Never again
 parent.0 = ecj\\ec\\gp\\koza\\koza.params
+#here I need to declare as parent ge.params
 
 #define grammar species
 pop.subpop.0.species = ec.gp.ge.GESpecies
