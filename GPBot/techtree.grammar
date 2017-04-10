@@ -5,8 +5,9 @@
 
 #this tech tree should work!
 
-#JUST FLIP THE DAMN TREE
+#the name of the file should be a function/node included in this list
 
+<techtree> :: = <buildplan>
 <buildplan> ::= <basicbuildings> <buildings>
 #refinery and supply depot (specially supply depots) need a higher probability
 <basicbuildings> ::= (supply_depot) | (command_center) | (refinery)
