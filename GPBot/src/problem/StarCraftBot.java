@@ -4,7 +4,7 @@ import ec.util.*;
 import support.ExeContext;
 import support.OnEndCallback;
 import ec.*;
-import bot.TestBot1;
+import bot.Bot;
 import bwapi.Game;
 import data.GameData;
 import ec.gp.*;
@@ -50,7 +50,7 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm{
 			
 			
 			ExeContext c = new ExeContext (state, ((GPIndividual) ind), threadnum, stack, input,  this);
-			TestBot1 t = new TestBot1(c);
+			Bot t = new Bot(c);
 			input.g = t.getGame();
 			c.setInput(input);
 			t.setCallback(new OnEndCallback() {
