@@ -10,7 +10,7 @@ import support.OnEndCallback;
 
 //import java.util.concurrent.TimeUnit;
 
-public class TestBot1 extends DefaultBWListener {
+public class Bot extends DefaultBWListener {
 	private OnEndCallback callback;
 
 	public OnEndCallback getCallback() {
@@ -23,7 +23,7 @@ public class TestBot1 extends DefaultBWListener {
 
 	private ExeContext exe;
 
-	public TestBot1(ExeContext exe) {
+	public Bot(ExeContext exe) {
 		super();
 		this.exe = exe;
 		hits = 0;
@@ -93,7 +93,7 @@ public class TestBot1 extends DefaultBWListener {
 		// We're going to locate the build plan call here
 		System.out.println("---The Build Plan size is BEFORE: " + exe.getInput().bp.size());
 
-		exe.getInd().trees[1].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
+		exe.getInd().trees[0].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
 				exe.getInd(), exe.getStbot());
 		System.out.println("---The Build Plan size is AFTER: " + exe.getInput().bp.size());
 	}
