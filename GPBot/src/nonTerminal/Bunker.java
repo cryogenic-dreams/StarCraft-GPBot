@@ -12,30 +12,24 @@ import support.Tuple;
 
 public class Bunker extends GPNode {
 
+
+	
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 9045000721791676524L;
 
-	//OO gods forbid me
-	private String name = "bunker";
-	private int noChildren = 2;
-	private UnitType unit = UnitType.Terran_Bunker;
-	
-	
-	
 	public String toString() {
-		return this.name;// This is for the visual
-							// representation
+		return "bunker";// This is for the visual
 	}
 		
 	@Override
 	public String name() {
-		// TODO Auto-generated method stub
-		return this.name;//this is for the magic
+		return "bunker";//this is for the magic
 	}
 
 	public int expectedChildren() {
-		return noChildren;//this
+		return 2;//this
 	}
 
 	public void eval(final EvolutionState state, final int thread, final GPData input, final ADFStack stack,
@@ -43,12 +37,12 @@ public class Bunker extends GPNode {
 
 		GameData rd = ((GameData) (input));
 		children[children.length - 1].eval(state, thread, input, stack, individual, problem);
-		rd.bp.push(new Tuple(unit, rd.s)); // Push de ti mismo mas el supply que te de tu nodo hijo
+		rd.bp.push(new Tuple(UnitType.Terran_Bunker, rd.s)); // Push de ti mismo mas el supply que te de tu nodo hijo
 
 		for(int i = 0; i < children.length - 1; i++) {
 			// Eval de cada hijo que es otro edificio
 			children[i].eval(state, thread, input, stack, individual, problem);
 		}
-		
+		System.out.println("Bunker");
 	}
 }

@@ -2,13 +2,12 @@ package bot;
 
 import bwapi.*;
 import bwta.BWTA;
-import bwta.BaseLocation;
-import data.GameData;
+//import bwta.BaseLocation;
+//import data.GameData;
 import support.ExeContext;
 import support.GimmeTheGame;
 import support.OnEndCallback;
 
-//import java.util.concurrent.TimeUnit;
 
 public class Bot extends DefaultBWListener {
 	private OnEndCallback callback;
@@ -142,10 +141,11 @@ public class Bot extends DefaultBWListener {
 
 		// build from build plan
 		UnitType u = exe.getInput().bp.peek().getX();
-		int sup = exe.getInput().bp.peek().getY() + aux;
+		int sup = exe.getInput().bp.peek().getY();
 		System.out.println("My supply: " + self.allUnitCount());
 		System.out.println("Supply: " + sup);
-	
+		System.out.println("Building: " + u.toString());
+
 		if ((self.allUnitCount() >= sup) && (self.minerals() >= u.mineralPrice()) && (self.gas() >= u.gasPrice())) {
 			System.out.println("INSIDE");
 			buildBuilding(exe.getInput().bp.pop().getX());

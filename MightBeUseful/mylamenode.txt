@@ -16,26 +16,19 @@ public class $nameOfYourClass extends GPNode {
 	 * 
 	 */
 
-	//OO gods forbid me
-	private String name = "$name";
-	private int noChildren = $children;
-	private UnitType unit = $unitType;
-	
-	
 	
 	public String toString() {
-		return this.name;// This is for the visual
-							// representation
+		return "$name";// This is for the visual representation
 	}
 
 	@Override
 	public String name() {
 		// TODO Auto-generated method stub
-		return this.name;//this is for the magic
+		return "$name";//this is for the magic
 	}
 
 	public int expectedChildren() {
-		return noChildren;//this
+		return $children;//this
 	}
 
 	public void eval(final EvolutionState state, final int thread, final GPData input, final ADFStack stack,
@@ -43,7 +36,7 @@ public class $nameOfYourClass extends GPNode {
 
 		GameData rd = ((GameData) (input));
 		children[children.length - 1].eval(state, thread, input, stack, individual, problem);
-		rd.bp.push(new Tuple(unit, rd.s)); // Push de ti mismo mas el supply que te de tu nodo hijo
+		rd.bp.push(new Tuple($unitType, rd.s)); // Push de ti mismo mas el supply que te de tu nodo hijo
 
 		for(int i = 0; i < children.length - 1; i++) {
 			// Eval de cada hijo que es otro edificio
