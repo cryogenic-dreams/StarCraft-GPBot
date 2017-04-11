@@ -145,7 +145,8 @@ public class Bot extends DefaultBWListener {
 		int sup = exe.getInput().bp.peek().getY() + aux;
 		System.out.println("My supply: " + self.allUnitCount());
 		System.out.println("Supply: " + sup);
-		if ((self.allUnitCount() >= sup) && (self.minerals() >= u.mineralPrice()) && (self.gas() >= u.gasPrice())/**/) {
+	
+		if ((self.allUnitCount() >= sup) && (self.minerals() >= u.mineralPrice()) && (self.gas() >= u.gasPrice())) {
 			System.out.println("INSIDE");
 			buildBuilding(exe.getInput().bp.pop().getX());
 		}

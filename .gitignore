@@ -6,3 +6,4 @@ ecj
 .classpath
 .proyect
 *.dll
+*.log
