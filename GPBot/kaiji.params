@@ -6,11 +6,6 @@ parent.1 = ecj\\ec\\gp\\koza\\koza.params
 
 #here I need to declare as parent ge.params
 
-#define grammar species
-pop.subpop.0.species = ec.gp.ge.GESpecies
-pop.subpop.0.species.parser = ec.gp.ge.GrammarParser
-pop.subpop.0.species.ind = ec.gp.ge.GEIndividual
-pop.subpop.0.species.fitness = ec.gp.koza.KozaFitness
 
 #define the grammar files
 pop.subpop.0.species.file.0 = techtree.grammar
@@ -21,8 +16,8 @@ ge.species.file.0 = techtree.grammar
 
 pop.subpop.0.species.ind.numtrees = 1
 
-#pop.subpop.0.species.ind.tree.0 = ec.gp.GPTree
-#pop.subpop.0.species.ind.tree.0.tc = tc0
+pop.subpop.0.species.ind.tree.0 = ec.gp.GPTree
+pop.subpop.0.species.ind.tree.0.tc = tc0
 #pop.subpop.0.species.ind.tree.1 = ec.gp.GPTree
 #pop.subpop.0.species.ind.tree.1.tc = tc1
 
