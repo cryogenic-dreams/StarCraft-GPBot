@@ -110,9 +110,7 @@ public class Bot extends DefaultBWListener {
 																								// the
 																								// moment
 
-		// Let's check if a build plan is generated...
-		// bp stack shouldn't be empty
-		// oh, it was a list, I thought I made a stack, anyways
+	
 
 		for (Unit myUnit : self.getUnits()) {
 			// if it's a worker and it's idle, send it to the closest mineral
@@ -147,8 +145,7 @@ public class Bot extends DefaultBWListener {
 		int sup = exe.getInput().bp.peek().getY() + aux;
 		System.out.println("My supply: " + self.allUnitCount());
 		System.out.println("Supply: " + sup);
-		System.out.println("Building: " + u);
-		if ((self.allUnitCount() >= sup) & (self.minerals() >= u.mineralPrice()) & (self.gas() >= u.gasPrice())) {
+		if ((self.allUnitCount() >= sup) && (self.minerals() >= u.mineralPrice()) && (self.gas() >= u.gasPrice())/**/) {
 			System.out.println("INSIDE");
 			buildBuilding(exe.getInput().bp.pop().getX());
 		}

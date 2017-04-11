@@ -1,10 +1,10 @@
 <techtree> ::= <buildplan>
 <buildplan> ::= <basicbuildings> <buildings>
-<basicbuildings> ::= (supply_depot) | (command_center) | (refinery)
+<basicbuildings> ::= (supply_depot) | (refinery)
 <buildings> ::= <building> | <building> <buildings>
 <building> ::= <barracks> | <engineering_bay> | <factory> | <bunker> | <academy> | <missile_turret> | <starport> | <armory> | <machine_shop> | <comsat_station> | <science_facility> | <control_tower> | <physics_lab> | <covert_ops> | <nuclear_silo>
-<barracks> ::= (command_center) (supply)
-<engineering_bay> ::= (command_center) (supply)
+<barracks> ::= (supply)
+<engineering_bay> ::= (supply)
 <factory> ::= <barracks> (supply)
 <bunker> ::= <barracks> (supply)
 <academy> ::= <barracks> (supply)
@@ -12,9 +12,9 @@
 <starport> ::= <factory> (supply)
 <armory> ::= <factory> (supply)
 <machine_shop> ::= <factory> (supply)
-<comsat_station> ::= <academy> (command_center) (supply)
+<comsat_station> ::= <academy> (supply)
 <science_facility> ::= <starport> (supply)
 <control_tower> ::= <starport> (supply)
 <physics_lab> ::= <science_facility> (supply)
 <covert_ops> ::= <science_facility> (supply)
-<nuclear_silo> ::= <covert_ops> (command_center) (supply)
+<nuclear_silo> ::= <covert_ops> (supply)

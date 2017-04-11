@@ -1,0 +1,272 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x5ee18ff6, pid=2248, tid=0x00000f44
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_121-b13) (build 1.8.0_121-b13)
+# Java VM: Java HotSpot(TM) Client VM (25.121-b13 mixed mode, sharing windows-x86 )
+# Problematic frame:
+# C  [bwapi_bridge2_5.dll+0x58ff6]
+#
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x012a8400):  JavaThread "main" [_thread_in_native, id=3908, stack(0x01370000,0x013c0000)]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0x00000000
+
+Registers:
+EAX=0x00000000, EBX=0x14622040, ECX=0x012a8540, EDX=0x14624c30
+ESP=0x013bdab8, EBP=0x013bdab8, ESI=0x14622040, EDI=0x012a8400
+EIP=0x5ee18ff6, EFLAGS=0x00010283
+
+Top of Stack: (sp=0x013bdab8)
+0x013bdab8:   013bdaf8 01d1d3d3 012a8540 013bdb10
+0x013bdac8:   00000000 00000000 14676833 000000b6
+0x013bdad8:   013bdad8 00000000 013bdb10 14624c30
+0x013bdae8:   00000000 14622040 00000000 013bdb08
+0x013bdaf8:   013bdb34 01d147b4 00000000 01d19d26
+0x013bdb08:   00000000 00000000 093585e8 013bdb14
+0x013bdb18:   1461fe75 013bdb3c 14624c30 00000000
+0x013bdb28:   1461fe80 013bdb08 013bdb3c 013bdb68 
+
+Instructions: (pc=0x5ee18ff6)
+0x5ee18fd6:   fc 5e 72 02 8b 12 8b 45 08 52 50 8b 08 8b 81 9c
+0x5ee18fe6:   02 00 00 ff d0 5d c2 10 00 cc 55 8b ec 8b 45 10
+0x5ee18ff6:   8b 00 85 c0 78 07 3d e9 00 00 00 7e 05 b8 e9 00
+0x5ee19006:   00 00 8d 04 40 83 3c c5 7c b8 fc 5e 10 8d 14 c5 
+
+
+Register to memory mapping:
+
+EAX=0x00000000 is an unknown value
+EBX={method} {0x14622044} 'toString_native' '(J)Ljava/lang/String;' in 'bwapi/UnitType'
+ECX=0x012a8540 is an unknown value
+EDX=0x14624c30 is pointing into metadata
+ESP=0x013bdab8 is pointing into the stack for thread: 0x012a8400
+EBP=0x013bdab8 is pointing into the stack for thread: 0x012a8400
+ESI={method} {0x14622044} 'toString_native' '(J)Ljava/lang/String;' in 'bwapi/UnitType'
+EDI=0x012a8400 is a thread
+
+
+Stack: [0x01370000,0x013c0000],  sp=0x013bdab8,  free space=310k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [bwapi_bridge2_5.dll+0x58ff6]
+j  bwapi.UnitType.toString_native(J)Ljava/lang/String;+0
+j  bwapi.UnitType.toString()Ljava/lang/String;+5
+j  bot.Bot.onFrame()V+307
+j  bwapi.AIModule.onFrame()V+11
+v  ~StubRoutines::call_stub
+V  [jvm.dll+0x15aa85]
+V  [jvm.dll+0x220d7e]
+V  [jvm.dll+0x15ab1e]
+V  [jvm.dll+0xdcc7b]
+V  [jvm.dll+0xdfc0c]
+C  [bwapi_bridge2_5.dll+0x1b20d]
+C  [bwapi_bridge2_5.dll+0x75101]
+j  bwapi.Mirror.startGame()V+0
+j  bot.Bot.run()V+15
+j  problem.StarCraftBot.evaluate(Lec/EvolutionState;Lec/Individual;II)V+97
+j  ec.gp.ge.GEProblem.evaluate(Lec/EvolutionState;Lec/Individual;II)V+107
+j  ec.simple.SimpleEvaluator.evalPopChunk(Lec/EvolutionState;[I[IILec/simple/SimpleProblemForm;)V+83
+j  ec.simple.SimpleEvaluator.evaluatePopulation(Lec/EvolutionState;)V+133
+j  ec.simple.SimpleEvolutionState.evolve()I+49
+j  ec.EvolutionState.run(I)V+23
+j  ec.Evolve.main([Ljava/lang/String;)V+278
+j  problem.StarCraftBot.run()V+3
+j  problem.StarCraftBot.main([Ljava/lang/String;)V+4
+v  ~StubRoutines::call_stub
+V  [jvm.dll+0x15aa85]
+V  [jvm.dll+0x220d7e]
+V  [jvm.dll+0x15ab1e]
+V  [jvm.dll+0xdca47]
+V  [jvm.dll+0xe4fdf]
+C  [javaw.exe+0x22ab]
+C  [javaw.exe+0xaebf]
+C  [javaw.exe+0xaf49]
+C  [kernel32.dll+0x67646]
+C  [ntdll.dll+0x40915]
+C  [ntdll.dll+0x40b71]
+C  0x00000000
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  bwapi.UnitType.toString_native(J)Ljava/lang/String;+0
+j  bwapi.UnitType.toString()Ljava/lang/String;+5
+j  bot.Bot.onFrame()V+307
+j  bwapi.AIModule.onFrame()V+11
+v  ~StubRoutines::call_stub
+j  bwapi.Mirror.startGame()V+0
+j  bot.Bot.run()V+15
+j  problem.StarCraftBot.evaluate(Lec/EvolutionState;Lec/Individual;II)V+97
+j  ec.gp.ge.GEProblem.evaluate(Lec/EvolutionState;Lec/Individual;II)V+107
+j  ec.simple.SimpleEvaluator.evalPopChunk(Lec/EvolutionState;[I[IILec/simple/SimpleProblemForm;)V+83
+j  ec.simple.SimpleEvaluator.evaluatePopulation(Lec/EvolutionState;)V+133
+j  ec.simple.SimpleEvolutionState.evolve()I+49
+j  ec.EvolutionState.run(I)V+23
+j  ec.Evolve.main([Ljava/lang/String;)V+278
+j  problem.StarCraftBot.run()V+3
+j  problem.StarCraftBot.main([Ljava/lang/String;)V+4
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x018e6000 JavaThread "Service Thread" daemon [_thread_blocked, id=1552, stack(0x151b0000,0x15200000)]
+  0x018c6800 JavaThread "C1 CompilerThread0" daemon [_thread_blocked, id=2784, stack(0x14fa0000,0x14ff0000)]
+  0x018c5000 JavaThread "Attach Listener" daemon [_thread_blocked, id=1044, stack(0x15130000,0x15180000)]
+  0x018c3800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=2572, stack(0x15020000,0x15070000)]
+  0x018bb400 JavaThread "Finalizer" daemon [_thread_blocked, id=4052, stack(0x03db0000,0x03e00000)]
+  0x0185f000 JavaThread "Reference Handler" daemon [_thread_blocked, id=2816, stack(0x03d60000,0x03db0000)]
+=>0x012a8400 JavaThread "main" [_thread_in_native, id=3908, stack(0x01370000,0x013c0000)]
+
+Other Threads:
+  0x0185c800 VMThread [stack: 0x14900000,0x14950000] [id=616]
+  0x018f0c00 WatcherThread [stack: 0x149b0000,0x14a00000] [id=2280]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap:
+ def new generation   total 4928K, used 688K [0x03e00000, 0x04350000, 0x09350000)
+  eden space 4416K,   4% used [0x03e00000, 0x03e2c2f0, 0x04250000)
+  from space 512K, 100% used [0x042d0000, 0x04350000, 0x04350000)
+  to   space 512K,   0% used [0x04250000, 0x04250000, 0x042d0000)
+ tenured generation   total 10944K, used 993K [0x09350000, 0x09e00000, 0x13e00000)
+   the space 10944K,   9% used [0x09350000, 0x09448628, 0x09448800, 0x09e00000)
+ Metaspace       used 1047K, capacity 3080K, committed 3136K, reserved 4480K
+
+Card table byte_map: [0x01940000,0x019d0000] byte_map_base: 0x01921000
+
+Polling page: 0x001b0000
+
+CodeCache: size=32768Kb used=831Kb max_used=831Kb free=31936Kb
+ bounds [0x01d10000, 0x01de0000, 0x03d10000]
+ total_blobs=260 nmethods=110 adapters=81
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 8.920 Thread 0x018c6800  106             java.util.zip.ZStreamRef::address (5 bytes)
+Event: 8.920 Thread 0x018c6800 nmethod 106 0x01ddf488 code [0x01ddf580, 0x01ddf610]
+Event: 10.743 Thread 0x018c6800  107             java.lang.Long::valueOf (36 bytes)
+Event: 10.743 Thread 0x018c6800 nmethod 107 0x01ddf648 code [0x01ddf750, 0x01ddf8d0]
+Event: 10.743 Thread 0x018c6800  108             java.lang.Long::<init> (10 bytes)
+Event: 10.743 Thread 0x018c6800 nmethod 108 0x01ddfa08 code [0x01ddfb00, 0x01ddfb90]
+Event: 10.746 Thread 0x018c6800  109             java.lang.Long::hashCode (8 bytes)
+Event: 10.746 Thread 0x018c6800 nmethod 109 0x01ddfbc8 code [0x01ddfcc0, 0x01ddfd60]
+Event: 10.746 Thread 0x018c6800  110             java.lang.Long::hashCode (8 bytes)
+Event: 10.746 Thread 0x018c6800 nmethod 110 0x01ddfdc8 code [0x01ddfec0, 0x01ddff60]
+
+GC Heap History (2 events):
+Event: 10.743 GC heap before
+{Heap before GC invocations=0 (full 0):
+ def new generation   total 4928K, used 4416K [0x03e00000, 0x04350000, 0x09350000)
+  eden space 4416K, 100% used [0x03e00000, 0x04250000, 0x04250000)
+  from space 512K,   0% used [0x04250000, 0x04250000, 0x042d0000)
+  to   space 512K,   0% used [0x042d0000, 0x042d0000, 0x04350000)
+ tenured generation   total 10944K, used 0K [0x09350000, 0x09e00000, 0x13e00000)
+   the space 10944K,   0% used [0x09350000, 0x09350000, 0x09350200, 0x09e00000)
+ Metaspace       used 1047K, capacity 3080K, committed 3136K, reserved 4480K
+Event: 10.746 GC heap after
+Heap after GC invocations=1 (full 0):
+ def new generation   total 4928K, used 512K [0x03e00000, 0x04350000, 0x09350000)
+  eden space 4416K,   0% used [0x03e00000, 0x03e00000, 0x04250000)
+  from space 512K, 100% used [0x042d0000, 0x04350000, 0x04350000)
+  to   space 512K,   0% used [0x04250000, 0x04250000, 0x042d0000)
+ tenured generation   total 10944K, used 993K [0x09350000, 0x09e00000, 0x13e00000)
+   the space 10944K,   9% used [0x09350000, 0x09448628, 0x09448800, 0x09e00000)
+ Metaspace       used 1047K, capacity 3080K, committed 3136K, reserved 4480K
+}
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (2 events):
+Event: 0.036 Thread 0x012a8400 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x03e079c0) thrown at [C:\workspace\8-2-build-windows-i586-cygwin\jdk8u121\8372\hotspot\src\share\vm
+Event: 0.036 Thread 0x012a8400 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.prefetchRead(Ljava/lang/Object;J)V name or signature does not match> (0x03e07c90) thrown at [C:\workspace\8-2-build-windows-i586-cygwin\jdk8u121\8372\hotspot\src\share\vm\prims\jni.cpp, li
+
+Events (10 events):
+Event: 8.919 loading class bwapi/Player
+Event: 8.919 loading class bwapi/Player done
+Event: 9.977 loading class bwta/BWTA
+Event: 9.977 loading class bwta/BWTA done
+Event: 10.739 loading class support/Tuple
+Event: 10.739 loading class support/Tuple done
+Event: 10.743 Executing VM operation: GenCollectForAllocation
+Event: 10.746 Executing VM operation: GenCollectForAllocation done
+Event: 10.746 Executing VM operation: RevokeBias
+Event: 10.746 Executing VM operation: RevokeBias done
+
+
+Dynamic libraries:
+0x012e0000 - 0x01313000 	C:\Program Files\Java\jre1.8.0_121\bin\javaw.exe
+0x76ed0000 - 0x77217000 	C:\Windows\SYSTEM32\ntdll.dll
+0x74f90000 - 0x7506c000 	C:\Windows\system32\kernel32.dll
+0x74e60000 - 0x74ea9000 	C:\Windows\system32\KERNELBASE.dll
+0x751f0000 - 0x7529b000 	C:\Windows\system32\ADVAPI32.dll
+0x74eb0000 - 0x74f8b000 	C:\Windows\system32\msvcrt.dll
+0x75540000 - 0x75562000 	C:\Windows\SYSTEM32\sechost.dll
+0x75450000 - 0x75539000 	C:\Windows\system32\RPCRT4.dll
+0x755d0000 - 0x756b1000 	C:\Windows\system32\USER32.dll
+0x772e0000 - 0x7734f000 	C:\Windows\system32\GDI32.dll
+0x751e0000 - 0x751ec000 	C:\Windows\system32\LPK.dll
+0x756c0000 - 0x75798000 	C:\Windows\system32\USP10.dll
+0x737b0000 - 0x739a8000 	C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_41e6975e2bd6f2b2\COMCTL32.dll
+0x752a0000 - 0x75322000 	C:\Windows\system32\SHLWAPI.dll
+0x757d0000 - 0x757f8000 	C:\Windows\system32\IMM32.DLL
+0x75070000 - 0x75184000 	C:\Windows\system32\MSCTF.dll
+0x67e10000 - 0x67ecf000 	C:\Program Files\Java\jre1.8.0_121\bin\msvcr100.dll
+0x67ed0000 - 0x6829e000 	C:\Program Files\Java\jre1.8.0_121\bin\client\jvm.dll
+0x71390000 - 0x71397000 	C:\Windows\system32\WSOCK32.dll
+0x75570000 - 0x755c2000 	C:\Windows\system32\WS2_32.dll
+0x77220000 - 0x77226000 	C:\Windows\system32\NSI.dll
+0x6e780000 - 0x6e7b7000 	C:\Windows\system32\WINMM.dll
+0x74010000 - 0x74019000 	C:\Windows\system32\VERSION.dll
+0x77510000 - 0x77515000 	C:\Windows\system32\PSAPI.DLL
+0x67e00000 - 0x67e0c000 	C:\Program Files\Java\jre1.8.0_121\bin\verify.dll
+0x67dd0000 - 0x67df1000 	C:\Program Files\Java\jre1.8.0_121\bin\java.dll
+0x67db0000 - 0x67dc3000 	C:\Program Files\Java\jre1.8.0_121\bin\zip.dll
+0x76140000 - 0x76ec5000 	C:\Windows\system32\SHELL32.dll
+0x75b30000 - 0x75d56000 	C:\Windows\system32\ole32.dll
+0x74b40000 - 0x74b4b000 	C:\Windows\system32\profapi.dll
+0x5edc0000 - 0x5f046000 	E:\StarCraft-GPBot\GPBot\bwapi_bridge2_5.dll
+0x6acc0000 - 0x6ad27000 	E:\StarCraft-GPBot\GPBot\libgmp-10.dll
+0x6f540000 - 0x6f59e000 	E:\StarCraft-GPBot\GPBot\libmpfr-4.dll
+0x62630000 - 0x626a1000 	C:\Program Files\Java\jre1.8.0_121\bin\MSVCP120.dll
+0x60e20000 - 0x60f0e000 	C:\Program Files\Java\jre1.8.0_121\bin\MSVCR120.dll
+0x67ca0000 - 0x67d90000 	C:\Windows\system32\dbghelp.dll
+
+VM Arguments:
+jvm_args: -Dfile.encoding=Cp1252 
+java_command: problem.StarCraftBot -file kaiji.params -p gp.tree.print-style=latex
+java_class_path (initial): E:\StarCraft-GPBot\GPBot\bin;C:\Users\improperio\Downloads\ecj.23.jar;C:\Users\improperio\Downloads\ExampleBot2_5\ExampleBot\lib\bwmirror_v2_5.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=C:/Program Files/Java/jre1.8.0_121/bin/client;C:/Program Files/Java/jre1.8.0_121/bin;C:/Program Files/Java/jre1.8.0_121/lib/i386;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\system32;
+USERNAME=improperio
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=x86 Family 6 Model 60 Stepping 3, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 7 Build 7601 (6.1.7601.17514)
+
+CPU:total 4 (4 cores per cpu, 1 threads per core) family 6 model 60 stepping 3, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, aes, clmul, lzcnt, tsc, tscinvbit
+
+Memory: 4k page, physical 3669560k(2020796k free), swap 7338512k(5585820k free)
+
+vm_info: Java HotSpot(TM) Client VM (25.121-b13) for windows-x86 JRE (1.8.0_121-b13), built on Dec 12 2016 18:17:00 by "java_re" with MS VC++ 10.0 (VS2010)
+
+time: Tue Apr 11 19:52:29 2017
+elapsed time: 10 seconds (0d 0h 0m 10s)
+
