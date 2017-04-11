@@ -61,7 +61,7 @@ public class Bot extends DefaultBWListener {
 
 	@Override
 	public void onUnitCreate(Unit unit) {
-		System.out.println("New unit discovered " + unit.getType());
+		//System.out.println("New unit discovered " + unit.getType());
 	}
 
 	@Override

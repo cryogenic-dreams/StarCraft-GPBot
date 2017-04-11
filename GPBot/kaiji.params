@@ -16,18 +16,13 @@ pop.subpop.0.species.fitness = ec.gp.koza.KozaFitness
 pop.subpop.0.species.file.0 = techtree.grammar
 ge.species.file.0 = techtree.grammar
 
-#define generations and wrapping
-pop.subpop.0.species.min-gene = -128
-pop.subpop.0.species.max-gene = 127
-pop.subpop.0.species.passes = 4
-#wraps must be powers of 2
 
 # the next four items are already defined in koza.params, but we put them here to be clear.
 
 pop.subpop.0.species.ind.numtrees = 1
 
-pop.subpop.0.species.ind.tree.0 = ec.gp.GPTree
-pop.subpop.0.species.ind.tree.0.tc = tc0
+#pop.subpop.0.species.ind.tree.0 = ec.gp.GPTree
+#pop.subpop.0.species.ind.tree.0.tc = tc0
 #pop.subpop.0.species.ind.tree.1 = ec.gp.GPTree
 #pop.subpop.0.species.ind.tree.1.tc = tc1
 
