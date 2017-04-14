@@ -62,6 +62,9 @@ public class Bot extends DefaultBWListener {
 	@Override
 	public void onUnitCreate(Unit unit) {
 		//System.out.println("New unit discovered " + unit.getType());
+		if(unit.getType().isBuilding()){
+			this.hits++;
+		}
 	}
 
 	@Override
@@ -95,6 +98,7 @@ public class Bot extends DefaultBWListener {
 		exe.getInd().trees[0].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
 				exe.getInd(), exe.getStbot());
 		System.out.println("---The Build Plan size is AFTER: " + exe.getInput().bp.size());
+		//this.sum = exe.getInput().bp.size();
 	}
 
 	@Override
