@@ -146,11 +146,16 @@ public class Bot extends DefaultBWListener {
 		System.out.println("Supply: " + sup);
 		System.out.println("Building: " + u.toString());
 
+		
+		
+		//here we do the checkings to build a building from the build plan
 		if ((self.allUnitCount() >= sup) && (self.minerals() >= u.mineralPrice()) && (self.gas() >= u.gasPrice())) {
 			System.out.println("INSIDE");
 			buildBuilding(exe.getInput().bp.pop().getX());
 		}
 
+		
+		
 		// exe.getInd().trees[0].child.eval(exe.getState(), exe.getThreadnum(),
 		// exe.getInput(), exe.getStack(),
 		// exe.getInd(), exe.getStbot());
