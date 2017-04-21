@@ -1,0 +1,14 @@
+ClassName,Name,Children,UnitType,FuncNo
+Marine,marine,2,Terran_Marine,0
+Vulture,vulture,2,Terran_Vulture,0
+Medic,medic,2,Terran_Medic,0
+Tank,tank,2,Terran_Siege_Tank_Siege_Mode,0
+Valkyrie,valkyrie,3,Terran_Valkyrie,0
+Firebat,firebat,2,Terran_Firebat,0
+Goliath,goliath,2,Terran_Goliath,0
+Wraith,wraith,2,Terran_Wraith,0
+ScienceVessel,science_vessel,3,Terran_Science_Vessel,0
+Dropship,dropship,2,Terran_Dropship,0
+Ghost,ghost,3,Terran_Ghost,0
+Battlecruiser,battlecruiser,3,Terran_Battlecruiser,0
+Quantity,quantity,0,quantity,0
