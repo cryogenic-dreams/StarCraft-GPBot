@@ -1,9 +1,9 @@
 <techtree> ::= <buildplan>
-<buildplan> ::= (buildplan <units> <basicbuildings>)
+<buildplan> ::= (buildplan <squads>)
 <basicbuildings> ::= <basicbuilding> | (basicbuildings <basicbuilding> <basicbuildings>)
 <basicbuilding> ::= (supply_depot) | (refinery) | <bunker> | <missile_turret> | <comsat_station>
-<units> ::= <unit> | (units <unit> <units>)
-<unit> ::= <marine> | <vulture> | <medic> | <tank> | <valkyrie> | <firebat> | <goliath> | <wraith> | <science_vessel> | <dropship> | <ghost> | <battlecruiser>
+<squads> ::= <squad> | (squads <squad> <squads>)
+<squad> ::= <valkyrie> | <marine> | <vulture> | <medic> | <tank> | <firebat> | <goliath> | <wraith> | <science_vessel> | <dropship> | <ghost> | <battlecruiser>
 <barracks> ::= (barracks <supply>)
 <engineering_bay> ::= (engineering_bay <supply>)
 <factory> ::= (factory <barracks> <supply>)

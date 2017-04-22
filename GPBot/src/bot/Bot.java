@@ -24,6 +24,7 @@ public class Bot extends DefaultBWListener {
 	public Bot(ExeContext exe) {
 		super();
 		this.exe = exe;
+		
 		hits = 0;
 		sum = 0;
 	}
@@ -62,7 +63,7 @@ public class Bot extends DefaultBWListener {
 	public void onUnitCreate(Unit unit) {
 		// System.out.println("New unit discovered " + unit.getType());
 		if (unit.getType().isBuilding()) {
-			this.hits++;
+			//this.hits++;
 		}
 	}
 

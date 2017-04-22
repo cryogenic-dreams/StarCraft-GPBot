@@ -38,11 +38,11 @@ public class Bunker extends GPNode {
 		GameData rd = ((GameData) (input));
 		children[children.length - 1].eval(state, thread, input, stack, individual, problem);
 		rd.bp.push(new Tuple(UnitType.Terran_Bunker, rd.s)); // Push de ti mismo mas el supply que te de tu nodo hijo
+		System.out.println("Bunker");
 
 		for(int i = 0; i < children.length - 1; i++) {
 			// Eval de cada hijo que es otro edificio
 			children[i].eval(state, thread, input, stack, individual, problem);
 		}
-		System.out.println("Bunker");
 	}
 }
