@@ -36,10 +36,11 @@ public class $nameOfYourClass extends GPNode {
 
 		GameData rd = ((GameData) (input));
 		children[children.length - 1].eval(state, thread, input, stack, individual, problem);
-		rd.bp.push(new Tuple($unitType, rd.s)); // Push de ti mismo mas el supply que te de tu nodo hijo
+		rd.bp.push(new Tuple(UnitType.$unitType, rd.s)); // Push de ti mismo mas el supply que te de tu nodo hijo
 		
 		for(int i = 0; i < children.length - 1; i++) {
 			// Eval de cada hijo que es otro edificio
 			children[i].eval(state, thread, input, stack, individual, problem);
 		}
+    }
 }

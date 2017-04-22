@@ -36,14 +36,8 @@ public class TrainMarine extends GPNode {
 
 		Player self = rd.g.self();
 
-		for (Unit myUnit : self.getUnits()) {// I would like to know if this is
-												// as important as I think/It is
+		for (Unit myUnit : self.getUnits()) {
 			
-			// This one is just to print units' position and type
-			// units.append(myUnit.getType()).append("").append(myUnit.getTilePosition()).append("\n");
-
-			
-			//in BWAPI the cost of minerals is doubled because a zerling costs 25, here it would cost 50 minerals
 				myUnit.train(UnitType.Terran_Marine);
 				System.out.println("I'm training marines");
 
