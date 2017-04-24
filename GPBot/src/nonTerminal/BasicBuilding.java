@@ -34,6 +34,5 @@ public class BasicBuilding extends GPNode {
 
 		children[0].eval(state, thread, input, stack, individual, problem);
 
-
 	}
 }
