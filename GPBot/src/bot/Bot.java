@@ -1,5 +1,7 @@
 package bot;
 
+
+
 import bwapi.*;
 import bwta.BWTA;
 //import bwta.BaseLocation;
@@ -24,14 +26,14 @@ public class Bot extends DefaultBWListener {
 	public Bot(ExeContext exe) {
 		super();
 		this.exe = exe;
-		
+
 		hits = 0;
 		sum = 0;
 	}
 
 	public double currentX;
 	public double currentY;
-
+	public boolean go_construct = false;
 	private int hits;
 	private double sum;
 
@@ -61,9 +63,15 @@ public class Bot extends DefaultBWListener {
 
 	@Override
 	public void onUnitCreate(Unit unit) {
-		// System.out.println("New unit discovered " + unit.getType());
-		if (unit.getType().isBuilding()) {
-			//this.hits++;
+		super.onUnitCreate(unit);
+	}
+
+	@Override
+	public void onUnitComplete(Unit arg0) {
+		super.onUnitComplete(arg0);
+		go_construct = false;
+		if (arg0.getType().isBuilding()) {
+			this.hits++;
 		}
 	}
 
@@ -94,10 +102,10 @@ public class Bot extends DefaultBWListener {
 
 		// We're going to locate the build plan call here
 		System.out.println("---The Build Plan size is BEFORE: " + exe.getInput().bp.size());
-		//game.pauseGame();
+		// game.pauseGame();
 		exe.getInd().trees[0].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
 				exe.getInd(), exe.getStbot());
-		//game.resumeGame();
+		// game.resumeGame();
 		System.out.println("---The Build Plan size is AFTER: " + exe.getInput().bp.size());
 		// this.sum = exe.getInput().bp.size();
 	}
@@ -105,20 +113,15 @@ public class Bot extends DefaultBWListener {
 	@Override
 	public void onFrame() {
 
-		game.drawTextScreen(10, 10, "Playing as " + self.getName() + " - " + self.getRace());// always
-																								// as
-																								// Terran,
-																								// at
-																								// least
-																								// for
-																								// the
-																								// moment
-
+		game.drawTextScreen(10, 10, "Playing as " + self.getName() + " - " + self.getRace());
 		for (Unit myUnit : self.getUnits()) {
 			// if it's a worker and it's idle, send it to the closest mineral
 			// patch
+			Unit closestMineral = null;
+			if (myUnit.getType().isRefinery()) {
+				closestMineral = myUnit;
+			}
 			if (myUnit.getType().isWorker() && myUnit.isIdle()) {
-				Unit closestMineral = null;
 
 				// find the closest mineral
 				for (Unit neutralUnit : game.neutral().getUnits()) {
@@ -127,18 +130,20 @@ public class Bot extends DefaultBWListener {
 						if (closestMineral == null
 								|| myUnit.getDistance(neutralUnit) < myUnit.getDistance(closestMineral)) {
 							closestMineral = neutralUnit;
-
 						}
+						// else if (neutralUnit.getType().isRefinery()) {
+						// closestMineral = myUnit;
+						// }
 					}
 				}
 
 				// if a mineral patch was found, send the worker to gather it
 				if (closestMineral != null) {
 					myUnit.gather(closestMineral, false);
-					System.out.println("I'm collecting minerals");
-
+					System.out.println("I'm collecting minerals and gas");
 				}
 			}
+
 		}
 		// StringBuilder units = new StringBuilder("My units:\n");
 
@@ -148,21 +153,31 @@ public class Bot extends DefaultBWListener {
 		System.out.println("My supply: " + self.allUnitCount());
 		System.out.println("Supply: " + sup);
 		System.out.println("Building: " + u.toString());
+		if (!go_construct) {
+			if (u.isAddon() || u.isBuilding()) {
+				// here we do the checkings to build a building from the build
+				// plan
+				if ((self.allUnitCount() >= sup) && (self.minerals() >= u.mineralPrice())
+						&& (self.gas() >= u.gasPrice())) {
+					System.out.println("INSIDE");
+					if (u.isAddon()) {
+						go_construct = true;
+						attachBuilding(exe.getInput().bp.pop().getX());
+					} else if (u.isBuilding()) {
+						go_construct = true;
+						buildBuilding(exe.getInput().bp.pop().getX());
+					}
+					// go_construct =false;
 
-		if (u.isAddon() || u.isBuilding()) {
-			// here we do the checkings to build a building from the build plan
-			if ((self.allUnitCount() >= sup) && (self.minerals() >= u.mineralPrice()) && (self.gas() >= u.gasPrice())) {
-				System.out.println("INSIDE");
-				if (u.isAddon()) {
-					attachBuilding(exe.getInput().bp.pop().getX());
-				} else if (u.isBuilding()) {
-					buildBuilding(exe.getInput().bp.pop().getX());
+				}
+			} else {
+				if ((self.minerals() >= (u.mineralPrice() * sup)) && (self.gas() >= (u.gasPrice() * sup))) {
+					go_construct = true;
+					trainUnit(exe.getInput().bp.peek().getX(), exe.getInput().bp.pop().getY());
 				}
 			}
-		} else {
-			if((self.minerals() >= (u.mineralPrice()*sup)) && (self.gas() >= (u.gasPrice()*sup)))	trainUnit(exe.getInput().bp.peek().getX(), exe.getInput().bp.pop().getY());
-		}
 
+		}
 	}
 
 	@Override
@@ -185,7 +200,7 @@ public class Bot extends DefaultBWListener {
 		for (Unit myUnit : self.getUnits()) {
 			TilePosition tile = getBuildTile(myUnit, building, myUnit.getTilePosition());
 			if (tile != null) {
-				if ((myUnit.canBuild(building, tile)) & !(myUnit.isConstructing())) {
+				if ((myUnit.canBuild(building, tile)) & !(myUnit.isConstructing()) & !(myUnit.isGatheringGas())) {
 					System.out.println("I'm building: " + building);
 					myUnit.build(building, tile);
 					break;
@@ -197,7 +212,7 @@ public class Bot extends DefaultBWListener {
 
 	public void attachBuilding(UnitType addon) {
 		for (Unit myUnit : self.getUnits()) {
-			if (!(myUnit.isConstructing())) {
+			if (!(myUnit.isConstructing()) & !(myUnit.isGatheringGas())) {
 				System.out.println("I'm building: " + addon);
 				myUnit.buildAddon(addon);
 				break;
@@ -208,9 +223,9 @@ public class Bot extends DefaultBWListener {
 
 	public void trainUnit(UnitType unit, int number) {
 		for (Unit myUnit : self.getUnits()) {
-			if ((myUnit.canTrain(unit)) & !(myUnit.isTraining())) {
+			if (myUnit.canTrain(unit)) {
 				System.out.println("I'm training: " + unit);
-				while (number > 0){
+				while (number > 0) {
 					myUnit.train();
 					number--;
 				}
