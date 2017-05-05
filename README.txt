@@ -19,6 +19,6 @@ In order to make it work you'll need:
 4. JDK 8 32 bits.
 5. SSCAI maps pack.
 6. ECJ library.
-7. This folder.
+7. GPBot folder (MightBeUseful is not necessary).
 
 I'll update with more indications of how to install and make it work as soon as I can.
