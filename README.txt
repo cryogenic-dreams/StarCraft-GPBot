@@ -21,4 +21,4 @@ In order to make it work you'll need:
 6. ECJ library.
 7. GPBot folder (MightBeUseful is not necessary).
 
-I'll update with more indications of how to install and make it work as soon as I can.
+I'll update with links, and more indications of how to install and make it work as soon as I can.
