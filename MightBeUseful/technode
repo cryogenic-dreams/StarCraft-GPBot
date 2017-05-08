@@ -1,0 +1,37 @@
+package $package;
+
+import bwapi.TechType;
+import data.GameData;
+import ec.EvolutionState;
+import ec.Problem;
+import ec.gp.ADFStack;
+import ec.gp.GPData;
+import ec.gp.GPIndividual;
+import ec.gp.GPNode;
+import support.Tuple;
+
+public class $nameOfYourClass extends GPNode {
+
+	
+	public String toString() {
+		return "$name";// This is for the visual representation
+	}
+
+	@Override
+	public String name() {
+		return "$name";//this is for the magic, aka the grammar
+	}
+
+	public int expectedChildren() {
+		return $children;
+	}
+
+	public void eval(final EvolutionState state, final int thread, final GPData input, final ADFStack stack,
+			final GPIndividual individual, final Problem problem) {
+
+		GameData rd = ((GameData) (input));
+		children[children.length - 1].eval(state, thread, input, stack, individual, problem);
+		rd.bp.push(new Tuple(TechType.$techType, 0)); // Push of yourself and your last node, which is the supply or the quantity
+		System.out.println("$name");
+    }
+}
