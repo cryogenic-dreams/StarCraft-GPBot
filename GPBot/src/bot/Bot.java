@@ -148,11 +148,13 @@ public class Bot extends DefaultBWListener {
 		// StringBuilder units = new StringBuilder("My units:\n");
 
 		// build from build plan
-		UnitType u = exe.getInput().bp.peek().getX();
+		Object u = exe.getInput().bp.peek().getX();
 		int sup = exe.getInput().bp.peek().getY();
 		System.out.println("My supply: " + self.allUnitCount());
 		System.out.println("Supply: " + sup);
 		System.out.println("Building: " + u.toString());
+		
+		//Change this tomorrow
 		if (!go_construct) {
 			if (u.isAddon() || u.isBuilding()) {
 				// here we do the checkings to build a building from the build
