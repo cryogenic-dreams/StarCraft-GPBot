@@ -8,11 +8,12 @@ import ec.gp.ADFStack;
 import ec.gp.GPData;
 import ec.gp.GPIndividual;
 import ec.gp.GPNode;
-import support.Tuple;
+import support.UnitTuple;
 
 public class $nameOfYourClass extends GPNode {
 
-	
+	private static final long serialVersionUID = 1;
+
 	public String toString() {
 		return "$name";// This is for the visual representation
 	}
@@ -31,7 +32,7 @@ public class $nameOfYourClass extends GPNode {
 
 		GameData rd = ((GameData) (input));
 		children[children.length - 1].eval(state, thread, input, stack, individual, problem);
-		rd.bp.push(new Tuple(UnitType.$unitType, rd.s)); // Push of yourself and your last node, which is the supply or the quantity
+		rd.bp.push(new UnitTuple($unitType, rd.s)); // Push of yourself and your last node, which is the supply or the quantity
 		int supply = rd.s;
 		for(int i = 0; i < children.length - 1; i++) {
 			children[i].eval(state, thread, input, stack, individual, problem);

@@ -1,5 +1,5 @@
 ClassName,Name,Children,UnitType,FuncNo
-InfWeapon,inf_weapon,0,Terran_Infantry_Weapon,0
+InfWeapon,inf_weapon,0,Terran_Infantry_Weapons,0
 InfArmor,inf_armor,0,Terran_Infantry_Armor,0
 StimPack,stim_pack,0,Stim_Packs,0
 U-238Shells,u-238_shells,0,U_238_Shells,0

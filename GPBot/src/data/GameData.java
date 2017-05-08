@@ -16,7 +16,7 @@ public class GameData extends GPData {
 	 */
 	private static final long serialVersionUID = -841133977253680026L;
 	public Game g; // return value
-	public Stack<Tuple> bp = new Stack<>(); //here we'll save our building plan, it'll have a build and a supply number, just like our usual build plan
+	public Stack<Tuple> bp = new Stack<Tuple>(); //here we'll save our building plan, it'll have a build and a supply number, just like our usual build plan
 	public int s = 200;
 	public int q;
 	

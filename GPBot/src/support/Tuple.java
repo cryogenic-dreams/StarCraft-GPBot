@@ -1,23 +1,25 @@
 package support;
 
-import bwapi.UnitType;
-
 public class Tuple {
 	
 	//Damn Java, you don't have tuples
-	private UnitType x;
+	private Object x;
 	private int y;
 	
 	
-	public Tuple(UnitType x, int y) {
+	public Tuple(Object x, int y) {
 		super();
 		this.x = x;
 		this.y = y;
 	}
-	public UnitType getX() {
+	
+	public Tuple() {
+		// TODO Auto-generated constructor stub
+	}
+	public Object getX() {
 		return x;
 	}
-	public void setX(UnitType x) {
+	public void setX(Object x) {
 		this.x = x;
 	}
 	public int getY() {
