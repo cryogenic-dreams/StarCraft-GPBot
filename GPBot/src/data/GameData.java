@@ -14,7 +14,7 @@ public class GameData extends GPData {
 	 * s is for supply, which I don't know if I need it to be a simple integer or many, we'll see
 	 * q is for quantity, it'll be our squad quantity
 	 */
-	private static final long serialVersionUID = -841133977253680026L;
+	private static final long serialVersionUID = 1;
 	public Game g; // return value
 	public Stack<Tuple> bp = new Stack<Tuple>(); //here we'll save our building plan, it'll have a build and a supply number, just like our usual build plan
 	public int s = 200;

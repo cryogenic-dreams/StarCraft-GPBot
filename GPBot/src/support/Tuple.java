@@ -1,13 +1,13 @@
 package support;
 
-public class Tuple {
+public class Tuple<U,I> {
 	
 	//Damn Java, you don't have tuples
-	private Object x;
-	private int y;
+	private U x;
+	private I y;
 	
 	
-	public Tuple(Object x, int y) {
+	public Tuple(U x, I y) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -16,16 +16,16 @@ public class Tuple {
 	public Tuple() {
 		// TODO Auto-generated constructor stub
 	}
-	public Object getX() {
+	public U getX() {
 		return x;
 	}
-	public void setX(Object x) {
+	public void setX(U x) {
 		this.x = x;
 	}
-	public int getY() {
+	public I getY() {
 		return y;
 	}
-	public void setY(int y) {
+	public void setY(I y) {
 		this.y = y;
 	}
 }
