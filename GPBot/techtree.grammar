@@ -4,35 +4,32 @@
 <basicbuilding> ::= (supply_depot) | (refinery)
 <buildings> ::= <building> | (buildings <building> <buildings>) 
 <building> ::= <barracks> | <engineering_bay> | <factory> | <bunker> | <academy> | <missile_turret> | <starport> | <armory> | <machine_shop> | <comsat_station> | <science_facility> | <control_tower> | <physics_lab> | <covert_ops> | <nuclear_silo>
-
-<barracks> ::= (barracks <supply>) | (<barracks_squads> (<barracks>))
-<engineering_bay> ::= (engineering_bay <supply>) | (<e_bay_tech> (<engineering_bay>))
-<factory> ::= (factory <barracks> <supply>) | (<factory_squads> (<factory>))
+<barracks> ::= (barracks <supply>) | <barracks_squads> <barracks>
+<engineering_bay> ::= (engineering_bay <supply>) | <e_bay_tech> <engineering_bay>
+<factory> ::= (factory <barracks> <supply>) | <factory_squads> <factory>
 <bunker> ::= (bunker <barracks> <supply>) 
-<academy> ::= (academy <barracks> <supply>) | (<academy_squads> (<academy>)) | (<academy_tech> (<academy>))
+<academy> ::= (academy <barracks> <supply>) | <academy_squads> <academy> | <academy_tech> <academy>
 <missile_turret> ::= (missile_turret <engineering_bay> <supply>) 
-<starport> ::= (starport <factory> <supply>) | (<starport_squads> (<starport>))
-<armory> ::= (armory <factory> <supply>) | (<armory_squads> (<armory>)) | (<armory_tech> (<armory>))
-<machine_shop> ::= (machine_shop <factory> <supply>) | (<machine_shop_squads> (<machine_shop>)) | (<machine_shop_tech> (<machine_shop>))
+<starport> ::= (starport <factory> <supply>) | <starport_squads> <starport>
+<armory> ::= (armory <factory> <supply>) | <armory_squads> <armory> | <armory_tech> <armory>
+<machine_shop> ::= (machine_shop <factory> <supply>) | <machine_shop_squads> <machine_shop> | <machine_shop_tech> <machine_shop>
 <comsat_station> ::= (comsat_station <academy> <supply>)
-<science_facility> ::= (science_facility <starport> <supply>) | (<science_facility_squads> (<science_facility>)) | (<science_facility_tech> (<science_facility>))
-<control_tower> ::= (control_tower <starport> <supply>) | (<control_tower_squads> (<control_tower>)) | (<control_tower_tech> (<control_tower>))
-<physics_lab> ::= (physics_lab <science_facility> <supply>) | (<physics_lab_squads> (<physics_lab>)) | (<physics_lab_tech> (<physics_lab>))
-<covert_ops> ::= (covert_ops <science_facility> <supply>) | (<covert_ops_squads> (<covert_ops>)) | (<covert_ops_tech> (<covert_ops>))
+<science_facility> ::= (science_facility <starport> <supply>) | <science_facility_squads> <science_facility> | <science_facility_tech> <science_facility>
+<control_tower> ::= (control_tower <starport> <supply>) | <control_tower_squads> <control_tower> | <control_tower_tech> <control_tower>
+<physics_lab> ::= (physics_lab <science_facility> <supply>) | <physics_lab_squads> <physics_lab> | <physics_lab_tech> <physics_lab>
+<covert_ops> ::= (covert_ops <science_facility> <supply>) | <covert_ops_squads> <covert_ops> | <covert_ops_tech> <covert_ops>
 <nuclear_silo> ::= (nuclear_silo <covert_ops> <supply>) 
-
 <barrack_squads> ::= <marine>
 <factory_squads> ::= <vulture>
-<armory_squads> ::= (<valkyrie> (<control_tower>)) | <goliath>
+<armory_squads> ::= <valkyrie> <control_tower> | <goliath>
 <academy_squads> ::= <medic> | <firebat>
 <machine_shop_squads> ::= <tank>
 <starport_squads> ::= <wraith>
-<science_facility_squads> ::= (<science_vessel> (<control_tower>))
-<control_tower_squads> ::= (<valkyrie> (<armory>)) | <dropship>
-<covert_ops_squads> ::= (<ghost> (<academy>))
-<physics_lab_squads> ::= (<battlecruiser> (<control_tower>))
-
-<marine> ::= (marine <quantity>) 
+<science_facility_squads> ::= <science_vessel> <control_tower>
+<control_tower_squads> ::= <valkyrie> <armory> | <dropship>
+<covert_ops_squads> ::= <ghost> <academy>
+<physics_lab_squads> ::= <battlecruiser> <control_tower>
+<marine> ::= (marine <quantity>)
 <vulture> ::= (vulture <quantity>) 
 <medic> ::= (medic <quantity>) 
 <tank> ::= (tank <quantity>) 
@@ -44,7 +41,6 @@
 <dropship> ::= (dropship <quantity>) 
 <ghost> ::= (ghost <quantity>) 
 <battlecruiser> ::= (battlecruiser <quantity>)
-
 <e_bay_tech> ::= <inf_weapon> | <inf_armor>
 <academy_tech> ::= <stim_pack> | <u-238_shells> | <restoration> | <optical_flare> | <caduceus_reactor>
 <armory_tech> ::= <veh_weapon> | <ship_weapon> | <veh_plate> | <ship_plate>
@@ -53,7 +49,6 @@
 <science_facility_tech> ::= <emp_shockwave> | <irradiate> | <titan_reactor>
 <physics_lab_tech> ::= <yamato_gun> | <colossus_reactor>
 <covert_ops_tech> ::= <personnel_cloaking> | <lockdown> | <ocular_implants> | <moebius_reactor> 
-
 <inf_weapon> ::= (inf_weapon)
 <inf_armor> ::= (inf_armor)
 <stim_pack> ::= (stim_pack)
@@ -80,6 +75,5 @@
 <lockdown> ::= (lockdown)
 <ocular_implants> ::= (ocular_implants)
 <moebius_reactor> ::= (moebius_reactor)
-
 <supply> ::= (supply) 
 <quantity> ::= (quantity)

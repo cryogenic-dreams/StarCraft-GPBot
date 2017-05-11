@@ -31,7 +31,7 @@ gp.fs.0.name = f0
 #gp.fs.1.name = f1
 
 #functionset0:
-gp.fs.0.size = 81
+gp.fs.0.size = 82
 gp.fs.0.func.0 = terminals.InfWeapon
 gp.fs.0.func.0.nc = nc0
 gp.fs.0.func.1 = terminals.InfArmor
@@ -194,6 +194,8 @@ gp.fs.0.func.79 = nonTerminal.Building
 gp.fs.0.func.79.nc = nc1
 gp.fs.0.func.80 = nonTerminal.TechTree
 gp.fs.0.func.80.nc = nc1
+gp.fs.0.func.81 = terminals.Supply
+gp.fs.0.func.81.nc = nc0
 
 gp.problem.stack = ec.gp.ADFStack
 gp.adf-stack.context = ec.gp.ADFContext
