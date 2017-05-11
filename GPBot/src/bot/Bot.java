@@ -146,7 +146,7 @@ public class Bot extends DefaultBWListener {
 
 		}
 		// StringBuilder units = new StringBuilder("My units:\n");
-
+/**
 		// build from build plan
 		Object u = exe.getInput().bp.peek().getX();
 		int sup = exe.getInput().bp.peek().getY();
@@ -179,7 +179,7 @@ public class Bot extends DefaultBWListener {
 				}
 			}
 
-		}
+		}**/
 	}
 
 	@Override

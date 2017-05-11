@@ -13,7 +13,7 @@ public class BasicBuilding extends GPNode {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4053114481721991207L;
+	private static final long serialVersionUID = 1;
 
 
 	public String toString() {
