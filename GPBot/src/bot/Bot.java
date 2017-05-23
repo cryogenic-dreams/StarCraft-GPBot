@@ -10,7 +10,7 @@ import support.ExeContext;
 import support.GimmeTheGame;
 import support.OnEndCallback;
 
-public class Bot extends DefaultBWListener {
+public class Bot extends DefaultBWListener implements Runnable{
 	private OnEndCallback callback;
 
 	public OnEndCallback getCallback() {
@@ -22,11 +22,14 @@ public class Bot extends DefaultBWListener {
 	}
 
 	private ExeContext exe;
+	protected BlockingQueue queue = null;
 
-	public Bot(ExeContext exe) {
+
+	
+	public Bot(ExeContext exe, BlockingQueue queue) {
 		super();
 		this.exe = exe;
-
+		this.queue = queue;
 		hits = 0;
 		sum = 0;
 	}
@@ -43,6 +46,7 @@ public class Bot extends DefaultBWListener {
 
 	private Player self;
 
+	@Override
 	public void run() {
 		mirror.getModule().setEventListener(this);
 		mirror.startGame();
@@ -169,7 +173,7 @@ public class Bot extends DefaultBWListener {
 						go_construct = true;
 						buildBuilding(exe.getInput().bp.pop().getX());
 					}
-					// go_construct =false;
+					// go_construct = false;
 
 				}
 			} else {
@@ -186,15 +190,22 @@ public class Bot extends DefaultBWListener {
 	public void onEnd(boolean arg0) {
 		// TODO Auto-generated method stub
 		super.onEnd(arg0);
-		game.pauseGame();
-		callback.onEnd(hits, sum);
+		gameSwitcher();
+		queue.put(hits, sum);
+		//callback.onEnd(hits, sum);
 		game.drawTextScreen(10, 25, "GG");
-		game.resumeGame();
+		//game.resumeGame();
 
 	}
 
+	public gameSwitcher(){
+		if(game.isPaused()){
+			game.resumeGame();
+		}
+		else game.pauseGame();
+	}
+	
 	public Game getGame() {
-		// TODO Auto-generated method stub
 		return game;
 	}
 
