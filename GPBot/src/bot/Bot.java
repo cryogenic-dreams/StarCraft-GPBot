@@ -2,6 +2,8 @@ package bot;
 
 
 
+import java.util.concurrent.BlockingQueue;
+
 import bwapi.*;
 import bwta.BWTA;
 //import bwta.BaseLocation;
@@ -9,6 +11,7 @@ import bwta.BWTA;
 import support.ExeContext;
 import support.GimmeTheGame;
 import support.OnEndCallback;
+import support.Tuple;
 
 public class Bot extends DefaultBWListener implements Runnable{
 	private OnEndCallback callback;
@@ -22,14 +25,14 @@ public class Bot extends DefaultBWListener implements Runnable{
 	}
 
 	private ExeContext exe;
-	protected BlockingQueue queue = null;
-
+	protected BlockingQueue<Tuple<Integer,Double>> fitnessQueue = null;
+	protected BlockingQueue<ExeContext> individualsQueue = null;
 
 	
-	public Bot(ExeContext exe, BlockingQueue queue) {
+	public Bot(BlockingQueue<Tuple<Integer,Double>> fitnessQueue, BlockingQueue<ExeContext> individualsQueue) {
 		super();
-		this.exe = exe;
-		this.queue = queue;
+		this.fitnessQueue = fitnessQueue;
+		this.individualsQueue = individualsQueue;
 		hits = 0;
 		sum = 0;
 	}
@@ -83,7 +86,16 @@ public class Bot extends DefaultBWListener implements Runnable{
 
 		game = mirror.getGame();
 		self = game.self();
-		gimmer.gimmeIt(game);// what the hell did i do yesterday...
+	//	gimmer.gimmeIt(game);// what the hell did i do yesterday...
+		//gameSwitcher();
+		System.err.println("Continuando");
+		try {
+			exe = this.individualsQueue.take();
+		} catch(InterruptedException e) {
+			e.printStackTrace();
+		}
+		//gameSwitcher();
+		System.err.println("Continuand2");
 
 		// Use BWTA to analyze map
 		// This may take a few minutes if the map is processed first time!
@@ -104,18 +116,24 @@ public class Bot extends DefaultBWListener implements Runnable{
 		// }
 
 		// We're going to locate the build plan call here
-		System.out.println("---The Build Plan size is BEFORE: " + exe.getInput().bp.size());
-		// game.pauseGame();
-		exe.getInd().trees[0].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
+		if (exe != null) {
+			exe.getInput().bp.clear();
+			System.out.println("---The Build Plan size is BEFORE: " + exe.getInput().bp.size());
+			// game.pauseGame();
+			exe.getInd().trees[0].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
 				exe.getInd(), exe.getStbot());
-		// game.resumeGame();
-		System.out.println("---The Build Plan size is AFTER: " + exe.getInput().bp.size());
-		// this.sum = exe.getInput().bp.size();
+			// game.resumeGame();
+			System.out.println("---The Build Plan size is AFTER: " + exe.getInput().bp.size());
+			// this.sum = exe.getInput().bp.size();
+		} else {
+			System.err.println("===============================================================================\nexe nulo!!!\n===============================================================================");
+		}
 	}
 
 	@Override
 	public void onFrame() {
 
+		if (exe != null) {
 		game.drawTextScreen(10, 10, "Playing as " + self.getName() + " - " + self.getRace());
 		for (Unit myUnit : self.getUnits()) {
 			// if it's a worker and it's idle, send it to the closest mineral
@@ -183,28 +201,32 @@ public class Bot extends DefaultBWListener implements Runnable{
 			}
 
 		}**/
+		} else {
+			System.err.println("===============================================================================\nexe nulo!!!\n===============================================================================");
+
+		}
 	}
 
 	@Override
 	public void onEnd(boolean arg0) {
-		// TODO Auto-generated method stub
 		super.onEnd(arg0);
-		gameSwitcher();
-		queue.put(hits, sum);
-		//callback.onEnd(hits, sum);
+		//gameSwitcher();
+		try {
+			this.fitnessQueue.put(new Tuple<>(hits, sum));
+		} catch(InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.err.println("La partida ha terminado!!!!");
 		game.drawTextScreen(10, 25, "GG");
-<<<<<<< HEAD
-		game.leaveGame();
-=======
-		//game.resumeGame();
->>>>>>> origin/master
+		//gameSwitcher();
+
+		//callback.onEnd(hits, sum);
+		
 
 	}
 
-	public gameSwitcher(){
-		if(game.isPaused()){
-			game.resumeGame();
-		}
+	public void gameSwitcher(){
+		if (game.isPaused()) game.resumeGame();
 		else game.pauseGame();
 	}
 	

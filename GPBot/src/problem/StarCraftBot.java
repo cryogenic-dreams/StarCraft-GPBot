@@ -2,31 +2,33 @@ package problem;
 
 import ec.util.*;
 import support.ExeContext;
-import support.OnEndCallback;
+import support.Tuple;
 import ec.*;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.SynchronousQueue;
+
 import bot.Bot;
-import bwapi.Game;
 import data.GameData;
 import ec.gp.*;
 import ec.gp.koza.*;
-import support.GimmeTheGame;
 
 import ec.simple.*;
 
-public class StarCraftBot extends GPProblem implements SimpleProblemForm{
+public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1814245143656863670L;
+	public static final long serialVersionUID = 1;
 
 	public static final String P_DATA = "data";
 
-	public double currentX;
-	public double currentY;
-	public Game myDamnGame; //this is important
-
+	protected BlockingQueue<Tuple<Integer,Double>> fitnessQueue = null;
+	protected BlockingQueue<ExeContext> individualsQueue = null;
 	public static String[] arguments;
 
+	public Bot bot;
+	
 	public void setup(final EvolutionState state, final Parameter base) {
 		// very important, remember this
 		super.setup(state, base);
@@ -36,61 +38,90 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm{
 			state.output.fatal("GPData class must subclass from " + GameData.class, base.push(P_DATA), null);
 	}
 
+	protected Thread workerThread;
+	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void finishEvaluating(EvolutionState state, int threadnum) {
 		// TODO Auto-generated method stub
 		super.finishEvaluating(state, threadnum);
+		
+		try {
+			//workerThread.interrupt();
+			workerThread.stop();
+			System.err.println("Esperando aqui sentado a que hilo termine");
+			workerThread.join();
+			System.err.println("El hilo ha terminado y todo funciona, o eso creo");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
+	protected EvolutionState currentEvolutionState;
+	protected Individual currentIndividual;
+	
 	public void evaluate(final EvolutionState state, final Individual ind, final int subpopulation,
 			final int threadnum) {
 		if (!ind.evaluated) // don't bother reevaluating
-		{
-			GameData input = (GameData) (this.input);
-			
-			
-			ExeContext c = new ExeContext (state, ((GPIndividual) ind), threadnum, stack, input,  this);
-			Bot t = new Bot(c);
-			input.g = t.getGame();
-			c.setInput(input);
-			t.setCallback(new OnEndCallback() {
+		{	
+			this.currentEvolutionState = state;
+			this.currentIndividual = ind;
+			ExeContext c = new ExeContext (state, ((GPIndividual) ind), threadnum, stack, (GameData) this.input,  this);
+			try {
+				this.individualsQueue.put(c);
+				((GameData) input).g = bot.getGame();                                                                                 
+				c.setInput((GameData) input);
 
-				@Override
-				public void onEnd(int hits, double sum) {
-					// the fitness better be KozaFitness!
-					KozaFitness f = ((KozaFitness) ind.fitness);
-					f.setStandardizedFitness(state, sum);
-					f.hits = hits;
-					ind.evaluated = true;
-					input.g.leaveGame();
-				}
-			
-			});
-			t.setGimmer(new GimmeTheGame() {
-
-				@Override
-				public void gimmeIt(Game g) {
-					// TODO Auto-generated method stub
-					System.out.println("Da game is " + g);
-					//input.g = g; this is not necessary
-					myDamnGame = g;
-				}
+				// Wait for game to finish...
+				Tuple<Integer, Double> results = this.fitnessQueue.take();
 				
-			});
-			t.run();
-			
-			System.out.println("I'M OUTTA HERE!");
+				KozaFitness f = ((KozaFitness) currentIndividual.fitness);
+				f.setStandardizedFitness(currentEvolutionState, results.getY());
+				f.hits = results.getX();
+				currentIndividual.evaluated = true;
+				//((GameData) input).g.leaveGame();
+				
+				System.err.println("I'M OUTTA HERE!");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
 							
 			
 		}
 	}
 
 	public static void main(String[] args) {
-		arguments = args;
-		run();
+		run(args);
 	}
 
-	public static void run() {
+	public StarCraftBot() {
+		
+		//arguments = args;
+		fitnessQueue = new SynchronousQueue<>();
+		individualsQueue = new SynchronousQueue<>();
+		bot = new Bot(fitnessQueue, individualsQueue);		
+		
+		workerThread = new Thread(bot);
+		workerThread.start();
+		
+
+	}
+	
+	@Override
+	public void describe(EvolutionState state, Individual ind, int subpopulation, int threadnum, int log) {
+		// TODO Auto-generated method stub
+		super.describe(state, ind, subpopulation, threadnum, log);
+	}
+
+	@Override
+	public void prepareToEvaluate(EvolutionState state, int threadnum) {
+		// TODO Auto-generated method stub
+		super.prepareToEvaluate(state, threadnum);
+	}
+
+	public static void run(String[] arguments) {
 		// TODO Auto-generated method stub
 		Evolve.main(arguments);
 	}

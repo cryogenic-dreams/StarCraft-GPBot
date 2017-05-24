@@ -14,17 +14,10 @@
 <armory> ::= <armory_tech> <armory_squads> (armory <factory> <supply>)
 <machine_shop> ::=  <machine_shop_squads> <machine_shop_tech> (machine_shop <factory> <supply>)
 <comsat_station> ::= (comsat_station <academy> <supply>)
-<<<<<<< HEAD
-<science_facility> ::= (science_facility <starport> <supply>) | <science_facility_squads> (science_facility <starport> <supply>) | <science_facility_tech> (science_facility <starport> <supply>)
-<control_tower> ::= (control_tower <starport> <supply>) | <control_tower_squads> <control_tower> | <control_tower_tech> <control_tower>
-<physics_lab> ::= (physics_lab <science_facility> <supply>) | <physics_lab_squads> <physics_lab> | <physics_lab_tech> <physics_lab>
-<covert_ops> ::= (covert_ops <science_facility> <supply>) | <covert_ops_squads> <covert_ops> | <covert_ops_tech> <covert_ops>
-=======
 <science_facility> ::= <science_facility_squads> <science_facility_tech> (science_facility <starport> <supply>)
 <control_tower> ::= <control_tower_squads> <control_tower_tech> (control_tower <starport> <supply>)
 <physics_lab> ::= <physics_lab_tech> <physics_lab_squads> (physics_lab <science_facility> <supply>)
 <covert_ops> ::= <covert_ops_squads> <covert_ops_tech> (covert_ops <science_facility> <supply>)
->>>>>>> origin/master
 <nuclear_silo> ::= (nuclear_silo <covert_ops> <supply>)
 <barrack_squads> ::= (barrack_squads <marine>)
 <factory_squads> ::= (factory_squads <vulture>)
