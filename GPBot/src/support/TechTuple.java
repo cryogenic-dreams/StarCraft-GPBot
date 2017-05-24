@@ -2,7 +2,7 @@ package support;
 
 import bwapi.TechType;
 
-public class TechTuple extends Tuple{
+public class TechTuple extends Tuple<TechType,Integer>{
 	
 	private TechType x;
 	

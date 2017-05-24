@@ -46,7 +46,6 @@ public class Bot extends DefaultBWListener {
 	public void run() {
 		mirror.getModule().setEventListener(this);
 		mirror.startGame();
-
 	}
 
 	int aux = 0;
@@ -189,7 +188,7 @@ public class Bot extends DefaultBWListener {
 		game.pauseGame();
 		callback.onEnd(hits, sum);
 		game.drawTextScreen(10, 25, "GG");
-		game.resumeGame();
+		game.leaveGame();
 
 	}
 

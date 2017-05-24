@@ -2,7 +2,7 @@ package support;
 
 import bwapi.UpgradeType;
 
-public class UpgradeTuple extends Tuple {
+public class UpgradeTuple extends Tuple<UpgradeType,Integer> {
 	
 	private UpgradeType x;
 

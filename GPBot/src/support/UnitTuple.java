@@ -12,4 +12,14 @@ public class UnitTuple extends Tuple<UnitType,Integer> {
 	public UnitTuple(UnitType x, int y) {
 		super(x,y);
 	}
+
+
+	public UnitType getX() {
+		return x;
+	}
+	public void setX(UnitType x) {
+		this.x = x;
+	}
+	
+	
 }

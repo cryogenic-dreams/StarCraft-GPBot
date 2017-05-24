@@ -62,6 +62,7 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm{
 					f.setStandardizedFitness(state, sum);
 					f.hits = hits;
 					ind.evaluated = true;
+					input.g.leaveGame();
 				}
 			
 			});
