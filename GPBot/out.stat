@@ -1,0 +1,32 @@
+
+Generation: 0
+Best Individual:
+Subpopulation 0:
+Evaluated: true
+Fitness: Standardized=0.014364963378004636 Adjusted=0.9858384665316448 Hits=108
+Tree 0:
+ (covert_ops (missile_turret (medic supply4)
+     (firebat supply_depot)) (factory (goliath
+     lockdown) (building colossus_reactor)))
+
+Generation: 1
+Best Individual:
+Subpopulation 0:
+Evaluated: true
+Fitness: Standardized=0.0951069406032069 Adjusted=0.9131528282061476 Hits=98
+Tree 0:
+ (machine_shop (machine_shop_tech (covert_ops_tech
+     lockdown)) (physics_lab (basicbuildings titan_reactor
+     veh_plate) (physics_lab_squads inf_armor
+     supply_depot)))
+
+Generation: 2
+Best Individual:
+Subpopulation 0:
+Evaluated: true
+Fitness: Standardized=0.0951069406032069 Adjusted=0.9131528282061476 Hits=98
+Tree 0:
+ (machine_shop (machine_shop_tech (covert_ops_tech
+     lockdown)) (physics_lab (basicbuildings titan_reactor
+     veh_plate) (physics_lab_squads inf_armor
+     supply_depot)))

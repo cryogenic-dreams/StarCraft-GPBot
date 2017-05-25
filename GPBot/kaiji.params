@@ -1,8 +1,8 @@
 #This is my dear conf file
 #I completely forgot about it yesterday
 #Never again
-parent.0 = ecj\\ec\\gp\\ge\\ge.params
-parent.1 = ecj\\ec\\gp\\koza\\koza.params
+
+parent.0 = ecj\\ec\\gp\\koza\\koza.params
 
 #here we turn on the checkpointing
 checkpoint = true
@@ -10,8 +10,8 @@ checkpoint-modulo = 1
 checkpoint-directory = saves
 
 #define the grammar files
-pop.subpop.0.species.file.0 = techtree.grammar
-ge.species.file.0 = techtree.grammar
+#pop.subpop.0.species.file.0 = techtree.grammar
+#ge.species.file.0 = techtree.grammar
 
 
 # the next four items are already defined in koza.params, but we put them here to be clear.
@@ -203,6 +203,6 @@ gp.problem.stack = ec.gp.ADFStack
 gp.adf-stack.context = ec.gp.ADFContext
 
 #in order to process grammars, we need to define a GESpecies problem between the eval and the problem
-eval.problem = ec.gp.ge.GEProblem
-eval.problem.problem = problem.StarCraftBot
-eval.problem.problem.data = data.GameData
+#eval.problem = ec.gp.ge.GEProblem
+eval.problem = problem.StarCraftBot
+eval.problem.data = data.GameData

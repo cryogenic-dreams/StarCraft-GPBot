@@ -1,12 +1,14 @@
 package support;
 
+import java.io.Serializable;
+
 import data.GameData;
 import ec.EvolutionState;
 import ec.gp.ADFStack;
 import ec.gp.GPIndividual;
 import problem.StarCraftBot;
 
-public class ExeContext {
+public class ExeContext  implements Serializable{
 
 	private EvolutionState state;
 	private GPIndividual ind;
@@ -14,7 +16,8 @@ public class ExeContext {
 	private  ADFStack stack;
 	private GameData input;
 	private StarCraftBot stbot;
-	
+	private static final long serialVersionUID = 1;
+
 	public ExeContext(EvolutionState state, GPIndividual ind, int threadnum, ADFStack stack, GameData input,
 			StarCraftBot stbot) {
 		super();

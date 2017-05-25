@@ -6,6 +6,7 @@ public class UnitTuple extends Tuple<UnitType,Integer> {
 	
 	//Damn Java, you don't have tuples
 	private UnitType x;
+	private static final long serialVersionUID = 1;
 
 	
 	

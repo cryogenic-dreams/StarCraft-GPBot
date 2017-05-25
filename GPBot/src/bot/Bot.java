@@ -2,6 +2,7 @@ package bot;
 
 
 
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 
 import bwapi.*;
@@ -28,6 +29,7 @@ public class Bot extends DefaultBWListener implements Runnable{
 	protected BlockingQueue<Tuple<Integer,Double>> fitnessQueue = null;
 	protected BlockingQueue<ExeContext> individualsQueue = null;
 
+	private Random r;
 	
 	public Bot(BlockingQueue<Tuple<Integer,Double>> fitnessQueue, BlockingQueue<ExeContext> individualsQueue) {
 		super();
@@ -35,6 +37,7 @@ public class Bot extends DefaultBWListener implements Runnable{
 		this.individualsQueue = individualsQueue;
 		hits = 0;
 		sum = 0;
+		r = new Random();
 	}
 
 	public double currentX;
@@ -212,6 +215,8 @@ public class Bot extends DefaultBWListener implements Runnable{
 		super.onEnd(arg0);
 		//gameSwitcher();
 		try {
+			hits= r.nextInt(200);
+			sum = r.nextDouble();
 			this.fitnessQueue.put(new Tuple<>(hits, sum));
 		} catch(InterruptedException e) {
 			e.printStackTrace();

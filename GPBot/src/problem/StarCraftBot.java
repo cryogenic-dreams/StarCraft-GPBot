@@ -40,22 +40,22 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 
 	protected Thread workerThread;
 	
-	@SuppressWarnings("deprecation")
+
 	@Override
 	public void finishEvaluating(EvolutionState state, int threadnum) {
 		// TODO Auto-generated method stub
 		super.finishEvaluating(state, threadnum);
-		
-		try {
-			//workerThread.interrupt();
-			workerThread.stop();
-			System.err.println("Esperando aqui sentado a que hilo termine");
-			workerThread.join();
-			System.err.println("El hilo ha terminado y todo funciona, o eso creo");
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		
+//		try {
+//			workerThread.interrupt();
+//			//workerThread.stop();
+//			System.err.println("Esperando aqui sentado a que hilo termine");
+//			workerThread.join();
+//			System.err.println("El hilo ha terminado y todo funciona, o eso creo");
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	protected EvolutionState currentEvolutionState;
@@ -76,13 +76,13 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 				// Wait for game to finish...
 				Tuple<Integer, Double> results = this.fitnessQueue.take();
 				
-				KozaFitness f = ((KozaFitness) currentIndividual.fitness);
-				f.setStandardizedFitness(currentEvolutionState, results.getY());
+				KozaFitness f = ((KozaFitness) this.currentIndividual.fitness);
+				f.setStandardizedFitness(this.currentEvolutionState, results.getY());
 				f.hits = results.getX();
-				currentIndividual.evaluated = true;
+				this.currentIndividual.evaluated = true;
 				//((GameData) input).g.leaveGame();
 				
-				System.err.println("I'M OUTTA HERE!");
+				System.err.println(this.currentIndividual.toString());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -92,9 +92,10 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 		}
 	}
 
-	public static void main(String[] args) {
-		run(args);
-	}
+//	public static void main(String[] args) {
+//		run(args);
+	
+//	}
 
 	public StarCraftBot() {
 		
@@ -113,6 +114,7 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 	public void describe(EvolutionState state, Individual ind, int subpopulation, int threadnum, int log) {
 		// TODO Auto-generated method stub
 		super.describe(state, ind, subpopulation, threadnum, log);
+		System.err.println("I'm finished!!!");
 	}
 
 	@Override
@@ -121,9 +123,8 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 		super.prepareToEvaluate(state, threadnum);
 	}
 
-	public static void run(String[] arguments) {
-		// TODO Auto-generated method stub
-		Evolve.main(arguments);
-	}
+//	public static void run(String[] arguments) {
+//		Evolve.main(arguments);
+//	}
 
 }
