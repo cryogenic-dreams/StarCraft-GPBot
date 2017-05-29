@@ -2,7 +2,9 @@
 #I completely forgot about it yesterday
 #Never again
 
-parent.0 = ecj\\ec\\gp\\koza\\koza.params
+parent.0 = ecj\\ec\\gp\\ge\\ge.params
+parent.1 = ecj\\ec\\gp\\koza\\koza.params
+
 
 #here we turn on the checkpointing
 checkpoint = true
@@ -10,8 +12,8 @@ checkpoint-modulo = 1
 checkpoint-directory = saves
 
 #define the grammar files
-#pop.subpop.0.species.file.0 = techtree.grammar
-#ge.species.file.0 = techtree.grammar
+pop.subpop.0.species.file.0 = techtree.grammar
+ge.species.file.0 = techtree.grammar
 
 
 # the next four items are already defined in koza.params, but we put them here to be clear.
@@ -137,25 +139,25 @@ gp.fs.0.func.49.nc = nc2
 gp.fs.0.func.50 = nonTerminal.MissileTurret
 gp.fs.0.func.50.nc = nc2
 gp.fs.0.func.51 = nonTerminal.Academy
-gp.fs.0.func.51.nc = nc2
+gp.fs.0.func.51.nc = nc4
 gp.fs.0.func.52 = nonTerminal.Factory
 gp.fs.0.func.52.nc = nc2
 gp.fs.0.func.53 = nonTerminal.Starport
-gp.fs.0.func.53.nc = nc2
+gp.fs.0.func.53.nc = nc3
 gp.fs.0.func.54 = nonTerminal.Armory
-gp.fs.0.func.54.nc = nc2
+gp.fs.0.func.54.nc = nc4
 gp.fs.0.func.55 = nonTerminal.MachineShop
-gp.fs.0.func.55.nc = nc2
+gp.fs.0.func.55.nc = nc4
 gp.fs.0.func.56 = nonTerminal.ComsatStation
 gp.fs.0.func.56.nc = nc2
 gp.fs.0.func.57 = nonTerminal.ScienceFacility
-gp.fs.0.func.57.nc = nc2
+gp.fs.0.func.57.nc = nc4
 gp.fs.0.func.58 = nonTerminal.ControlTower
-gp.fs.0.func.58.nc = nc2
+gp.fs.0.func.58.nc = nc4
 gp.fs.0.func.59 = nonTerminal.PhysicsLab
-gp.fs.0.func.59.nc = nc2
+gp.fs.0.func.59.nc = nc4
 gp.fs.0.func.60 = nonTerminal.CovertOps
-gp.fs.0.func.60.nc = nc2
+gp.fs.0.func.60.nc = nc4
 gp.fs.0.func.61 = nonTerminal.NuclearSilo
 gp.fs.0.func.61.nc = nc2
 gp.fs.0.func.62 = nonTerminal.Marine
@@ -203,6 +205,6 @@ gp.problem.stack = ec.gp.ADFStack
 gp.adf-stack.context = ec.gp.ADFContext
 
 #in order to process grammars, we need to define a GESpecies problem between the eval and the problem
-#eval.problem = ec.gp.ge.GEProblem
-eval.problem = problem.StarCraftBot
-eval.problem.data = data.GameData
+eval.problem = ec.gp.ge.GEProblem
+eval.problem.problem = problem.StarCraftBot
+eval.problem.problem.data = data.GameData

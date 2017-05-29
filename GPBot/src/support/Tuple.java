@@ -1,13 +1,10 @@
 package support;
 
-import java.io.Serializable;
-
-public class Tuple<U,I>  implements Serializable {
+public class Tuple<U,I>  {
 	
 	//Damn Java, you don't have tuples
 	private U x;
 	private I y;
-	private static final long serialVersionUID = 1;
 
 	
 	public Tuple(U x, I y) {

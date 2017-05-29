@@ -2,31 +2,16 @@
 Generation: 0
 Best Individual:
 Subpopulation 0:
-Evaluated: true
-Fitness: Standardized=0.014364963378004636 Adjusted=0.9858384665316448 Hits=108
+Evaluated: T
+Fitness: Standardized=0.4762028845123719 Adjusted=0.6774136607450987 Hits=34
+-119 40 -113 44 76 -104 -85 -13 -109 -99 68 87 -64 -22 42 -53 68 -92 -124 -122 -124 -14 -25
+Equivalent GP Individual:
 Tree 0:
- (covert_ops (missile_turret (medic supply4)
-     (firebat supply_depot)) (factory (goliath
-     lockdown) (building colossus_reactor)))
-
-Generation: 1
-Best Individual:
-Subpopulation 0:
-Evaluated: true
-Fitness: Standardized=0.0951069406032069 Adjusted=0.9131528282061476 Hits=98
-Tree 0:
- (machine_shop (machine_shop_tech (covert_ops_tech
-     lockdown)) (physics_lab (basicbuildings titan_reactor
-     veh_plate) (physics_lab_squads inf_armor
-     supply_depot)))
-
-Generation: 2
-Best Individual:
-Subpopulation 0:
-Evaluated: true
-Fitness: Standardized=0.0951069406032069 Adjusted=0.9131528282061476 Hits=98
-Tree 0:
- (machine_shop (machine_shop_tech (covert_ops_tech
-     lockdown)) (physics_lab (basicbuildings titan_reactor
-     veh_plate) (physics_lab_squads inf_armor
-     supply_depot)))
+ (buildplan (buildings veh_weapon (buildings
+     (academy_squads (medic quantity7)) (buildings
+     (barrack_squads (marine quantity8)) (comsat_station
+     (academy_squads (medic quantity4)) supply103))))
+     (basicbuildings refinery (basicbuildings
+         supply_depot (basicbuildings supply_depot
+         (basicbuildings supply_depot refinery)))))
+ERCs:     -85 -> supply103    -22 -> quantity7    -124 -> quantity8    76 -> quantity4

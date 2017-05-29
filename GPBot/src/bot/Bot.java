@@ -120,7 +120,10 @@ public class Bot extends DefaultBWListener implements Runnable{
 
 		// We're going to locate the build plan call here
 		if (exe != null) {
-			exe.getInput().bp.clear();
+			if(exe.getInput().bp == null) { System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+			exe.getInput().initializeIfNull();}
+			exe.getInput().bp.clear();//clean the stack
+			System.out.println("entrando");
 			System.out.println("---The Build Plan size is BEFORE: " + exe.getInput().bp.size());
 			// game.pauseGame();
 			exe.getInd().trees[0].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
@@ -205,7 +208,7 @@ public class Bot extends DefaultBWListener implements Runnable{
 
 		}**/
 		} else {
-			System.err.println("===============================================================================\nexe nulo!!!\n===============================================================================");
+			//System.err.println("===============================================================================\nexe nulo!!!\n===============================================================================");
 
 		}
 	}

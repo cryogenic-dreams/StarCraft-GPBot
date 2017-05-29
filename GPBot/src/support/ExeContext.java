@@ -13,7 +13,7 @@ public class ExeContext  implements Serializable{
 	private EvolutionState state;
 	private GPIndividual ind;
 	private int threadnum;
-	private  ADFStack stack;
+	private ADFStack stack;
 	private GameData input;
 	private StarCraftBot stbot;
 	private static final long serialVersionUID = 1;

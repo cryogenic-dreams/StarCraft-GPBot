@@ -16,16 +16,23 @@ public class GameData extends GPData {
 	 */
 	//there's no need to serialize this class and attributes since all of them are generated in runtime
 	private static final long serialVersionUID = 1;
-	public Game g; // return value
-	public Stack<Tuple> bp = new Stack<Tuple>(); //here we'll save our building plan, it'll have a build and a supply number, just like our usual build plan
+	public transient Game g; // return value
+	public transient Stack<Tuple> bp = new Stack<Tuple>(); //here we'll save our building plan, it'll have a build and a supply number, just like our usual build plan
 	public int s = 200;
 	public int q;
 	
 	public void copyTo(final GPData gpd) // copy my stuff to another GameData
 	{
+		initializeIfNull();
 		((GameData) gpd).g = g;
 		((GameData) gpd).bp = bp;
 		((GameData) gpd).s = s;
 		((GameData) gpd).q = q;
+	}
+	
+	public void initializeIfNull() {
+		if(bp == null) {
+			bp = new Stack<Tuple>();
+		}
 	}
 }
