@@ -3,15 +3,68 @@ Generation: 0
 Best Individual:
 Subpopulation 0:
 Evaluated: T
-Fitness: Standardized=0.4762028845123719 Adjusted=0.6774136607450987 Hits=34
--119 40 -113 44 76 -104 -85 -13 -109 -99 68 87 -64 -22 42 -53 68 -92 -124 -122 -124 -14 -25
+Fitness: Standardized=1.7976931348623157E308 Adjusted=5.562684646268003E-309 Hits=0
+113 -81 69 -28 -95 -97 -51 45 -6 -54 -91 -43 16 -17 -84 37 -83 12 -73 39 -92 50 -77 -69
 Equivalent GP Individual:
-Tree 0:
- (buildplan (buildings veh_weapon (buildings
-     (academy_squads (medic quantity7)) (buildings
-     (barrack_squads (marine quantity8)) (comsat_station
-     (academy_squads (medic quantity4)) supply103))))
-     (basicbuildings refinery (basicbuildings
-         supply_depot (basicbuildings supply_depot
-         (basicbuildings supply_depot refinery)))))
-ERCs:     -85 -> supply103    -22 -> quantity7    -124 -> quantity8    76 -> quantity4
+[BAD]
+ERCs:     -17 -> quantity1    -81 -> quantity0    -6 -> quantity1    -92 -> quantity7
+
+Generation: 1
+Best Individual:
+Subpopulation 0:
+Evaluated: T
+Fitness: Standardized=1.7976931348623157E308 Adjusted=5.562684646268003E-309 Hits=0
+113 -81 69 -28 -95 -97 -51 45 -6 -54 -91 -43 16 -17 -84 37 -83 12 -73 39 -92 50 -77 -69
+Equivalent GP Individual:
+[BAD]
+ERCs:     -17 -> quantity1    -81 -> quantity0    -6 -> quantity1    -92 -> quantity7
+
+Generation: 2
+Best Individual:
+Subpopulation 0:
+Evaluated: T
+Fitness: Standardized=1.7976931348623157E308 Adjusted=5.562684646268003E-309 Hits=0
+113 -81 69 -28 -95 -97 -51 45 -6 -54 -91 -43 16 -17 -84 125 -83 12 -73 39 -92 50 -77 -69
+Equivalent GP Individual:
+[BAD]
+ERCs:     -17 -> quantity1    -81 -> quantity0    -6 -> quantity1    -92 -> quantity7
+
+Generation: 3
+Best Individual:
+Subpopulation 0:
+Evaluated: T
+Fitness: Standardized=1.7976931348623157E308 Adjusted=5.562684646268003E-309 Hits=0
+113 -81 69 -28 -95 -97 -51 45 -6 -54 -91 -43 16 -17 -84 125 -83 12 -73 39 -92 50 -77 -69
+Equivalent GP Individual:
+[BAD]
+ERCs:     -17 -> quantity1    -81 -> quantity0    -6 -> quantity1    -92 -> quantity7
+
+Generation: 4
+Best Individual:
+Subpopulation 0:
+Evaluated: T
+Fitness: Standardized=1.7976931348623157E308 Adjusted=5.562684646268003E-309 Hits=0
+113 -81 69 -28 -95 -97 -51 45 -6 -54 -91 -43 16 -17 -84 125 -83 12 -73 39 -92 50 -77 -69
+Equivalent GP Individual:
+[BAD]
+ERCs:     -17 -> quantity1    -81 -> quantity0    -6 -> quantity1    -92 -> quantity7
+
+Generation: 5
+Best Individual:
+Subpopulation 0:
+Evaluated: T
+Fitness: Standardized=1.7976931348623157E308 Adjusted=5.562684646268003E-309 Hits=0
+113 -81 69 -28 -95 -97 -51 45 -6 -54 -91 -43 16 -17 -84 125 -83 12 -73 39 -92 50 -77 -69
+Equivalent GP Individual:
+[BAD]
+ERCs:     -17 -> quantity1    -81 -> quantity0    -6 -> quantity1    -92 -> quantity7
+
+Generation: 6
+Best Individual:
+Subpopulation 0:
+Evaluated: T
+Fitness: Standardized=1.7976931348623157E308 Adjusted=5.562684646268003E-309 Hits=0
+113 -81 69 -28 -95 -97 -51 45 -6 -54 -91 -43 16 -17 -84 125 -83 12 -73 39 -92 50 -77 -69
+Equivalent GP Individual:
+[BAD]
+ERCs:     -17 -> quantity1    -81 -> quantity0    -6 -> quantity1    -92 -> quantity7
