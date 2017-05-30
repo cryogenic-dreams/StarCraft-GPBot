@@ -94,6 +94,7 @@ public class Bot extends DefaultBWListener implements Runnable{
 		System.err.println("Continuando");
 		try {
 			exe = this.individualsQueue.take();
+			System.out.println("-----------------Continuadosss");
 		} catch(InterruptedException e) {
 			e.printStackTrace();
 		}

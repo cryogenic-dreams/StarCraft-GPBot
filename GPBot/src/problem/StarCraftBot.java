@@ -22,7 +22,7 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 	public static final long serialVersionUID = 1;
 
 	public static final String P_DATA = "data";
-	private transient boolean checked = false;
+	// private transient boolean checked = false;
 	protected transient BlockingQueue<Tuple<Integer, Double>> fitnessQueue = null;
 	protected transient BlockingQueue<ExeContext> individualsQueue = null;
 	public static transient String[] arguments;
@@ -34,7 +34,6 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 	public void setup(final EvolutionState state, final Parameter base) {
 		// very important, remember this
 		super.setup(state, base);
-
 		// verify our input is the right class (or subclasses from it)
 		if (!(input instanceof GameData))
 			state.output.fatal("GPData class must subclass from " + GameData.class, base.push(P_DATA), null);
@@ -61,13 +60,15 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 	public void evaluate(final EvolutionState state, final Individual ind, final int subpopulation,
 			final int threadnum) {
 
-		checkNull();
+	
 		if (!ind.evaluated) // don't bother reevaluating
 		{
 			this.currentEvolutionState = state;
 			this.currentIndividual = ind;
+
 			ExeContext c = new ExeContext(state, ((GPIndividual) ind), threadnum, stack, (GameData) this.input, this);
 			try {
+				System.err.println("evaluating");
 				this.individualsQueue.put(c);
 				((GameData) input).g = bot.getGame();
 				c.setInput((GameData) input);
@@ -102,22 +103,21 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 		bot = new Bot(fitnessQueue, individualsQueue);
 		workerThread = new Thread(bot);
 		workerThread.start();
-		checked = true;
+		//checked = true;
 	}
 
 	public void checkNull() {
-		if (!checked) {
-			checked = true;
-			// arguments = args;
-			if (this.fitnessQueue == null)
-				fitnessQueue = new SynchronousQueue<>();
-			if (this.individualsQueue == null)
-				individualsQueue = new SynchronousQueue<>();
-			if (this.bot == null) {
-				bot = new Bot(fitnessQueue, individualsQueue);
-				workerThread = new Thread(bot);
-				workerThread.start();
-			}
+
+		// arguments = args;
+		if (this.fitnessQueue == null)
+			fitnessQueue = new SynchronousQueue<>();
+		if (this.individualsQueue == null)
+			individualsQueue = new SynchronousQueue<>();
+		if (this.bot == null) {
+			bot = new Bot(fitnessQueue, individualsQueue);
+			workerThread = new Thread(bot);
+			workerThread.start();
+
 		}
 
 	}
@@ -133,6 +133,8 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 	public void prepareToEvaluate(EvolutionState state, int threadnum) {
 		// TODO Auto-generated method stub
 		super.prepareToEvaluate(state, threadnum);
+		checkNull();
+
 	}
 
 	// public static void run(String[] arguments) {

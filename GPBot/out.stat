@@ -3,68 +3,128 @@ Generation: 0
 Best Individual:
 Subpopulation 0:
 Evaluated: T
-Fitness: Standardized=1.7976931348623157E308 Adjusted=5.562684646268003E-309 Hits=0
-113 -81 69 -28 -95 -97 -51 45 -6 -54 -91 -43 16 -17 -84 37 -83 12 -73 39 -92 50 -77 -69
+Fitness: Standardized=0.6072151442000288 Adjusted=0.6221942367882163 Hits=143
+116 -70 108 -128 -11 113 4 -52 14 -91 69 -128 79 12 86 -8
 Equivalent GP Individual:
-[BAD]
-ERCs:     -17 -> quantity1    -81 -> quantity0    -6 -> quantity1    -92 -> quantity7
+Tree 0:
+ (buildplan (buildings (barrack_squads (marine
+     quantity1)) veh_weapon) (basicbuildings supply_depot
+     supply_depot))
+ERCs:     14 -> quantity1
 
 Generation: 1
 Best Individual:
 Subpopulation 0:
 Evaluated: T
-Fitness: Standardized=1.7976931348623157E308 Adjusted=5.562684646268003E-309 Hits=0
-113 -81 69 -28 -95 -97 -51 45 -6 -54 -91 -43 16 -17 -84 37 -83 12 -73 39 -92 50 -77 -69
+Fitness: Standardized=0.7688884198774163 Adjusted=0.5653267830592162 Hits=168
+116 -70 108 -128 -11 113 4 -52 14 -91 69 -128 79 12 86 -8
 Equivalent GP Individual:
-[BAD]
-ERCs:     -17 -> quantity1    -81 -> quantity0    -6 -> quantity1    -92 -> quantity7
+Tree 0:
+ (buildplan (buildings (barrack_squads (marine
+     quantity1)) veh_weapon) (basicbuildings supply_depot
+     supply_depot))
+ERCs:     14 -> quantity1
+
+Generation: 1
+Best Individual:
+Subpopulation 0:
+Evaluated: T
+Fitness: Standardized=0.2945789108862039 Adjusted=0.77245194679979 Hits=143
+116 -70 108 -128 -11 113 4 -52 14 -91 69 -128 79 12 86 -8
+Equivalent GP Individual:
+Tree 0:
+ (buildplan (buildings (barrack_squads (marine
+     quantity1)) veh_weapon) (basicbuildings supply_depot
+     supply_depot))
+ERCs:     14 -> quantity1
+
+Generation: 1
+Best Individual:
+Subpopulation 0:
+Evaluated: T
+Fitness: Standardized=0.5451813637660389 Adjusted=0.6471732208591491 Hits=51
+116 -70 108 -128 -11 113 4 -52 14 -91 69 -128 79 12 86 -8
+Equivalent GP Individual:
+Tree 0:
+ (buildplan (buildings (barrack_squads (marine
+     quantity1)) veh_weapon) (basicbuildings supply_depot
+     supply_depot))
+ERCs:     14 -> quantity1
 
 Generation: 2
 Best Individual:
 Subpopulation 0:
 Evaluated: T
-Fitness: Standardized=1.7976931348623157E308 Adjusted=5.562684646268003E-309 Hits=0
-113 -81 69 -28 -95 -97 -51 45 -6 -54 -91 -43 16 -17 -84 125 -83 12 -73 39 -92 50 -77 -69
+Fitness: Standardized=0.18336831756235472 Adjusted=0.8450454394958967 Hits=34
+116 -70 108 -128 -11 113 4 -52 14 -91 69 -128 79 12 92 -8
 Equivalent GP Individual:
-[BAD]
-ERCs:     -17 -> quantity1    -81 -> quantity0    -6 -> quantity1    -92 -> quantity7
+Tree 0:
+ (buildplan (buildings (barrack_squads (marine
+     quantity1)) veh_weapon) (basicbuildings supply_depot
+     supply_depot))
+ERCs:     14 -> quantity1
 
-Generation: 3
+Generation: 1
 Best Individual:
 Subpopulation 0:
 Evaluated: T
-Fitness: Standardized=1.7976931348623157E308 Adjusted=5.562684646268003E-309 Hits=0
-113 -81 69 -28 -95 -97 -51 45 -6 -54 -91 -43 16 -17 -84 125 -83 12 -73 39 -92 50 -77 -69
+Fitness: Standardized=0.2891339954534914 Adjusted=0.7757145521930171 Hits=133
+116 -70 108 -128 -11 113 4 -52 14 -91 69 -128 79 12 86 -8
 Equivalent GP Individual:
-[BAD]
-ERCs:     -17 -> quantity1    -81 -> quantity0    -6 -> quantity1    -92 -> quantity7
+Tree 0:
+ (buildplan (buildings (barrack_squads (marine
+     quantity1)) veh_weapon) (basicbuildings supply_depot
+     supply_depot))
+ERCs:     14 -> quantity1
 
-Generation: 4
+Generation: 1
 Best Individual:
 Subpopulation 0:
 Evaluated: T
-Fitness: Standardized=1.7976931348623157E308 Adjusted=5.562684646268003E-309 Hits=0
-113 -81 69 -28 -95 -97 -51 45 -6 -54 -91 -43 16 -17 -84 125 -83 12 -73 39 -92 50 -77 -69
+Fitness: Standardized=0.6496999367426832 Adjusted=0.6061708421802394 Hits=170
+116 -70 108 -128 -11 113 4 -52 14 -91 69 -128 79 12 86 -8
 Equivalent GP Individual:
-[BAD]
-ERCs:     -17 -> quantity1    -81 -> quantity0    -6 -> quantity1    -92 -> quantity7
+Tree 0:
+ (buildplan (buildings (barrack_squads (marine
+     quantity1)) veh_weapon) (basicbuildings supply_depot
+     supply_depot))
+ERCs:     14 -> quantity1
 
-Generation: 5
+Generation: 1
 Best Individual:
 Subpopulation 0:
 Evaluated: T
-Fitness: Standardized=1.7976931348623157E308 Adjusted=5.562684646268003E-309 Hits=0
-113 -81 69 -28 -95 -97 -51 45 -6 -54 -91 -43 16 -17 -84 125 -83 12 -73 39 -92 50 -77 -69
+Fitness: Standardized=0.3717651595354874 Adjusted=0.7289877520570824 Hits=28
+116 -70 108 -128 -11 113 4 -52 14 -91 69 -128 79 12 86 -8
 Equivalent GP Individual:
-[BAD]
-ERCs:     -17 -> quantity1    -81 -> quantity0    -6 -> quantity1    -92 -> quantity7
+Tree 0:
+ (buildplan (buildings (barrack_squads (marine
+     quantity1)) veh_weapon) (basicbuildings supply_depot
+     supply_depot))
+ERCs:     14 -> quantity1
 
-Generation: 6
+Generation: 1
 Best Individual:
 Subpopulation 0:
 Evaluated: T
-Fitness: Standardized=1.7976931348623157E308 Adjusted=5.562684646268003E-309 Hits=0
-113 -81 69 -28 -95 -97 -51 45 -6 -54 -91 -43 16 -17 -84 125 -83 12 -73 39 -92 50 -77 -69
+Fitness: Standardized=0.10903191704998572 Adjusted=0.9016873045998446 Hits=40
+116 -70 108 -128 -11 113 4 -52 14 -91 69 -128 79 12 86 -8
 Equivalent GP Individual:
-[BAD]
-ERCs:     -17 -> quantity1    -81 -> quantity0    -6 -> quantity1    -92 -> quantity7
+Tree 0:
+ (buildplan (buildings (barrack_squads (marine
+     quantity1)) veh_weapon) (basicbuildings supply_depot
+     supply_depot))
+ERCs:     14 -> quantity1
+
+Generation: 1
+Best Individual:
+Subpopulation 0:
+Evaluated: T
+Fitness: Standardized=0.37766192766720685 Adjusted=0.7258674860045662 Hits=92
+116 -70 108 -128 -11 113 4 -52 14 -91 69 -128 79 12 86 -8
+Equivalent GP Individual:
+Tree 0:
+ (buildplan (buildings (barrack_squads (marine
+     quantity1)) veh_weapon) (basicbuildings supply_depot
+     supply_depot))
+ERCs:     14 -> quantity1
