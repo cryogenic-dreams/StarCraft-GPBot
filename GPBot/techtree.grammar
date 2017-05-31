@@ -6,7 +6,7 @@
 <building> ::= <barracks> | <engineering_bay> | <factory> | <bunker> | <academy> | <missile_turret> | <starport> | <armory> | <machine_shop> | <comsat_station> | <science_facility> | <control_tower> | <physics_lab> | <covert_ops> | <nuclear_silo>
 <barracks> ::= <barrack_squads> (barracks <supply>)
 <engineering_bay> ::= <e_bay_tech> (engineering_bay <supply>)
-<factory> ::= (factory <factory_squads> <barracks> <supply>)
+<factory> ::= <factory_squads> (factory <barracks> <supply>)
 <bunker> ::= (bunker <barracks> <supply>)
 <academy> ::= <academy_squads> <academy_tech> (academy <barracks> <supply>)
 <missile_turret> ::= (missile_turret <engineering_bay> <supply>)
