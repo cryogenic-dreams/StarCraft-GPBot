@@ -115,11 +115,10 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 			individualsQueue = new SynchronousQueue<>();
 		if (this.bot == null) {
 			bot = new Bot(fitnessQueue, individualsQueue);
+		if(workerThread == null)
 			workerThread = new Thread(bot);
-			workerThread.start();
-
+		workerThread.start();
 		}
-
 	}
 
 	@Override
