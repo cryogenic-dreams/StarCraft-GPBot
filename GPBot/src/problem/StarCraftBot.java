@@ -1,6 +1,7 @@
 package problem;
 
 import ec.util.*;
+import support.BotContext;
 import support.ExeContext;
 import support.Tuple;
 import ec.*;
@@ -23,13 +24,10 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 
 	public static final String P_DATA = "data";
 	// private transient boolean checked = false;
-	protected transient BlockingQueue<Tuple<Integer, Double>> fitnessQueue = null;
-	protected transient BlockingQueue<ExeContext> individualsQueue = null;
-	public static transient String[] arguments;
-	protected transient Thread workerThread;
-	public transient Bot bot;
+
 	protected EvolutionState currentEvolutionState;
 	protected Individual currentIndividual;
+	public transient BotContext bc = null;
 
 	public void setup(final EvolutionState state, final Parameter base) {
 		// very important, remember this
@@ -59,8 +57,7 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 
 	public void evaluate(final EvolutionState state, final Individual ind, final int subpopulation,
 			final int threadnum) {
-
-	
+		checkNull();
 		if (!ind.evaluated) // don't bother reevaluating
 		{
 			this.currentEvolutionState = state;
@@ -69,12 +66,12 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 			ExeContext c = new ExeContext(state, ((GPIndividual) ind), threadnum, stack, (GameData) this.input, this);
 			try {
 				System.err.println("evaluating");
-				this.individualsQueue.put(c);
-				((GameData) input).g = bot.getGame();
+				bc.getIndividualsQueue().put(c);
+				((GameData) input).g = bc.getBot().getGame();
 				c.setInput((GameData) input);
 
 				// Wait for game to finish...
-				Tuple<Integer, Double> results = this.fitnessQueue.take();
+				Tuple<Integer, Double> results = bc.getFitnessQueue().take();
 
 				KozaFitness f = ((KozaFitness) this.currentIndividual.fitness);
 				f.setStandardizedFitness(this.currentEvolutionState, results.getY());
@@ -90,35 +87,16 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 		}
 	}
 
-	// public static void main(String[] args) {
-	// run(args);
-
-	// }
-
 	public StarCraftBot() {
 
-		// arguments = args;
-		fitnessQueue = new SynchronousQueue<>();
-		individualsQueue = new SynchronousQueue<>();
-		bot = new Bot(fitnessQueue, individualsQueue);
-		workerThread = new Thread(bot);
-		workerThread.start();
-		//checked = true;
+		checkNull();
 	}
 
 	public void checkNull() {
 
-		// arguments = args;
-		if (this.fitnessQueue == null)
-			fitnessQueue = new SynchronousQueue<>();
-		if (this.individualsQueue == null)
-			individualsQueue = new SynchronousQueue<>();
-		if (this.bot == null) {
-			bot = new Bot(fitnessQueue, individualsQueue);
-		if(workerThread == null)
-			workerThread = new Thread(bot);
-		workerThread.start();
-		}
+		if (bc == null)
+			bc = BotContext.getInstance();
+
 	}
 
 	@Override
@@ -135,9 +113,5 @@ public class StarCraftBot extends GPProblem implements SimpleProblemForm {
 		checkNull();
 
 	}
-
-	// public static void run(String[] arguments) {
-	// Evolve.main(arguments);
-	// }
 
 }
