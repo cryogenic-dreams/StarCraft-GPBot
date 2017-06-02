@@ -33,7 +33,7 @@ public class Barracks extends GPNode {
 			final GPIndividual individual, final Problem problem) {
 
 		GameData rd = ((GameData) (input));
-		children[children.length - 1].eval(state, thread, input, stack, individual, problem);
+		children[0].eval(state, thread, input, stack, individual, problem);
 		rd.bp.push(new UnitTuple(UnitType.Terran_Barracks, rd.s)); // Push of yourself and your last node, which is the supply or the quantity
 		int supply = rd.s;
 		System.out.println("barracks | supply: " + supply);
