@@ -25,7 +25,7 @@ public class ControlTower extends GPNode {
 	}
 
 	public int expectedChildren() {
-		return 2;
+		return 4;
 	}
 
 	public void eval(final EvolutionState state, final int thread, final GPData input, final ADFStack stack,

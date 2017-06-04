@@ -24,7 +24,7 @@ public class EngineeringBay extends GPNode {
 		return "engineering_bay";//this is for the magic, aka the grammar
 	}
 	public int expectedChildren() {
-		return 1;//this
+		return 2;//this
 	}
 
 

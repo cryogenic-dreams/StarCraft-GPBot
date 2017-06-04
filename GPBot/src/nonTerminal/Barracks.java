@@ -25,7 +25,7 @@ public class Barracks extends GPNode {
 	}
 	
 	public int expectedChildren() {
-		return 1;
+		return 2;
 	}
 
 
