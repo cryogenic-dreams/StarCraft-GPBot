@@ -1,8 +1,8 @@
 package bot;
 
-
-
+import java.util.List;
 import java.util.Random;
+import java.util.Stack;
 import java.util.concurrent.BlockingQueue;
 
 import bwapi.*;
@@ -12,15 +12,15 @@ import support.GimmeTheGame;
 import support.OnEndCallback;
 import support.Tuple;
 
-public class Bot extends DefaultBWListener implements Runnable{
-	
+public class Bot extends DefaultBWListener implements Runnable {
+
 	private ExeContext exe;
-	protected BlockingQueue<Tuple<Integer,Double>> fitnessQueue = null;
+	protected BlockingQueue<Tuple<Integer, Double>> fitnessQueue = null;
 	protected BlockingQueue<ExeContext> individualsQueue = null;
-	private Random r;//auxiliar
-	private List<Units> workers;
-	private List<Units> squads;
-	private List<Units> buildings;
+	private Random r;// auxiliar
+	private List<Unit> workers;
+	private List<Unit> squads;
+	private List<Unit> buildings;
 	public double currentX;
 	public double currentY;
 	public boolean go_construct = false;
@@ -30,8 +30,8 @@ public class Bot extends DefaultBWListener implements Runnable{
 	private Game game;
 	private Player self;
 	int aux = 0;
-	
-	public Bot(BlockingQueue<Tuple<Integer,Double>> fitnessQueue, BlockingQueue<ExeContext> individualsQueue) {
+
+	public Bot(BlockingQueue<Tuple<Integer, Double>> fitnessQueue, BlockingQueue<ExeContext> individualsQueue) {
 		super();
 		this.fitnessQueue = fitnessQueue;
 		this.individualsQueue = individualsQueue;
@@ -40,14 +40,11 @@ public class Bot extends DefaultBWListener implements Runnable{
 		r = new Random();
 	}
 
-	
 	@Override
 	public void run() {
 		mirror.getModule().setEventListener(this);
 		mirror.startGame();
 	}
-
-	
 
 	private GimmeTheGame gimmer;
 
@@ -62,7 +59,7 @@ public class Bot extends DefaultBWListener implements Runnable{
 	@Override
 	public void onUnitCreate(Unit unit) {
 		super.onUnitCreate(unit);
-		//this is for squads and on complete for buildings???
+		// this is for squads and on complete for buildings???
 	}
 
 	@Override
@@ -79,11 +76,11 @@ public class Bot extends DefaultBWListener implements Runnable{
 
 		game = mirror.getGame();
 		self = game.self();
-		//gimmer.gimmeIt(game);// what the hell did i do yesterday...
+		// gimmer.gimmeIt(game);// what the hell did i do yesterday...
 
 		try {
 			exe = this.individualsQueue.take();
-		} catch(InterruptedException e) {
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
@@ -107,15 +104,17 @@ public class Bot extends DefaultBWListener implements Runnable{
 
 		// We're going to locate the build plan call here
 		if (exe != null) {
-			if(exe.getInput().bp == null) {
-				exe.getInput().initializeIfNull();}
-			exe.getInput().bp.clear();//clean the stack
+			if (exe.getInput().bp == null) {
+				exe.getInput().initializeIfNull();
+			}
+			exe.getInput().bp.clear();// clean the stack
 			System.out.println("---The Build Plan size is BEFORE: " + exe.getInput().bp.size());
 			exe.getInd().trees[0].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
-				exe.getInd(), exe.getStbot());
+					exe.getInd(), exe.getStbot());
 			System.out.println("---The Build Plan size is AFTER: " + exe.getInput().bp.size());
 		} else {
-			System.err.println("===============================================================================\nexe nulo!!!\n===============================================================================");
+			System.err.println(
+					"===============================================================================\nexe nulo!!!\n===============================================================================");
 		}
 	}
 
@@ -123,118 +122,122 @@ public class Bot extends DefaultBWListener implements Runnable{
 	public void onFrame() {
 
 		if (exe != null) {
-		game.drawTextScreen(10, 10, "Playing as " + self.getName() + " - " + self.getRace());
-		for (Unit myUnit : self.getUnits()) {
-			// if it's a worker and it's idle, send it to the closest mineral
-			// patch
-			Unit closestMineral = null;
-			if (myUnit.getType().isRefinery()) {
-				closestMineral = myUnit;
-			}
-			if (myUnit.getType().isWorker() && myUnit.isIdle()) {
+			game.drawTextScreen(10, 10, "Playing as " + self.getName() + " - " + self.getRace());
+			for (Unit myUnit : self.getUnits()) {
+				// if it's a worker and it's idle, send it to the closest
+				// mineral
+				// patch
+				Unit closestMineral = null;
+				if (myUnit.getType().isRefinery()) {
+					closestMineral = myUnit;
+				}
+				if (myUnit.getType().isWorker() && myUnit.isIdle()) {
 
-				// find the closest mineral
-				for (Unit neutralUnit : game.neutral().getUnits()) {
-					if (neutralUnit.getType().isMineralField()) {
+					// find the closest mineral
+					for (Unit neutralUnit : game.neutral().getUnits()) {
+						if (neutralUnit.getType().isMineralField()) {
 
-						if (closestMineral == null
-								|| myUnit.getDistance(neutralUnit) < myUnit.getDistance(closestMineral)) {
-							closestMineral = neutralUnit;
+							if (closestMineral == null
+									|| myUnit.getDistance(neutralUnit) < myUnit.getDistance(closestMineral)) {
+								closestMineral = neutralUnit;
+							}
+							// else if (neutralUnit.getType().isRefinery()) {
+							// closestMineral = myUnit;
+							// }
 						}
-						// else if (neutralUnit.getType().isRefinery()) {
-						// closestMineral = myUnit;
-						// }
+					}
+
+					// if a mineral patch was found, send the worker to gather
+					// it
+					if (closestMineral != null) {
+						myUnit.gather(closestMineral, false);
+						System.out.println("I'm collecting minerals and gas");
 					}
 				}
 
-				// if a mineral patch was found, send the worker to gather it
-				if (closestMineral != null) {
-					myUnit.gather(closestMineral, false);
-					System.out.println("I'm collecting minerals and gas");
-				}
 			}
+			// StringBuilder units = new StringBuilder("My units:\n");
 
+			// build from build plan
+			executeBuildPlan(exe.getInput().bp);
 		}
-		// StringBuilder units = new StringBuilder("My units:\n");
-
-		// build from build plan
-		executeBuildPlan(exe.getInput().bp);
 	}
-	
-	public void executeBuildPlan(Stack<Tuple> bp){
+
+	public void executeBuildPlan(Stack<Tuple> bp) {
 		Object o = bp.peek().getX();
-		int sup = bp.peek().getY();
+		int sup = (int) bp.peek().getY();
 		System.out.println("My supply: " + self.allUnitCount());
 		System.out.println("Supply: " + sup);
-		System.out.println("Building: " + u.toString());
+		System.out.println("Building: " + o.toString());
 		if (!go_construct) {
-			switch (bp.peek().getX().getClass.getName()) {
-				// here we do the checkings to build a building from the build
-				// plan
-				case "UnitType":
-					UnitType unit = bp.peek().getX();
-					if(unit.isAddon()) || (unit.isBuilding()){
-					//buildings
-						if ((self.allUnitCount() >= sup) && (self.minerals() >= unit.mineralPrice())
-								&& (self.gas() >= unit.gasPrice())) {
-							System.out.println("INSIDE");
-							if (unit.isAddon()) {
-								go_construct = true;
-								attachBuilding(bp.pop().getX());
-							} else if (unit.isBuilding()) {
-								go_construct = true;
-								buildBuilding(bp.pop().getX());
-							}
-						}
-					} else {
-					//squads
-						if ((self.minerals() >= (unit.mineralPrice() * sup)) && (self.gas() >= (unit.gasPrice() * sup))) {
+			switch (bp.peek().getX().getClass().getName()) {
+			// here we do the checkings to build a building from the build
+			// plan
+			case "UnitType":
+				UnitType unit = (UnitType) bp.peek().getX();
+				if (unit.isAddon() || unit.isBuilding()) {
+					// buildings
+					if ((self.allUnitCount() >= sup) && (self.minerals() >= unit.mineralPrice())
+							&& (self.gas() >= unit.gasPrice())) {
+						System.out.println("INSIDE");
+						if (unit.isAddon()) {
 							go_construct = true;
-							trainUnit(bp.peek().getX(), bp.pop().getY());
+							attachBuilding((UnitType) bp.pop().getX());
+						} else if (unit.isBuilding()) {
+							go_construct = true;
+							buildBuilding((UnitType) bp.pop().getX());
 						}
 					}
-					break;
-					
-				case "TechType"
-					TechType tech = bp.peek().getX();
-					if ((self.minerals() >= (tech.mineralPrice())) && (self.gas() >= (tech.gasPrice()))) {
-						investigateTech(bp.pop().getX());
+				} else {
+					// squads
+					if ((self.minerals() >= (unit.mineralPrice() * sup)) && (self.gas() >= (unit.gasPrice() * sup))) {
+						go_construct = true;
+						trainUnit((UnitType) bp.peek().getX(), (int) bp.pop().getY());
 					}
-					break;
-				case "UpgradeType"
-					UpgradeType up = bp.peek().getX();
-					if ((self.minerals() >= (up.mineralPrice())) && (self.gas() >= (up.gasPrice()))) {
-						upgrade(bp.pop().getX());
-					}
-					break;
-				default:
-					//do nothing (yet)
+				}
+				break;
+
+			case "TechType":
+				TechType tech = (TechType) bp.peek().getX();
+				if ((self.minerals() >= (tech.mineralPrice())) && (self.gas() >= (tech.gasPrice()))) {
+					investigateTech((TechType) bp.pop().getX());
+				}
+				break;
+			case "UpgradeType":
+				UpgradeType up = (UpgradeType) bp.peek().getX();
+				if ((self.minerals() >= (up.mineralPrice())) && (self.gas() >= (up.gasPrice()))) {
+					upgrade((UpgradeType) bp.pop().getX());
+				}
+				break;
+			default:
+				// do nothing (yet)
 			}
 		}
 	}
-		
-		
+
 	@Override
 	public void onEnd(boolean arg0) {
 		super.onEnd(arg0);
-		//gameSwitcher();
+		// gameSwitcher();
 		try {
-			hits= r.nextInt(200);
+			hits = r.nextInt(200);
 			sum = r.nextDouble();
 			this.fitnessQueue.put(new Tuple<>(hits, sum));
-		} catch(InterruptedException e) {
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		System.err.println("La partida ha terminado!!!!");
 		game.drawTextScreen(10, 25, "GG");
-		//gameSwitcher();
+		// gameSwitcher();
 	}
 
-	public void gameSwitcher(){
-		if (game.isPaused()) game.resumeGame();
-		else game.pauseGame();
+	public void gameSwitcher() {
+		if (game.isPaused())
+			game.resumeGame();
+		else
+			game.pauseGame();
 	}
-	
+
 	public Game getGame() {
 		return game;
 	}
@@ -251,6 +254,32 @@ public class Bot extends DefaultBWListener implements Runnable{
 			}
 
 		}
+	}
+
+	public void upgrade(UpgradeType up) {
+		for (Unit myUnit : self.getUnits()) {
+			// TilePosition tile = getBuildTile(myUnit, building,
+			// myUnit.getTilePosition());
+			if (myUnit.canUpgrade(up)) {
+				System.out.println("I'm upgrading: " + up);
+				myUnit.upgrade(up);
+				break;
+			}
+		}
+
+	}
+
+	public void investigateTech(TechType tech) {
+		for (Unit myUnit : self.getUnits()) {
+			// TilePosition tile = getBuildTile(myUnit, building,
+			// myUnit.getTilePosition());
+			if (myUnit.canResearch(tech)) {
+				System.out.println("I'm researching: " + tech);
+				myUnit.research(tech);
+				break;
+			}
+		}
+
 	}
 
 	public void attachBuilding(UnitType addon) {
