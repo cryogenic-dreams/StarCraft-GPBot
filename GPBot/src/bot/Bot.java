@@ -7,29 +7,29 @@ import java.util.concurrent.BlockingQueue;
 
 import bwapi.*;
 import bwta.BWTA;
-//import bwta.BaseLocation;
-//import data.GameData;
 import support.ExeContext;
 import support.GimmeTheGame;
 import support.OnEndCallback;
 import support.Tuple;
 
 public class Bot extends DefaultBWListener implements Runnable{
-	private OnEndCallback callback;
-
-	public OnEndCallback getCallback() {
-		return callback;
-	}
-
-	public void setCallback(OnEndCallback callback) {
-		this.callback = callback;
-	}
-
+	
 	private ExeContext exe;
 	protected BlockingQueue<Tuple<Integer,Double>> fitnessQueue = null;
 	protected BlockingQueue<ExeContext> individualsQueue = null;
-
-	private Random r;
+	private Random r;//auxiliar
+	private List<Units> workers;
+	private List<Units> squads;
+	private List<Units> buildings;
+	public double currentX;
+	public double currentY;
+	public boolean go_construct = false;
+	private int hits;
+	private double sum;
+	private Mirror mirror = new Mirror();
+	private Game game;
+	private Player self;
+	int aux = 0;
 	
 	public Bot(BlockingQueue<Tuple<Integer,Double>> fitnessQueue, BlockingQueue<ExeContext> individualsQueue) {
 		super();
@@ -40,25 +40,14 @@ public class Bot extends DefaultBWListener implements Runnable{
 		r = new Random();
 	}
 
-	public double currentX;
-	public double currentY;
-	public boolean go_construct = false;
-	private int hits;
-	private double sum;
-
-	private Mirror mirror = new Mirror();
-
-	private Game game;
-
-	private Player self;
-
+	
 	@Override
 	public void run() {
 		mirror.getModule().setEventListener(this);
 		mirror.startGame();
 	}
 
-	int aux = 0;
+	
 
 	private GimmeTheGame gimmer;
 
@@ -73,6 +62,7 @@ public class Bot extends DefaultBWListener implements Runnable{
 	@Override
 	public void onUnitCreate(Unit unit) {
 		super.onUnitCreate(unit);
+		//this is for squads and on complete for buildings???
 	}
 
 	@Override
@@ -89,17 +79,13 @@ public class Bot extends DefaultBWListener implements Runnable{
 
 		game = mirror.getGame();
 		self = game.self();
-	//	gimmer.gimmeIt(game);// what the hell did i do yesterday...
-		//gameSwitcher();
-		System.err.println("Continuando");
+		//gimmer.gimmeIt(game);// what the hell did i do yesterday...
+
 		try {
 			exe = this.individualsQueue.take();
-			System.out.println("-----------------Continuadosss");
 		} catch(InterruptedException e) {
 			e.printStackTrace();
 		}
-		//gameSwitcher();
-		System.err.println("Continuand2");
 
 		// Use BWTA to analyze map
 		// This may take a few minutes if the map is processed first time!
@@ -121,17 +107,13 @@ public class Bot extends DefaultBWListener implements Runnable{
 
 		// We're going to locate the build plan call here
 		if (exe != null) {
-			if(exe.getInput().bp == null) { System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-			exe.getInput().initializeIfNull();}
+			if(exe.getInput().bp == null) {
+				exe.getInput().initializeIfNull();}
 			exe.getInput().bp.clear();//clean the stack
-			System.out.println("entrando");
 			System.out.println("---The Build Plan size is BEFORE: " + exe.getInput().bp.size());
-			// game.pauseGame();
 			exe.getInd().trees[0].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
 				exe.getInd(), exe.getStbot());
-			// game.resumeGame();
 			System.out.println("---The Build Plan size is AFTER: " + exe.getInput().bp.size());
-			// this.sum = exe.getInput().bp.size();
 		} else {
 			System.err.println("===============================================================================\nexe nulo!!!\n===============================================================================");
 		}
@@ -246,10 +228,6 @@ public class Bot extends DefaultBWListener implements Runnable{
 		System.err.println("La partida ha terminado!!!!");
 		game.drawTextScreen(10, 25, "GG");
 		//gameSwitcher();
-
-		//callback.onEnd(hits, sum);
-		
-
 	}
 
 	public void gameSwitcher(){
