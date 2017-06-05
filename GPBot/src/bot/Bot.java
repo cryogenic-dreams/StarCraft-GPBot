@@ -174,46 +174,64 @@ public class Bot extends DefaultBWListener implements Runnable{
 
 		}
 		// StringBuilder units = new StringBuilder("My units:\n");
-/**
+
 		// build from build plan
-		Object u = exe.getInput().bp.peek().getX();
-		int sup = exe.getInput().bp.peek().getY();
+		executeBuildPlan(exe.getInput().bp);
+	}
+	
+	public void executeBuildPlan(Stack<Tuple> bp){
+		Object o = bp.peek().getX();
+		int sup = bp.peek().getY();
 		System.out.println("My supply: " + self.allUnitCount());
 		System.out.println("Supply: " + sup);
 		System.out.println("Building: " + u.toString());
-		
-		//Change this tomorrow
 		if (!go_construct) {
-			if (u.isAddon() || u.isBuilding()) {
+			switch (bp.peek().getX().getClass.getName()) {
 				// here we do the checkings to build a building from the build
 				// plan
-				if ((self.allUnitCount() >= sup) && (self.minerals() >= u.mineralPrice())
-						&& (self.gas() >= u.gasPrice())) {
-					System.out.println("INSIDE");
-					if (u.isAddon()) {
-						go_construct = true;
-						attachBuilding(exe.getInput().bp.pop().getX());
-					} else if (u.isBuilding()) {
-						go_construct = true;
-						buildBuilding(exe.getInput().bp.pop().getX());
+				case "UnitType":
+					UnitType unit = bp.peek().getX();
+					if(unit.isAddon()) || (unit.isBuilding()){
+					//buildings
+						if ((self.allUnitCount() >= sup) && (self.minerals() >= unit.mineralPrice())
+								&& (self.gas() >= unit.gasPrice())) {
+							System.out.println("INSIDE");
+							if (unit.isAddon()) {
+								go_construct = true;
+								attachBuilding(bp.pop().getX());
+							} else if (unit.isBuilding()) {
+								go_construct = true;
+								buildBuilding(bp.pop().getX());
+							}
+						}
+					} else {
+					//squads
+						if ((self.minerals() >= (unit.mineralPrice() * sup)) && (self.gas() >= (unit.gasPrice() * sup))) {
+							go_construct = true;
+							trainUnit(bp.peek().getX(), bp.pop().getY());
+						}
 					}
-					// go_construct = false;
-
-				}
-			} else {
-				if ((self.minerals() >= (u.mineralPrice() * sup)) && (self.gas() >= (u.gasPrice() * sup))) {
-					go_construct = true;
-					trainUnit(exe.getInput().bp.peek().getX(), exe.getInput().bp.pop().getY());
-				}
+					break;
+					
+				case "TechType"
+					TechType tech = bp.peek().getX();
+					if ((self.minerals() >= (tech.mineralPrice())) && (self.gas() >= (tech.gasPrice()))) {
+						investigateTech(bp.pop().getX());
+					}
+					break;
+				case "UpgradeType"
+					UpgradeType up = bp.peek().getX();
+					if ((self.minerals() >= (up.mineralPrice())) && (self.gas() >= (up.gasPrice()))) {
+						upgrade(bp.pop().getX());
+					}
+					break;
+				default:
+					//do nothing (yet)
 			}
-
-		}**/
-		} else {
-			//System.err.println("===============================================================================\nexe nulo!!!\n===============================================================================");
-
 		}
 	}
-
+		
+		
 	@Override
 	public void onEnd(boolean arg0) {
 		super.onEnd(arg0);
