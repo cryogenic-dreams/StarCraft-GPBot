@@ -166,13 +166,15 @@ public class Bot extends DefaultBWListener implements Runnable {
 	public void executeBuildPlan(Stack<Tuple> bp) {
 		Object o = bp.peek().getX();
 		int sup = (int) bp.peek().getY();
-		System.out.println("My supply: " + self.allUnitCount());
-		System.out.println("Supply: " + sup);
-		System.out.println("Building: " + o.toString());
+	//	System.out.println("My supply: " + self.allUnitCount());
+	//	System.out.println("Supply: " + sup);
+	//	System.err.println("Building: " + o.toString());
 		if (!go_construct) {
+			System.err.println(bp.peek().getX().toString());
 			switch (bp.peek().getX().getClass().getName()) {
 			// here we do the checkings to build a building from the build
 			// plan
+			
 			case "UnitType":
 				UnitType unit = (UnitType) bp.peek().getX();
 				if (unit.isAddon() || unit.isBuilding()) {
@@ -211,6 +213,8 @@ public class Bot extends DefaultBWListener implements Runnable {
 				break;
 			default:
 				// do nothing (yet)
+				System.out.println("NOPE, NOTHING------------------------");
+				break;
 			}
 		}
 	}

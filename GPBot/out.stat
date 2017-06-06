@@ -1,0 +1,21 @@
+
+Generation: 0
+Best Individual:
+Subpopulation 0:
+Evaluated: T
+Fitness: Standardized=0.821433856030924 Adjusted=0.5490180149495487 Hits=46
+20 125 -16 73 113 101 -82 -53 44 -53 -124 127 127 121 111 15 116 -15 8 14 -107 10 -34 -48 -45
+Equivalent GP Individual:
+Tree 0:
+ (buildplan (basicbuildings refinery refinery)
+     (buildings (engineering_bay inf_weapon supply152)
+         (buildings (comsat_station (academy (academy_squads
+             (medic quantity2)) u_238_shells (barracks
+             (barrack_squads (marine quantity0)) supply31)
+             supply189) supply5) (buildings (barracks
+             (barrack_squads (marine quantity5)) supply63)
+             (machine_shop ion_thrusters (machine_shop_squads
+                 (tank quantity3)) (factory (factory_squads
+                 (vulture quantity0)) (barracks (barrack_squads
+                 (marine supply5)) supply152) supply166) supply123)))))
+ERCs:     113 -> quantity0    -53 -> supply5    116 -> supply63    101 -> supply189    73 -> supply31    121 -> supply166    -45 -> quantity3    125 -> quantity0    14 -> quantity2    127 -> supply152    111 -> quantity5    15 -> supply123
