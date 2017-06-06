@@ -4,18 +4,7 @@ import bwapi.TechType;
 
 public class TechTuple extends Tuple<TechType,Integer>{
 	
-	private TechType x;
-	
 	public TechTuple(TechType x, int y) {
-		super();
-		this.x = x;
-
+		super(x,y);
 	}
-	public TechType getX() {
-		return x;
-	}
-	public void setX(TechType x) {
-		this.x = x;
-	}
-
 }

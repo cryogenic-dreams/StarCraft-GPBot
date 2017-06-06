@@ -8,7 +8,6 @@ public class Tuple<U,I>  {
 
 	
 	public Tuple(U x, I y) {
-		super();
 		this.x = x;
 		this.y = y;
 	}
@@ -27,5 +26,17 @@ public class Tuple<U,I>  {
 	}
 	public void setY(I y) {
 		this.y = y;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("(");
+		sb.append(getX());
+		sb.append(", ");
+		sb.append(getY());
+		sb.append(")");
+		
+		return sb.toString();
 	}
 }

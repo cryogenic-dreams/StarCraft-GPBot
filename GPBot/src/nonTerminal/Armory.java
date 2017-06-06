@@ -14,14 +14,13 @@ public class Armory extends GPNode {
 
 	private static final long serialVersionUID = 1;
 
-
 	public String toString() {
 		return "armory";// This is for the visual representation
 	}
 
 	@Override
 	public String name() {
-		return "armory";//this is for the magic, aka the grammar
+		return "armory";// this is for the magic, aka the grammar
 	}
 
 	public int expectedChildren() {
@@ -30,14 +29,22 @@ public class Armory extends GPNode {
 
 	public void eval(final EvolutionState state, final int thread, final GPData input, final ADFStack stack,
 			final GPIndividual individual, final Problem problem) {
-
 		GameData rd = ((GameData) (input));
-		children[3].eval(state, thread, input, stack, individual, problem);//supply
-		children[0].eval(state, thread, input, stack, individual, problem);//tech
-		children[1].eval(state, thread, input, stack, individual, problem);//squads
-		rd.bp.push(new UnitTuple(UnitType.Terran_Armory, rd.s)); // Push of yourself and your last node, which is the supply or the quantity
+		children[3].eval(state, thread, input, stack, individual, problem);// supply
+		children[0].eval(state, thread, input, stack, individual, problem);// tech
+		children[1].eval(state, thread, input, stack, individual, problem);// squads
+		rd.bp.push(new UnitTuple(UnitType.Terran_Armory, rd.s)); // Push of
+																	// yourself
+																	// and your
+																	// last
+																	// node,
+																	// which is
+																	// the
+																	// supply or
+																	// the
+																	// quantity
 		int supply = rd.s;
-		children[2].eval(state, thread, input, stack, individual, problem);//pre-building
+		children[2].eval(state, thread, input, stack, individual, problem);// pre-building
 		System.out.println("armory | supply: " + supply);
-    }
+	}
 }

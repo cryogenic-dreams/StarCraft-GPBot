@@ -3,19 +3,58 @@ Generation: 0
 Best Individual:
 Subpopulation 0:
 Evaluated: T
-Fitness: Standardized=0.821433856030924 Adjusted=0.5490180149495487 Hits=46
-20 125 -16 73 113 101 -82 -53 44 -53 -124 127 127 121 111 15 116 -15 8 14 -107 10 -34 -48 -45
+Fitness: Standardized=0.36638302418965896 Adjusted=0.7318592095309845 Hits=160
+96 42 -63 -69 38 46 -59 -2 94 -23 33 15 40 100 70 74 -75 47 0 -128 54 14 -40 85 -12
 Equivalent GP Individual:
 Tree 0:
- (buildplan (basicbuildings refinery refinery)
-     (buildings (engineering_bay inf_weapon supply152)
-         (buildings (comsat_station (academy (academy_squads
-             (medic quantity2)) u_238_shells (barracks
-             (barrack_squads (marine quantity0)) supply31)
-             supply189) supply5) (buildings (barracks
-             (barrack_squads (marine quantity5)) supply63)
-             (machine_shop ion_thrusters (machine_shop_squads
-                 (tank quantity3)) (factory (factory_squads
-                 (vulture quantity0)) (barracks (barrack_squads
-                 (marine supply5)) supply152) supply166) supply123)))))
-ERCs:     113 -> quantity0    -53 -> supply5    116 -> supply63    101 -> supply189    73 -> supply31    121 -> supply166    -45 -> quantity3    125 -> quantity0    14 -> quantity2    127 -> supply152    111 -> quantity5    15 -> supply123
+ (buildplan (buildings (nuclear_silo (covert_ops
+     (covert_ops_tech lockdown) (covert_ops_squads
+     (ghost quantity5)) (science_facility (science_facility_tech
+     emp_shockwave) (science_facility_squads (science_vessel
+     quantity8)) (starport (starport_squads (wraith
+     quantity0)) (factory (factory_squads (vulture
+     quantity9)) (barracks (barrack_squads (marine
+     quantity3)) supply99) supply198) supply111)
+     supply27) quantity8) supply185) (buildings
+     (covert_ops (covert_ops_tech personnel_cloaking)
+         (covert_ops_squads (ghost quantity4)) (science_facility
+         (science_facility_tech emp_shockwave) (science_facility_squads
+         (science_vessel quantity5)) (starport (starport_squads
+         (wraith supply27)) (factory (factory_squads
+         (vulture quantity9)) (barracks (barrack_squads
+         (marine quantity6)) quantity9) supply95)
+         supply115) supply28) quantity5) (bunker (barracks
+     (barrack_squads (marine quantity8)) supply185)
+     supply110))) (basicbuildings supply_depot
+     (basicbuildings supply_depot refinery)))
+ERCs:     0 -> quantity8    33 -> supply99    -2 -> supply115    -69 -> quantity9    70 -> supply111    38 -> quantity4    -40 -> supply110    40 -> supply198    -75 -> supply27    42 -> quantity6    14 -> quantity9    46 -> supply95    15 -> quantity5    85 -> quantity0    54 -> supply185    -23 -> supply28    94 -> quantity3
+
+Generation: 1
+Best Individual:
+Subpopulation 0:
+Evaluated: T
+Fitness: Standardized=0.423828806789425 Adjusted=0.7023316252849866 Hits=33
+96 42 -63 -69 38 46 -59 -2 94 -23 33 15 40 100 70 74 -75 47 0 -128 54 14 -40 85 -12
+Equivalent GP Individual:
+Tree 0:
+ (buildplan (buildings (nuclear_silo (covert_ops
+     (covert_ops_tech lockdown) (covert_ops_squads
+     (ghost quantity5)) (science_facility (science_facility_tech
+     emp_shockwave) (science_facility_squads (science_vessel
+     quantity8)) (starport (starport_squads (wraith
+     quantity0)) (factory (factory_squads (vulture
+     quantity9)) (barracks (barrack_squads (marine
+     quantity3)) supply99) supply198) supply111)
+     supply27) quantity8) supply185) (buildings
+     (covert_ops (covert_ops_tech personnel_cloaking)
+         (covert_ops_squads (ghost quantity4)) (science_facility
+         (science_facility_tech emp_shockwave) (science_facility_squads
+         (science_vessel quantity5)) (starport (starport_squads
+         (wraith supply27)) (factory (factory_squads
+         (vulture quantity9)) (barracks (barrack_squads
+         (marine quantity6)) quantity9) supply95)
+         supply115) supply28) quantity5) (bunker (barracks
+     (barrack_squads (marine quantity8)) supply185)
+     supply110))) (basicbuildings supply_depot
+     (basicbuildings supply_depot refinery)))
+ERCs:     0 -> quantity8    33 -> supply99    -2 -> supply115    -69 -> quantity9    70 -> supply111    38 -> quantity4    -40 -> supply110    40 -> supply198    -75 -> supply27    42 -> quantity6    14 -> quantity9    46 -> supply95    15 -> quantity5    85 -> quantity0    54 -> supply185    -23 -> supply28    94 -> quantity3

@@ -159,24 +159,26 @@ public class Bot extends DefaultBWListener implements Runnable {
 			// StringBuilder units = new StringBuilder("My units:\n");
 
 			// build from build plan
-			executeBuildPlan(exe.getInput().bp);
+			executeBuildPlan();
 		}
 	}
 
-	public void executeBuildPlan(Stack<Tuple> bp) {
-		Object o = bp.peek().getX();
-		int sup = (int) bp.peek().getY();
-	//	System.out.println("My supply: " + self.allUnitCount());
-	//	System.out.println("Supply: " + sup);
-	//	System.err.println("Building: " + o.toString());
+	public void executeBuildPlan() {
+	
+		Object o = exe.getInput().bp.peek().getX();
+		int sup = (int) exe.getInput().bp.peek().getY();
+		
+		 System.out.println("My supply: " + self.allUnitCount());
+		 System.out.println("Supply: " + sup);
+		 System.err.println("Building: " + o.toString());
 		if (!go_construct) {
-			System.err.println(bp.peek().getX().toString());
-			switch (bp.peek().getX().getClass().getName()) {
-			// here we do the checkings to build a building from the build
-			// plan
+		//System.out.println(exe.getInput().bp);
 			
-			case "UnitType":
-				UnitType unit = (UnitType) bp.peek().getX();
+		//	System.out.println("---------------------------------------------------------------");
+	
+
+			if (exe.getInput().bp.peek().getX().getClass() == UnitType.class) {
+				UnitType unit = (UnitType) exe.getInput().bp.peek().getX();
 				if (unit.isAddon() || unit.isBuilding()) {
 					// buildings
 					if ((self.allUnitCount() >= sup) && (self.minerals() >= unit.mineralPrice())
@@ -184,37 +186,34 @@ public class Bot extends DefaultBWListener implements Runnable {
 						System.out.println("INSIDE");
 						if (unit.isAddon()) {
 							go_construct = true;
-							attachBuilding((UnitType) bp.pop().getX());
+							attachBuilding((UnitType) exe.getInput().bp.pop().getX());
 						} else if (unit.isBuilding()) {
 							go_construct = true;
-							buildBuilding((UnitType) bp.pop().getX());
+							buildBuilding((UnitType) exe.getInput().bp.pop().getX());
 						}
 					}
 				} else {
 					// squads
 					if ((self.minerals() >= (unit.mineralPrice() * sup)) && (self.gas() >= (unit.gasPrice() * sup))) {
 						go_construct = true;
-						trainUnit((UnitType) bp.peek().getX(), (int) bp.pop().getY());
+						trainUnit((UnitType) exe.getInput().bp.peek().getX(), (int) exe.getInput().bp.pop().getY());
 					}
 				}
-				break;
+			}
 
-			case "TechType":
-				TechType tech = (TechType) bp.peek().getX();
+			else if (exe.getInput().bp.peek().getX().getClass() == TechType.class) {
+				TechType tech = (TechType) exe.getInput().bp.peek().getX();
 				if ((self.minerals() >= (tech.mineralPrice())) && (self.gas() >= (tech.gasPrice()))) {
-					investigateTech((TechType) bp.pop().getX());
+					investigateTech((TechType) exe.getInput().bp.pop().getX());
 				}
-				break;
-			case "UpgradeType":
-				UpgradeType up = (UpgradeType) bp.peek().getX();
+			} else if (exe.getInput().bp.peek().getX().getClass() == UpgradeType.class) {
+				UpgradeType up = (UpgradeType) exe.getInput().bp.peek().getX();
 				if ((self.minerals() >= (up.mineralPrice())) && (self.gas() >= (up.gasPrice()))) {
-					upgrade((UpgradeType) bp.pop().getX());
+					upgrade((UpgradeType) exe.getInput().bp.pop().getX());
 				}
-				break;
-			default:
+			} else {
 				// do nothing (yet)
 				System.out.println("NOPE, NOTHING------------------------");
-				break;
 			}
 		}
 	}
@@ -302,7 +301,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 			if (myUnit.canTrain(unit)) {
 				System.out.println("I'm training: " + unit);
 				while (number > 0) {
-					myUnit.train();
+					myUnit.train(unit);
 					number--;
 				}
 				break;
