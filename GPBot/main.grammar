@@ -1,0 +1,6 @@
+<tree> ::= <ifs>
+<ifs> ::= <if> <if> | <if> <ifs>
+<if> ::= (if <condition> <operation> <operation>)
+<condition> ::= <true> | <false> | <unit_less> | <supply_at> | <scv_at>
+<operation> ::= <action> | <if> | <action> <if>
+<action> ::= <command_center> | <scv_explore> | <lift> | <land> | <repair> | <gather_mineral> | <gather_gas> | <send_text> | <basic_building> | <building> | <scv> | <train> | <empty>
