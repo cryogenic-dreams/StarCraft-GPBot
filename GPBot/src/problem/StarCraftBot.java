@@ -5,10 +5,6 @@ import support.BotContext;
 import support.ExeContext;
 import support.Tuple;
 import ec.*;
-
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.SynchronousQueue;
-
 import bot.Bot;
 import data.GameData;
 import ec.gp.*;

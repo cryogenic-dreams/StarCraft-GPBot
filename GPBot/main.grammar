@@ -1,6 +1,6 @@
-<tree> ::= <ifs>
-<ifs> ::= <if> <if> | <if> <ifs>
+<main> ::= <ifs>
+<ifs> ::= <if> <empty> | <if> <ifs>
 <if> ::= (if <condition> <operation> <operation>)
-<condition> ::= <true> | <false> | <unit_less> | <supply_at> | <scv_at>
-<operation> ::= <action> | <if> | <action> <if>
+<condition> ::= <true> | <false> | <unit_at> | <supply_at> | <scv_at> | <mineral_at> | <gas_at> | <building_attacked>
+<operation> ::= <action> <empty> | <if> <empty> | <action> <if>
 <action> ::= <command_center> | <scv_explore> | <lift> | <land> | <repair> | <gather_mineral> | <gather_gas> | <send_text> | <basic_building> | <building> | <scv> | <train> | <empty>

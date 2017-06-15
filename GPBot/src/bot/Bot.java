@@ -59,7 +59,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	@Override
 	public void onUnitCreate(Unit unit) {
 		super.onUnitCreate(unit);
-		// this is for squads and on complete for buildings???
+		//not used
 	}
 
 	@Override
@@ -76,8 +76,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 		game = mirror.getGame();
 		self = game.self();
-		// gimmer.gimmeIt(game);// what the hell did i do yesterday...
-
+		
 		try {
 			exe = this.individualsQueue.take();
 		} catch (InterruptedException e) {
@@ -91,16 +90,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 		BWTA.analyze();
 		System.out.println("Map data ready");
 
-		// int i = 0;
-		// for (BaseLocation baseLocation : BWTA.getBaseLocations()) {
-		// System.out.println("Base location #" + (++i) + ". Printing location's
-		// region polygon:");
-		// for (Position position :
-		// baseLocation.getRegion().getPolygon().getPoints()) {
-		// System.out.print(position + ", ");
-		// }
-		// System.out.println();
-		// }
 
 		// We're going to locate the build plan call here
 		if (exe != null) {
@@ -141,14 +130,11 @@ public class Bot extends DefaultBWListener implements Runnable {
 									|| myUnit.getDistance(neutralUnit) < myUnit.getDistance(closestMineral)) {
 								closestMineral = neutralUnit;
 							}
-							// else if (neutralUnit.getType().isRefinery()) {
-							// closestMineral = myUnit;
-							// }
+						
 						}
 					}
 
-					// if a mineral patch was found, send the worker to gather
-					// it
+					// if a mineral patch was found, send the worker to gather it
 					if (closestMineral != null) {
 						myUnit.gather(closestMineral, false);
 						System.out.println("I'm collecting minerals and gas");
@@ -156,15 +142,15 @@ public class Bot extends DefaultBWListener implements Runnable {
 				}
 
 			}
-			// StringBuilder units = new StringBuilder("My units:\n");
-
+			
 			// build from build plan
 			executeBuildPlan();
 		}
 	}
 
 	public void executeBuildPlan() {
-	
+		//The ugly method to execute the buildplan stack
+		
 		Object o = exe.getInput().bp.peek().getX();
 		int sup = (int) exe.getInput().bp.peek().getY();
 		
@@ -172,9 +158,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 		 System.out.println("Supply: " + sup);
 		 System.err.println("Building: " + o.toString());
 		if (!go_construct) {
-		//System.out.println(exe.getInput().bp);
-			
-		//	System.out.println("---------------------------------------------------------------");
 	
 
 			if (exe.getInput().bp.peek().getX().getClass() == UnitType.class) {
@@ -202,11 +185,13 @@ public class Bot extends DefaultBWListener implements Runnable {
 			}
 
 			else if (exe.getInput().bp.peek().getX().getClass() == TechType.class) {
+				//research tech
 				TechType tech = (TechType) exe.getInput().bp.peek().getX();
 				if ((self.minerals() >= (tech.mineralPrice())) && (self.gas() >= (tech.gasPrice()))) {
 					investigateTech((TechType) exe.getInput().bp.pop().getX());
 				}
 			} else if (exe.getInput().bp.peek().getX().getClass() == UpgradeType.class) {
+				//upgrades
 				UpgradeType up = (UpgradeType) exe.getInput().bp.peek().getX();
 				if ((self.minerals() >= (up.mineralPrice())) && (self.gas() >= (up.gasPrice()))) {
 					upgrade((UpgradeType) exe.getInput().bp.pop().getX());
@@ -221,7 +206,8 @@ public class Bot extends DefaultBWListener implements Runnable {
 	@Override
 	public void onEnd(boolean arg0) {
 		super.onEnd(arg0);
-		// gameSwitcher();
+
+		game.drawTextScreen(10, 25, "GG");
 		try {
 			hits = r.nextInt(200);
 			sum = r.nextDouble();
@@ -229,12 +215,11 @@ public class Bot extends DefaultBWListener implements Runnable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.err.println("La partida ha terminado!!!!");
-		game.drawTextScreen(10, 25, "GG");
-		// gameSwitcher();
+
 	}
 
 	public void gameSwitcher() {
+		//not yet used
 		if (game.isPaused())
 			game.resumeGame();
 		else
@@ -261,8 +246,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 	public void upgrade(UpgradeType up) {
 		for (Unit myUnit : self.getUnits()) {
-			// TilePosition tile = getBuildTile(myUnit, building,
-			// myUnit.getTilePosition());
 			if (myUnit.canUpgrade(up)) {
 				System.out.println("I'm upgrading: " + up);
 				myUnit.upgrade(up);
@@ -274,8 +257,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 	public void investigateTech(TechType tech) {
 		for (Unit myUnit : self.getUnits()) {
-			// TilePosition tile = getBuildTile(myUnit, building,
-			// myUnit.getTilePosition());
 			if (myUnit.canResearch(tech)) {
 				System.out.println("I'm researching: " + tech);
 				myUnit.research(tech);
