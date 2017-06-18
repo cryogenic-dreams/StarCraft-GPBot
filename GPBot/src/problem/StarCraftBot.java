@@ -5,7 +5,6 @@ import support.BotContext;
 import support.ExeContext;
 import support.Tuple;
 import ec.*;
-import bot.Bot;
 import data.GameData;
 import ec.gp.*;
 import ec.gp.koza.*;

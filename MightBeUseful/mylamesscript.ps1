@@ -7,10 +7,7 @@
 #still vb sucks dicks
 
 param($File, $classFile)
-#$File is mystupidcsv.csv and $classFile is mylamenode.txt
 
-
-#calm down, scv are from starcraft, csv from powershell -_-
 $csv = import-csv $File
 
 #now, let's replace
@@ -21,7 +18,6 @@ Foreach($row in $csv){
     $nameOfYourClass = $row.ClassName
     $name = $row.Name
     $children = $row.Children
-    $unitType = $row.UnitType
     $funcNo = $row.FuncNo
 
     $wholeText= Get-Content $classFile
@@ -36,7 +32,6 @@ Foreach($row in $csv){
     $wholeText = $wholeText.replace('$name', $name) 
     $wholeText = $wholeText.replace('$children', $children) 
     $wholeText = $wholeText.replace('$unitType', $unitType) 
-    $wholeText > $javaFileName #magic or stackoverflow, magicflow
     
     'gp.fs.'+$funcNo+'.func.'+$count+' = '+$package+'.' + $nameOfYourClass >> '..\GPBot\allmynodes.params'
     'gp.fs.'+$funcNo+'.func.'+$count+'.nc = nc'+$children >> '..\GPBot\allmynodes.params'
