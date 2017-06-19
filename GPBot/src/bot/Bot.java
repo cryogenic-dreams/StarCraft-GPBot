@@ -1,5 +1,6 @@
 package bot;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Stack;
@@ -38,9 +39,9 @@ public class Bot extends DefaultBWListener implements Runnable {
 		hits = 0;
 		sum = 0;
 		r = new Random();
-		this.workers = new List<Unit>();
-		this.squads = new List<Unit>();
-		this.buildings = new List<Unit>();
+		this.workers = new ArrayList<Unit>();
+		this.squads = new ArrayList<Unit>();
+		this.buildings = new ArrayList<Unit>();
 	}
 
 	@Override
@@ -113,7 +114,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 	@Override
 	public void onFrame() {
-
+		try{
 		if (exe != null) {
 			
 			game.drawTextScreen(10, 10, "Playing as " + self.getName() + " - " + self.getRace());
@@ -150,7 +151,10 @@ public class Bot extends DefaultBWListener implements Runnable {
 			
 			// build from build plan
 			executeBuildPlan();
-		}
+			exe.getInd().trees[1].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
+					exe.getInd(), exe.getStbot());
+			
+		}}catch(Exception e){e.printStackTrace(System.err);}
 	}
 
 	public void executeBuildPlan() {

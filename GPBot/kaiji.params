@@ -20,7 +20,7 @@ ge.species.file.1 = main.grammar
 
 # the next four items are already defined in koza.params, but we put them here to be clear.
 
-pop.subpop.0.species.ind.numtrees = 1
+pop.subpop.0.species.ind.numtrees = 2
 
 pop.subpop.0.species.ind.tree.0 = ec.gp.GPTree
 pop.subpop.0.species.ind.tree.0.tc = tc0
@@ -29,7 +29,7 @@ pop.subpop.0.species.ind.tree.1.tc = tc1
 
 
 # We have one function set, of class GPFunctionSet
-gp.fs.size = 1
+gp.fs.size = 2
 gp.fs.0 = ec.gp.GPFunctionSet
 gp.fs.1 = ec.gp.GPFunctionSet
 # We'll call the function set "f0"and "f1".
@@ -37,63 +37,78 @@ gp.fs.0.name = f0
 gp.fs.1.name = f1
 
 #functionset1:
-gp.fs.1.size = 27
-gp.fs.1.func.0 = nonTerminal.Main
-gp.fs.1.func.0.nc = nc1
-gp.fs.1.func.1 = nonTerminal.Ifs
-gp.fs.1.func.1.nc = nc2
-gp.fs.1.func.2 = nonTerminal.If
-gp.fs.1.func.2.nc = nc3
-gp.fs.1.func.3 = nonTerminal.Condition
-gp.fs.1.func.3.nc = nc1
-gp.fs.1.func.4 = nonTerminal.Operation
-gp.fs.1.func.4.nc = nc1
-gp.fs.1.func.5 = terminals.True
+gp.fs.1.size = 35
+gp.fs.1.func.0 = nonTerminal.If
+gp.fs.1.func.0.nc = nc3
+gp.fs.1.func.1 = terminals.True
+gp.fs.1.func.1.nc = nc0
+gp.fs.1.func.2 = terminals.False
+gp.fs.1.func.2.nc = nc0
+gp.fs.1.func.3 = terminals.Refinery
+gp.fs.1.func.3.nc = nc80
+gp.fs.1.func.4 = terminals.CommandCenter
+gp.fs.1.func.4.nc = nc0
+gp.fs.1.func.5 = terminals.SupplyDepot
 gp.fs.1.func.5.nc = nc0
-gp.fs.1.func.6 = terminals.False
+gp.fs.1.func.6 = terminals.Empty
 gp.fs.1.func.6.nc = nc0
-gp.fs.1.func.7 = nonTerminal.Action
-gp.fs.1.func.7.nc = nc2
-gp.fs.1.func.8 = terminals.CommandCenter
-gp.fs.1.func.8.nc = nc0
-gp.fs.1.func.9 = terminals.Empty
-gp.fs.1.func.9.nc = nc0
-gp.fs.1.func.10 = terminals.UnitAt
+gp.fs.1.func.7 = nonTerminal.UnitAt
+gp.fs.1.func.7.nc = nc1
+gp.fs.1.func.8 = nonTerminal.SupplyAt
+gp.fs.1.func.8.nc = nc1
+gp.fs.1.func.9 = nonTerminal.SCVAt
+gp.fs.1.func.9.nc = nc1
+gp.fs.1.func.10 = nonTerminal.MineralAt
 gp.fs.1.func.10.nc = nc1
-gp.fs.1.func.11 = terminals.SupplyAt
+gp.fs.1.func.11 = nonTerminal.GasAt
 gp.fs.1.func.11.nc = nc1
-gp.fs.1.func.12 = terminals.SCVAt
-gp.fs.1.func.12.nc = nc1
-gp.fs.1.func.13 = terminals.MineralAt
-gp.fs.1.func.13.nc = nc1
-gp.fs.1.func.14 = terminals.GasAt
+gp.fs.1.func.12 = terminals.BuildingAttacked
+gp.fs.1.func.12.nc = nc0
+gp.fs.1.func.13 = terminals.SCVExplore
+gp.fs.1.func.13.nc = nc0
+gp.fs.1.func.14 = nonTerminal.Lift
 gp.fs.1.func.14.nc = nc1
-gp.fs.1.func.15 = terminals.BuildingAttacked
-gp.fs.1.func.15.nc = nc0
-gp.fs.1.func.16 = terminals.SCVExplore
+gp.fs.1.func.15 = nonTerminal.Land
+gp.fs.1.func.15.nc = nc1
+gp.fs.1.func.16 = terminals.Repair
 gp.fs.1.func.16.nc = nc0
-gp.fs.1.func.17 = terminals.Lift
-gp.fs.1.func.17.nc = nc1
-gp.fs.1.func.18 = terminals.Land
-gp.fs.1.func.18.nc = nc1
-gp.fs.1.func.19 = terminals.Repair
+gp.fs.1.func.17 = terminals.GatherMineral
+gp.fs.1.func.17.nc = nc0
+gp.fs.1.func.18 = terminals.GatherGas
+gp.fs.1.func.18.nc = nc0
+gp.fs.1.func.19 = terminals.SendText
 gp.fs.1.func.19.nc = nc0
-gp.fs.1.func.20 = terminals.GatherMineral
-gp.fs.1.func.20.nc = nc0
-gp.fs.1.func.21 = terminals.GatherGas
+gp.fs.1.func.20 = nonTerminal.SCV
+gp.fs.1.func.20.nc = nc81
+gp.fs.1.func.21 = terminals.At
 gp.fs.1.func.21.nc = nc0
-gp.fs.1.func.22 = terminals.SendText
-gp.fs.1.func.22.nc = nc0
-gp.fs.1.func.23 = terminals.Train
-gp.fs.1.func.23.nc = nc50
-gp.fs.1.func.24 = terminals.SCV
-gp.fs.1.func.24.nc = nc81
-gp.fs.1.func.25 = nonTerminal.Building
-gp.fs.1.func.25.nc = nc10
-gp.fs.1.func.26 = nonTerminal.BasicBuilding
-gp.fs.1.func.26.nc = nc65
-gp.fs.1.func.27 = terminals.At
-gp.fs.1.func.27.nc = nc0
+gp.fs.1.func.22 = nonTerminal.Marine
+gp.fs.1.func.22.nc = nc1
+gp.fs.1.func.23 = nonTerminal.Vulture
+gp.fs.1.func.23.nc = nc1
+gp.fs.1.func.24 = nonTerminal.Medic
+gp.fs.1.func.24.nc = nc1
+gp.fs.1.func.25 = nonTerminal.Tank
+gp.fs.1.func.25.nc = nc1
+gp.fs.1.func.26 = nonTerminal.Valkyrie
+gp.fs.1.func.26.nc = nc1
+gp.fs.1.func.27 = nonTerminal.Firebat
+gp.fs.1.func.27.nc = nc1
+gp.fs.1.func.28 = nonTerminal.Goliath
+gp.fs.1.func.28.nc = nc1
+gp.fs.1.func.29 = nonTerminal.Wraith
+gp.fs.1.func.29.nc = nc1
+gp.fs.1.func.30 = nonTerminal.ScienceVessel
+gp.fs.1.func.30.nc = nc1
+gp.fs.1.func.31 = nonTerminal.Dropship
+gp.fs.1.func.31.nc = nc1
+gp.fs.1.func.32 = nonTerminal.Ghost
+gp.fs.1.func.32.nc = nc1
+gp.fs.1.func.33 = nonTerminal.Battlecruiser
+gp.fs.1.func.33.nc = nc1
+gp.fs.1.func.34 = terminals.Quantity
+gp.fs.1.func.34.nc = nc0
+
 #what if a functionset includes another functionset?
 
 #functionset0:
