@@ -38,6 +38,9 @@ public class Bot extends DefaultBWListener implements Runnable {
 		hits = 0;
 		sum = 0;
 		r = new Random();
+		this.workers = new List<Unit>();
+		this.squads = new List<Unit>();
+		this.buildings = new List<Unit>();
 	}
 
 	@Override
@@ -69,6 +72,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		if (arg0.getType().isBuilding()) {
 			this.hits++;
 		}
+		addList(arg0);
 	}
 
 	@Override
@@ -111,6 +115,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	public void onFrame() {
 
 		if (exe != null) {
+			
 			game.drawTextScreen(10, 10, "Playing as " + self.getName() + " - " + self.getRace());
 			for (Unit myUnit : self.getUnits()) {
 				// if it's a worker and it's idle, send it to the closest
@@ -154,14 +159,19 @@ public class Bot extends DefaultBWListener implements Runnable {
 		Object o = exe.getInput().bp.peek().getX();
 		int sup = (int) exe.getInput().bp.peek().getY();
 		
-		 System.out.println("My supply: " + self.allUnitCount());
-		 System.out.println("Supply: " + sup);
-		 System.err.println("Building: " + o.toString());
+		System.out.println("My supply: " + self.allUnitCount());
+		System.out.println("Supply: " + sup);
+		System.err.println("Building: " + o.toString());
+		
+		UnitType unit = (UnitType) exe.getInput().bp.peek().getX();
+		if((self.minerals() >= (unit.mineralPrice()+200)) && (self.gas() >= (unit.gasPrice()+100))){
+			go_construct = false;
+		}
 		if (!go_construct) {
 	
 
 			if (exe.getInput().bp.peek().getX().getClass() == UnitType.class) {
-				UnitType unit = (UnitType) exe.getInput().bp.peek().getX();
+				
 				if (unit.isAddon() || unit.isBuilding()) {
 					// buildings
 					if ((self.allUnitCount() >= sup) && (self.minerals() >= unit.mineralPrice())
@@ -228,6 +238,18 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 	public Game getGame() {
 		return game;
+	}
+	
+	public void addList(Unit newUnit) {
+		if((newUnit.getType().isBuilding()) || (newUnit.getType().isBuilding())){
+			buildings.add(newUnit);
+		}
+		else if(newUnit.getType().isWorker()){
+			workers.add(newUnit);
+		}
+		else if((newUnit.getType().isOrganic()) || (newUnit.getType().isMechanical())){
+			squads.add(newUnit);
+		}
 	}
 
 	public void buildBuilding(UnitType building) {
