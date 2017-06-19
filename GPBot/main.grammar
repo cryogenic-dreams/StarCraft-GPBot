@@ -6,7 +6,7 @@
 <action> ::= <command_center> | <scv_explore> | <lift> | <land> | <repair> | <gather_mineral> | <gather_gas> | <send_text> | <basicbuilding> | <scv> | <train> | <empty>
 <true> ::= (true)
 <false> ::= (false)
-<unit_at> ::= (unit_at)
+<unit_at> ::= (unit_at <at>)
 <supply_at> ::= (supply_at <at>)
 <scv_at> ::= (scv_at <at>)
 <mineral_at> ::= (mineral_at <at>)

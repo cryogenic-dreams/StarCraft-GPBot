@@ -63,7 +63,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	@Override
 	public void onUnitCreate(Unit unit) {
 		super.onUnitCreate(unit);
-		//not used
+		// not used
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 		game = mirror.getGame();
 		self = game.self();
-		
+
 		try {
 			exe = this.individualsQueue.take();
 		} catch (InterruptedException e) {
@@ -94,7 +94,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 		BWTA.readMap();
 		BWTA.analyze();
 		System.out.println("Map data ready");
-
 
 		// We're going to locate the build plan call here
 		if (exe != null) {
@@ -114,68 +113,69 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 	@Override
 	public void onFrame() {
-		try{
-		if (exe != null) {
-			
-			game.drawTextScreen(10, 10, "Playing as " + self.getName() + " - " + self.getRace());
-			for (Unit myUnit : self.getUnits()) {
-				// if it's a worker and it's idle, send it to the closest
-				// mineral
-				// patch
-				Unit closestMineral = null;
-				if (myUnit.getType().isRefinery()) {
-					closestMineral = myUnit;
-				}
-				if (myUnit.getType().isWorker() && myUnit.isIdle()) {
+		try {
+			if (exe != null) {
 
-					// find the closest mineral
-					for (Unit neutralUnit : game.neutral().getUnits()) {
-						if (neutralUnit.getType().isMineralField()) {
+				game.drawTextScreen(10, 10, "Playing as " + self.getName() + " - " + self.getRace());
+				for (Unit myUnit : self.getUnits()) {
+					// if it's a worker and it's idle, send it to the closest
+					// mineral
+					// patch
+					Unit closestMineral = null;
+					if (myUnit.getType().isRefinery()) {
+						closestMineral = myUnit;
+					}
+					if (myUnit.getType().isWorker() && myUnit.isIdle()) {
 
-							if (closestMineral == null
-									|| myUnit.getDistance(neutralUnit) < myUnit.getDistance(closestMineral)) {
-								closestMineral = neutralUnit;
+						// find the closest mineral
+						for (Unit neutralUnit : game.neutral().getUnits()) {
+							if (neutralUnit.getType().isMineralField()) {
+
+								if (closestMineral == null
+										|| myUnit.getDistance(neutralUnit) < myUnit.getDistance(closestMineral)) {
+									closestMineral = neutralUnit;
+								}
+
 							}
-						
+						}
+
+						// if a mineral patch was found, send the worker to
+						// gather it
+						if (closestMineral != null) {
+							myUnit.gather(closestMineral, false);
+							System.out.println("I'm collecting minerals and gas");
 						}
 					}
 
-					// if a mineral patch was found, send the worker to gather it
-					if (closestMineral != null) {
-						myUnit.gather(closestMineral, false);
-						System.out.println("I'm collecting minerals and gas");
-					}
 				}
 
+				// build from build plan
+				executeBuildPlan();
+				exe.getInd().trees[1].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
+						exe.getInd(), exe.getStbot());
+
 			}
-			
-			// build from build plan
-			executeBuildPlan();
-			exe.getInd().trees[1].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
-					exe.getInd(), exe.getStbot());
-			
-		}}catch(Exception e){e.printStackTrace(System.err);}
+		} catch (Exception e) {
+			e.printStackTrace(System.err);
+		}
 	}
 
 	public void executeBuildPlan() {
-		//The ugly method to execute the buildplan stack
-		
+		// The ugly method to execute the buildplan stack
+		try{
 		Object o = exe.getInput().bp.peek().getX();
 		int sup = (int) exe.getInput().bp.peek().getY();
-		
+
 		System.out.println("My supply: " + self.allUnitCount());
 		System.out.println("Supply: " + sup);
 		System.err.println("Building: " + o.toString());
-		
-		UnitType unit = (UnitType) exe.getInput().bp.peek().getX();
-		if((self.minerals() >= (unit.mineralPrice()+200)) && (self.gas() >= (unit.gasPrice()+100))){
-			go_construct = false;
-		}
-		if (!go_construct) {
-	
 
-			if (exe.getInput().bp.peek().getX().getClass() == UnitType.class) {
-				
+		if (exe.getInput().bp.peek().getX().getClass() == UnitType.class) {
+			UnitType unit = (UnitType) exe.getInput().bp.peek().getX();
+			if ((self.minerals() >= (unit.mineralPrice() + 200)) && (self.gas() >= (unit.gasPrice() + 100))) {
+				go_construct = false;
+			}
+			if (!go_construct) {
 				if (unit.isAddon() || unit.isBuilding()) {
 					// buildings
 					if ((self.allUnitCount() >= sup) && (self.minerals() >= unit.mineralPrice())
@@ -197,25 +197,37 @@ public class Bot extends DefaultBWListener implements Runnable {
 					}
 				}
 			}
+		}
 
-			else if (exe.getInput().bp.peek().getX().getClass() == TechType.class) {
-				//research tech
-				TechType tech = (TechType) exe.getInput().bp.peek().getX();
+		else if (exe.getInput().bp.peek().getX().getClass() == TechType.class) {
+			// research tech
+			TechType tech = (TechType) exe.getInput().bp.peek().getX();
+			if ((self.minerals() >= (tech.mineralPrice() + 200)) && (self.gas() >= (tech.gasPrice() + 100))) {
+				go_construct = false;
+			}
+			if (!go_construct) {
 				if ((self.minerals() >= (tech.mineralPrice())) && (self.gas() >= (tech.gasPrice()))) {
 					investigateTech((TechType) exe.getInput().bp.pop().getX());
 				}
-			} else if (exe.getInput().bp.peek().getX().getClass() == UpgradeType.class) {
-				//upgrades
-				UpgradeType up = (UpgradeType) exe.getInput().bp.peek().getX();
+			}
+		} else if (exe.getInput().bp.peek().getX().getClass() == UpgradeType.class) {
+			// upgrades
+			UpgradeType up = (UpgradeType) exe.getInput().bp.peek().getX();
+			if ((self.minerals() >= (up.mineralPrice() + 200)) && (self.gas() >= (up.gasPrice() + 100))) {
+				go_construct = false;
+			}
+			if (!go_construct) {
 				if ((self.minerals() >= (up.mineralPrice())) && (self.gas() >= (up.gasPrice()))) {
 					upgrade((UpgradeType) exe.getInput().bp.pop().getX());
 				}
-			} else {
-				// do nothing (yet)
-				System.out.println("NOPE, NOTHING------------------------");
 			}
-		}
+		} else {
+			// do nothing (yet)
+			System.out.println("NOPE, NOTHING------------------------");
+		}}catch(Exception e){}
 	}
+
+	
 
 	@Override
 	public void onEnd(boolean arg0) {
@@ -233,7 +245,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public void gameSwitcher() {
-		//not yet used
+		// not yet used
 		if (game.isPaused())
 			game.resumeGame();
 		else
@@ -243,15 +255,13 @@ public class Bot extends DefaultBWListener implements Runnable {
 	public Game getGame() {
 		return game;
 	}
-	
+
 	public void addList(Unit newUnit) {
-		if((newUnit.getType().isBuilding()) || (newUnit.getType().isBuilding())){
+		if ((newUnit.getType().isBuilding()) || (newUnit.getType().isBuilding())) {
 			buildings.add(newUnit);
-		}
-		else if(newUnit.getType().isWorker()){
+		} else if (newUnit.getType().isWorker()) {
 			workers.add(newUnit);
-		}
-		else if((newUnit.getType().isOrganic()) || (newUnit.getType().isMechanical())){
+		} else if ((newUnit.getType().isOrganic()) || (newUnit.getType().isMechanical())) {
 			squads.add(newUnit);
 		}
 	}
