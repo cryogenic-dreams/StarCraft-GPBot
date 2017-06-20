@@ -163,12 +163,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	public void executeBuildPlan() {
 		// The ugly method to execute the buildplan stack
 		try{
-		Object o = exe.getInput().bp.peek().getX();
-		int sup = (int) exe.getInput().bp.peek().getY();
-
-		System.out.println("My supply: " + self.allUnitCount());
-		System.out.println("Supply: " + sup);
-		System.err.println("Building: " + o.toString());
+		
 
 		if (exe.getInput().bp.peek().getX().getClass() == UnitType.class) {
 			UnitType unit = (UnitType) exe.getInput().bp.peek().getX();
@@ -271,8 +266,8 @@ public class Bot extends DefaultBWListener implements Runnable {
 			TilePosition tile = getBuildTile(myUnit, building, myUnit.getTilePosition());
 			if (tile != null) {
 				if ((myUnit.canBuild(building, tile)) & !(myUnit.isConstructing()) & !(myUnit.isGatheringGas())) {
-					System.out.println("I'm building: " + building);
 					myUnit.build(building, tile);
+					planToString();
 					break;
 				}
 			}
@@ -283,8 +278,8 @@ public class Bot extends DefaultBWListener implements Runnable {
 	public void upgrade(UpgradeType up) {
 		for (Unit myUnit : self.getUnits()) {
 			if (myUnit.canUpgrade(up)) {
-				System.out.println("I'm upgrading: " + up);
 				myUnit.upgrade(up);
+				planToString();
 				break;
 			}
 		}
@@ -294,8 +289,8 @@ public class Bot extends DefaultBWListener implements Runnable {
 	public void investigateTech(TechType tech) {
 		for (Unit myUnit : self.getUnits()) {
 			if (myUnit.canResearch(tech)) {
-				System.out.println("I'm researching: " + tech);
 				myUnit.research(tech);
+				planToString();
 				break;
 			}
 		}
@@ -305,8 +300,8 @@ public class Bot extends DefaultBWListener implements Runnable {
 	public void attachBuilding(UnitType addon) {
 		for (Unit myUnit : self.getUnits()) {
 			if (!(myUnit.isConstructing()) & !(myUnit.isGatheringGas())) {
-				System.out.println("I'm building: " + addon);
 				myUnit.buildAddon(addon);
+				planToString();
 				break;
 			}
 		}
@@ -316,11 +311,11 @@ public class Bot extends DefaultBWListener implements Runnable {
 	public void trainUnit(UnitType unit, int number) {
 		for (Unit myUnit : self.getUnits()) {
 			if (myUnit.canTrain(unit)) {
-				System.out.println("I'm training: " + unit);
 				while (number > 0) {
 					myUnit.train(unit);
 					number--;
 				}
+				planToString();
 				break;
 			}
 		}
@@ -368,5 +363,13 @@ public class Bot extends DefaultBWListener implements Runnable {
 		if (ret == null)
 			game.printf("Unable to find suitable build position for " + buildingType.toString());
 		return ret;
+	}
+	public void planToString(){
+		Object o = exe.getInput().bp.peek().getX();
+		int sup = (int) exe.getInput().bp.peek().getY();
+
+		System.out.println("My supply: " + self.allUnitCount());
+		System.out.println("Supply: " + sup);
+		System.err.println("B/S/T/U: " + o.toString());
 	}
 }
