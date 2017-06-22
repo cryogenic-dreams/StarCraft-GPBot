@@ -32,8 +32,8 @@ public class Refinery extends GPNode {
 			final GPIndividual individual, final Problem problem) {
 
 		GameData rd = ((GameData) (input));
-		//REWRITE THIS if (!(rd.g.buildings.contains(UnitType.Terran_Refinery, 0)))){
+		if (!(rd.g.buildings.contains(UnitType.Terran_Refinery)))){
 		rd.bp.push(new UnitTuple(UnitType.Terran_Refinery, 0)); // Push of yourself and your last node, which is the supply or the quantity
-		System.out.println("refinery");
+		System.out.println("refinery");}
     }
 }
