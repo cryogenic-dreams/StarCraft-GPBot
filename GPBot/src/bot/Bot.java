@@ -39,9 +39,9 @@ public class Bot extends DefaultBWListener implements Runnable {
 		hits = 0;
 		sum = 0;
 		r = new Random();
-		this.workers = new ArrayList<Unit>();
-		this.squads = new ArrayList<Unit>();
-		this.buildings = new ArrayList<Unit>();
+		this.workers = exe.getInput().workers;
+		this.squads = exe.getInput().squads;
+		this.buildings = exe.getInput().buildings;
 	}
 
 	@Override
@@ -164,7 +164,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		// The ugly method to execute the buildplan stack
 		try{
 		
-
+		int sup = (int) exe.getInput().bp.peek().getY();
 		if (exe.getInput().bp.peek().getX().getClass() == UnitType.class) {
 			UnitType unit = (UnitType) exe.getInput().bp.peek().getX();
 			if ((self.minerals() >= (unit.mineralPrice() + 200)) && (self.gas() >= (unit.gasPrice() + 100))) {

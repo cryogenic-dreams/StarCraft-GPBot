@@ -1,8 +1,11 @@
 package data;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 import bwapi.Game;
+import bwapi.Unit;
 import ec.gp.GPData;
 import support.Tuple;
 
@@ -23,6 +26,9 @@ public class GameData extends GPData {
 	private static final long serialVersionUID = 1;
 	public transient Game g; // return value
 	public transient Stack<Tuple> bp = new Stack<Tuple>(); //here we'll save our building plan, it'll have a build and a supply number, just like our usual build plan
+	public List<Unit> workers = new ArrayList<Unit>();
+	public List<Unit> squads = new ArrayList<Unit>();
+	public List<Unit> buildings = new ArrayList<Unit>();
 	public int s = 200; //erc
 	public int q; // yet another erc
 	public transient boolean condition;
@@ -37,11 +43,23 @@ public class GameData extends GPData {
 		((GameData) gpd).q = q;
 		((GameData) gpd).at = at;
 		((GameData) gpd).condition = condition;
+		((GameData) gpd).workers = workers;
+		((GameData) gpd).squads = squads;
+		((GameData) gpd).buildings = buildings;
 	}
 	
 	public void initializeIfNull() {
 		if(bp == null) {
 			bp = new Stack<Tuple>();
+		}
+		if (workers == null){
+			workers = new ArrayList<Unit>();
+		}
+		if (squads == null){
+			squads = new ArrayList<Unit>();
+		}
+		if (buildings == null){
+			buildings = new ArrayList<Unit>();
 		}
 	}
 }
