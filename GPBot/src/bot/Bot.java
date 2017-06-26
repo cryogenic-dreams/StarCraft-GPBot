@@ -251,15 +251,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 		return game;
 	}
 
-	public void moveSquads(List<Unit> squad){
-		//if idle do a random walk
-		if(squad.get(0).isIdle()){
-			squad.get(0).move(new Position(exe.getState().random[exe.getThreadnum()].nextInt(100), exe.getState().random[exe.getThreadnum()].nextInt(100)));
-			for(int i = 0; i < squad.size(); i++){
-				squad.get(i).follow(squad.get(0));
-			}
-		}
-	}
 	
 	public void addList(Unit newUnit) {
 		if ((newUnit.getType().isBuilding()) || (newUnit.getType().isBuilding())) {
