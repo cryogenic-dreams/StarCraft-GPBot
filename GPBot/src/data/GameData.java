@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Stack;
 import bwapi.Game;
 import bwapi.Unit;
+import bwapi.UnitType;
 import ec.gp.GPData;
 import support.Tuple;
 
@@ -33,6 +34,11 @@ public class GameData extends GPData {
 	public int q; // yet another erc
 	public transient boolean condition;
 	public int at; //yet yet anothe erc
+	public int x;
+	public int y;
+	public int state=0;
+	public UnitType ut;
+	public List<Unit> enemies = new ArrayList<Unit>();
 	
 	public void copyTo(final GPData gpd) // copy my stuff to another GameData
 	{
@@ -46,6 +52,11 @@ public class GameData extends GPData {
 		((GameData) gpd).workers = workers;
 		((GameData) gpd).squads = squads;
 		((GameData) gpd).buildings = buildings;
+		((GameData) gpd).x = x;
+		((GameData) gpd).y = y;
+		((GameData) gpd).state = state;
+		((GameData) gpd).ut = ut;
+		((GameData) gpd).enemies = enemies;
 	}
 	
 	public void initializeIfNull() {

@@ -25,5 +25,5 @@ DoDefensiveMatrix,do_defensive_matrix,1,2
 DoIrradiate,do_irradiate,1,2
 DoEMP,do_EMP,1,2
 Enemy,enemy,0,2
-UnitType,unit_type,0,2
+ChooseUnitType,choose_unit_type,0,2
 Position,position,2,2
