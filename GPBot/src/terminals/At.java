@@ -56,7 +56,7 @@ public class At extends ERC {
 	}
 
 	public boolean nodeEquals(GPNode node) {
-		return (node.getClass() == this.getClass() && ((Quantity) node).value1 == value2);
+		return (node.getClass() == this.getClass() && ((At) node).value2 == value2);
 	}
 
 	public void readNode(EvolutionState state, DataInput input) throws IOException {
