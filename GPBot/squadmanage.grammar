@@ -6,9 +6,9 @@
 <passive_act> ::= <hold> | <move> | <block> | <patrol> | <load> | <unload> | <do_scanner> | <do_cloak>
 <aggressive_act> ::= <attack> | <move> | <load> | <unload> | <do_tank> | <do_scanner> | <do_cloak> | <do_siege> | <do_stim_pack> | <do_spider_mines> | <do_heal> | <do_restoration> | <do_optical_flare> | <do_nuclear_strike> | <do_yamato> | <do_lockdown> | <do_defensive_matrix> | <do_irradiate> | <do_EMP>
 <hold> ::= (hold <quantity> <choose_unit_type>)
-<move> ::= (move <quantity> <choose_unit_type> <position>)
+<move> ::= (move <quantity> <choose_unit_type> <go_position>)
 <block> ::= (block <quantity> <choose_unit_type>)
-<patrol> ::= (patrol <quantity> <choose_unit_type> <position>)
+<patrol> ::= (patrol <quantity> <choose_unit_type> <go_position>)
 <load> ::= (load <quantity> <choose_unit_type>)
 <unload> ::= (unload)
 <do_scanner> ::= (do_scanner)
@@ -30,7 +30,7 @@
 <quantity> ::= (quantity)
 <enemy> ::= (enemy)
 <choose_unit_type> ::= (choose_unit_type)
-<position> ::= (position <x> <y>)
+<go_position> ::= (go_position <x> <y>)
 <x> ::= (x)
 <y> ::= (y)
 <empty> ::= (empty)
