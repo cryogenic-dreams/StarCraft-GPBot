@@ -1,16 +1,20 @@
 package bot;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Stack;
 import java.util.concurrent.BlockingQueue;
-
-import bwapi.*;
+import bwapi.DefaultBWListener;
+import bwapi.Game;
+import bwapi.Mirror;
+import bwapi.Player;
+import bwapi.TechType;
+import bwapi.TilePosition;
+import bwapi.Unit;
+import bwapi.UnitType;
+import bwapi.UpgradeType;
 import bwta.BWTA;
 import support.ExeContext;
 import support.GimmeTheGame;
-import support.OnEndCallback;
 import support.Tuple;
 
 public class Bot extends DefaultBWListener implements Runnable {

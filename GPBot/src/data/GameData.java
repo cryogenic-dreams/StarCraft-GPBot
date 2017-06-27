@@ -9,7 +9,7 @@ import bwapi.Unit;
 import bwapi.UnitType;
 import ec.gp.GPData;
 import support.Tuple;
-
+@SuppressWarnings("rawtypes")
 public class GameData extends GPData {
 
 	/**
@@ -26,6 +26,7 @@ public class GameData extends GPData {
 	
 	private static final long serialVersionUID = 1;
 	public transient Game g; // return value
+	
 	public transient Stack<Tuple> bp = new Stack<Tuple>(); //here we'll save our building plan, it'll have a build and a supply number, just like our usual build plan
 	public List<Unit> workers = new ArrayList<Unit>();
 	public List<Unit> squads = new ArrayList<Unit>();
