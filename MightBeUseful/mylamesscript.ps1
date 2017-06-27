@@ -30,9 +30,9 @@ Foreach($row in $csv){
     $wholeText = $wholeText.replace('$package', $package) 
     $wholeText = $wholeText.replace('$nameOfYourClass', $nameOfYourClass) 
     $wholeText = $wholeText.replace('$name', $name) 
-    $wholeText = $wholeText.replace('$children', $children) 
-    $wholeText = $wholeText.replace('$unitType', $unitType) 
+    $wholeText = $wholeText.replace('$children', $children)
     
+    $wholetext >> $javaFileName
     'gp.fs.'+$funcNo+'.func.'+$count+' = '+$package+'.' + $nameOfYourClass >> '..\GPBot\allmynodes.params'
     'gp.fs.'+$funcNo+'.func.'+$count+'.nc = nc'+$children >> '..\GPBot\allmynodes.params'
     $count = $count + 1
