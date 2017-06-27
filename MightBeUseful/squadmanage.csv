@@ -2,10 +2,10 @@
 Ini,ini,2,2
 Hold,2,2
 Move,3,2
-X,0,2
-Y,0,2
-Block,2,2
-Patrol,3,2
+X,x,2
+Y,y,2
+Block,block,2
+Patrol,patrol,2
 Load,load,2,2
 Unload,unload,0,2
 DoScanner,do_scanner,0,2

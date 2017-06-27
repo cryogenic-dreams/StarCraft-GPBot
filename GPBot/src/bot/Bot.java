@@ -1,7 +1,6 @@
 package bot;
 
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import bwapi.DefaultBWListener;
 import bwapi.Game;
@@ -22,10 +21,10 @@ public class Bot extends DefaultBWListener implements Runnable {
 	private ExeContext exe;
 	protected BlockingQueue<Tuple<Integer, Double>> fitnessQueue = null;
 	protected BlockingQueue<ExeContext> individualsQueue = null;
-	private Random r;// auxiliar
 	private List<Unit> workers;
 	private List<Unit> squads;
 	private List<Unit> buildings;
+	private List<Unit> enemies;
 	public double currentX;
 	public double currentY;
 	public boolean go_construct = false;
@@ -42,10 +41,10 @@ public class Bot extends DefaultBWListener implements Runnable {
 		this.individualsQueue = individualsQueue;
 		hits = 0;
 		sum = 0;
-		r = new Random();
 		this.workers = exe.getInput().workers;
 		this.squads = exe.getInput().squads;
 		this.buildings = exe.getInput().buildings;
+		this.enemies = exe.getInput().enemies;
 	}
 
 	@Override
@@ -70,6 +69,25 @@ public class Bot extends DefaultBWListener implements Runnable {
 		// not used
 	}
 
+	
+	
+	@Override
+	public void onUnitDestroy(Unit arg0) {
+		// TODO Auto-generated method stub
+		//eliminate the unit from its list
+		super.onUnitDestroy(arg0);
+	}
+
+	@Override
+	public void onUnitDiscover(Unit arg0) {
+		super.onUnitDiscover(arg0);
+		if(arg0.getPlayer().isEnemy(game.self())){
+			//found enemy, entering aggressive mode
+			exe.getInput().state = 1;
+			enemies.add(arg0);
+		}
+	}
+
 	@Override
 	public void onUnitComplete(Unit arg0) {
 		super.onUnitComplete(arg0);
@@ -82,7 +100,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 	@Override
 	public void onStart() {
-
 		game = mirror.getGame();
 		self = game.self();
 
@@ -109,6 +126,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 			exe.getInd().trees[0].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
 					exe.getInd(), exe.getStbot());
 			System.out.println("---The Build Plan size is AFTER: " + exe.getInput().bp.size());
+			sum = exe.getInput().bp.size();
 		} else {
 			System.err.println(
 					"===============================================================================\nexe nulo!!!\n===============================================================================");
@@ -122,9 +140,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 				game.drawTextScreen(10, 10, "Playing as " + self.getName() + " - " + self.getRace());
 				for (Unit myUnit : self.getUnits()) {
-					// if it's a worker and it's idle, send it to the closest
-					// mineral
-					// patch
+					// if it's a worker and it's idle, send it to the closest mineral patch
 					Unit closestMineral = null;
 					if (myUnit.getType().isRefinery()) {
 						closestMineral = myUnit;
@@ -231,11 +247,8 @@ public class Bot extends DefaultBWListener implements Runnable {
 	@Override
 	public void onEnd(boolean arg0) {
 		super.onEnd(arg0);
-
 		game.drawTextScreen(10, 25, "GG");
 		try {
-			hits = r.nextInt(200);
-			sum = r.nextDouble();
 			this.fitnessQueue.put(new Tuple<>(hits, sum));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -244,7 +257,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public void gameSwitcher() {
-		// not yet used
+		//not yet used
 		if (game.isPaused())
 			game.resumeGame();
 		else
