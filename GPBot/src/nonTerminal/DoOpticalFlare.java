@@ -49,10 +49,10 @@ public class DoOpticalFlare extends GPNode {
 						}
 					}
 					
-					if(TechType.Defensive_Matrix.targetsPosition()){
+					if(TechType.Optical_Flare.targetsPosition()){
 						unit.useTech(TechType.Optical_Flare, enemy1.getPosition());
 					}
-					else if (TechType.Defensive_Matrix.targetsUnit()){
+					else if (TechType.Optical_Flare.targetsUnit()){
 						unit.useTech(TechType.Optical_Flare, enemy1);
 					}
 					else unit.useTech(TechType.Optical_Flare);
