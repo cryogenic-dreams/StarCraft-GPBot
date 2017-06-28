@@ -16,25 +16,85 @@ pop.subpop.0.species.file.0 = techtree.grammar
 ge.species.file.0 = techtree.grammar
 pop.subpop.0.species.file.1 = main.grammar
 ge.species.file.1 = main.grammar
+pop.subpop.0.species.file.2 = squadmanage.grammar
+ge.species.file.2 = squadmanage.grammar
 
 
 # the next four items are already defined in koza.params, but we put them here to be clear.
 
-pop.subpop.0.species.ind.numtrees = 2
+pop.subpop.0.species.ind.numtrees = 3
 
 pop.subpop.0.species.ind.tree.0 = ec.gp.GPTree
 pop.subpop.0.species.ind.tree.0.tc = tc0
 pop.subpop.0.species.ind.tree.1 = ec.gp.GPTree
 pop.subpop.0.species.ind.tree.1.tc = tc1
-
+pop.subpop.0.species.ind.tree.2 = ec.gp.GPTree
+pop.subpop.0.species.ind.tree.2.tc = tc2
 
 # We have one function set, of class GPFunctionSet
-gp.fs.size = 2
+gp.fs.size = 3
 gp.fs.0 = ec.gp.GPFunctionSet
 gp.fs.1 = ec.gp.GPFunctionSet
-# We'll call the function set "f0"and "f1".
+gp.fs.2 = ec.gp.GPFunctionSet
+
 gp.fs.0.name = f0
 gp.fs.1.name = f1
+gp.fs.2.name = f2
+
+#functionset2:
+gp.fs.1.size = 26
+gp.fs.2.func.0 = nonTerminal.Ini
+gp.fs.2.func.0.nc = nc2
+gp.fs.2.func.1 = nonTerminal.Hold
+gp.fs.2.func.1.nc = nc1
+gp.fs.2.func.2 = nonTerminal.Move
+gp.fs.2.func.2.nc = nc2
+gp.fs.2.func.3 = terminals.X
+gp.fs.2.func.3.nc = nc0
+gp.fs.2.func.4 = terminals.Y
+gp.fs.2.func.4.nc = nc0
+gp.fs.2.func.5 = nonTerminal.Block
+gp.fs.2.func.5.nc = nc1
+gp.fs.2.func.6 = nonTerminal.Patrol
+gp.fs.2.func.6.nc = nc2
+gp.fs.2.func.7 = nonTerminal.Load
+gp.fs.2.func.7.nc = nc1
+gp.fs.2.func.8 = terminals.Unload
+gp.fs.2.func.8.nc = nc0
+gp.fs.2.func.9 = terminals.DoScanner
+gp.fs.2.func.9.nc = nc0
+gp.fs.2.func.10 = nonTerminal.DoCloak
+gp.fs.2.func.10.nc = nc1
+gp.fs.2.func.11 = nonTerminal.Attack
+gp.fs.2.func.11.nc = nc2
+gp.fs.2.func.12 = nonTerminal.DoTank
+gp.fs.2.func.12.nc = nc1
+gp.fs.2.func.13 = nonTerminal.DoSiege
+gp.fs.2.func.13.nc = nc1
+gp.fs.2.func.14 = nonTerminal.DoStimPack
+gp.fs.2.func.14.nc = nc1
+gp.fs.2.func.15 = terminals.DoSpiderMines
+gp.fs.2.func.15.nc = nc0
+gp.fs.2.func.16 = terminals.DoRestoration
+gp.fs.2.func.16.nc = nc0
+gp.fs.2.func.17 = nonTerminal.DoOpticalFlare
+gp.fs.2.func.17.nc = nc2
+gp.fs.2.func.18 = nonTerminal.DoNuclearStrike
+gp.fs.2.func.18.nc = nc1
+gp.fs.2.func.19 = nonTerminal.DoYamato
+gp.fs.2.func.19.nc = nc2
+gp.fs.2.func.20 = nonTerminal.DoLockDown
+gp.fs.2.func.20.nc = nc2
+gp.fs.2.func.21 = nonTerminal.DoDefensiveMatrix
+gp.fs.2.func.21.nc = nc1
+gp.fs.2.func.22 = nonTerminal.DoIrradiate
+gp.fs.2.func.22.nc = nc2
+gp.fs.2.func.23 = nonTerminal.DoEMP
+gp.fs.2.func.23.nc = nc2
+gp.fs.2.func.24 = terminals.Enemy
+gp.fs.2.func.24.nc = nc0
+gp.fs.2.func.25 = nonTerminal.Position
+gp.fs.2.func.25.nc = nc2
 
 #functionset1:
 gp.fs.1.size = 35

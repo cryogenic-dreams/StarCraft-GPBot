@@ -24,7 +24,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 	private List<Unit> workers;
 	private List<Unit> squads;
 	private List<Unit> buildings;
-	private List<Unit> enemies;
 	public double currentX;
 	public double currentY;
 	public boolean go_construct = false;
@@ -44,7 +43,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 		this.workers = exe.getInput().workers;
 		this.squads = exe.getInput().squads;
 		this.buildings = exe.getInput().buildings;
-		this.enemies = exe.getInput().enemies;
 	}
 
 	@Override
@@ -68,7 +66,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 		super.onUnitCreate(unit);
 		// not used
 	}
-
 	
 	
 	@Override
@@ -84,7 +81,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		if(arg0.getPlayer().isEnemy(game.self())){
 			//found enemy, entering aggressive mode
 			exe.getInput().state = 1;
-			enemies.add(arg0);
+			//enemies.add(arg0);
 		}
 	}
 
