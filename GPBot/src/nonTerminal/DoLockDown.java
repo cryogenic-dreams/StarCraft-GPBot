@@ -38,12 +38,12 @@ public class DoLockDown extends GPNode {
 		children[1].eval(state, thread, input, stack, individual, problem);
 		
 		int q = gd.q;
-		List<Unit> energy_enemies = null;
+		List<Unit> mech_enemies = null;
 		if(!gd.enemies.isEmpty()){
 			for (Unit e : gd.enemies){
 			//get enemies with energy
 				if(e.getType().isMechanical()){
-					energy_enemies.add(e);
+					mech_enemies.add(e);
 				}
 			}
 		}
@@ -51,9 +51,9 @@ public class DoLockDown extends GPNode {
 		if (!gd.squads.isEmpty()) {
 			for (Unit unit : gd.squads) {
 				if ((unit.getType() == UnitType.Ghost) && (!unit.isAttacking())) {
-					Unit enemy1 = energy_enemies.get(0);
-					int distance = unit.getDistance(energy_enemies.get(0));
-					for (Unit enemy2 : energy_enemies){
+					Unit enemy1 = mech_enemies.get(0);
+					int distance = unit.getDistance(mech_enemies.get(0));
+					for (Unit enemy2 : mech_enemies){
 						//get nearest enemy
 						if (unit.getDistance(enemy2) < distance){
 							distance = unit.getDistance(enemy2);
