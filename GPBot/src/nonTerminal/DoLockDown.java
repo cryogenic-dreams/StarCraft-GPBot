@@ -61,10 +61,10 @@ public class DoLockDown extends GPNode {
 						}
 					}
 					
-					if(TechType.Defensive_Matrix.targetsPosition()){
+					if(TechType.Lockdown.targetsPosition()){
 						unit.useTech(TechType.Lockdown, enemy1.getPosition());
 					}
-					else if (TechType.Defensive_Matrix.targetsUnit()){
+					else if (TechType.Lockdown.targetsUnit()){
 						unit.useTech(TechType.Lockdown, enemy1);
 					}
 					else unit.useTech(TechType.Lockdown);
