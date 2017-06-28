@@ -42,7 +42,7 @@ public class DoIrradiate extends GPNode {
 		if(!gd.enemies.isEmpty()){
 			for (Unit e : gd.enemies){
 			//get enemies with energy
-				if(e.getEnergy() > 0){
+				if(e.getType().isOrganic()){
 					energy_enemies.add(e);
 				}
 			}
@@ -62,12 +62,12 @@ public class DoIrradiate extends GPNode {
 					}
 					
 					if(TechType.Defensive_Matrix.targetsPosition()){
-						unit.useTech(TechType.EMP_Shockwave, enemy1.getPosition());
+						unit.useTech(TechType.Irradiate, enemy1.getPosition());
 					}
 					else if (TechType.Defensive_Matrix.targetsUnit()){
-						unit.useTech(TechType.EMP_Shockwave, enemy1);
+						unit.useTech(TechType.Irradiate, enemy1);
 					}
-					else unit.useTech(TechType.EMP_Shockwave);
+					else unit.useTech(TechType.Irradiate);
 					q--;
 				}
 				if (q <= 0) {
