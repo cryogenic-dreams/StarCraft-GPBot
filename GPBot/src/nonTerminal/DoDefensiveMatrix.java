@@ -1,5 +1,8 @@
 ﻿package nonTerminal;
 
+import bwapi.TechType;
+import bwapi.Unit;
+import bwapi.UnitType;
 import data.GameData;
 import ec.EvolutionState;
 import ec.Problem;
@@ -7,7 +10,6 @@ import ec.gp.ADFStack;
 import ec.gp.GPData;
 import ec.gp.GPIndividual;
 import ec.gp.GPNode;
-import support.Tuple;
 
 public class DoDefensiveMatrix extends GPNode {
 
@@ -40,7 +42,7 @@ public class DoDefensiveMatrix extends GPNode {
 
 		if (!gd.squads.isEmpty()) {
 			for (Unit unit : gd.squads) {
-				if (((unit.getType() == UnitType.Science_Vessel) && (!unit.isAttacking()) && (!unit.isDefenseMatrixed())) {
+				if (((unit.getType() == UnitType.Terran_Science_Vessel) && (!unit.isAttacking()) && (!unit.isDefenseMatrixed()))) {
 					if(TechType.Defensive_Matrix.targetsPosition()){
 						unit.useTech(TechType.Defensive_Matrix, unit.getPosition());
 					}

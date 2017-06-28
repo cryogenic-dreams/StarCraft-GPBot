@@ -1,5 +1,7 @@
 ﻿package nonTerminal;
 
+import bwapi.TechType;
+import bwapi.Unit;
 import data.GameData;
 import ec.EvolutionState;
 import ec.Problem;
@@ -7,7 +9,6 @@ import ec.gp.ADFStack;
 import ec.gp.GPData;
 import ec.gp.GPIndividual;
 import ec.gp.GPNode;
-import support.Tuple;
 
 public class DoStimPack extends GPNode {
 
