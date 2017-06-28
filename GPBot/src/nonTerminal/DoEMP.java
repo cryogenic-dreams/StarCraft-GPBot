@@ -61,10 +61,10 @@ public class DoEMP extends GPNode {
 						}
 					}
 					
-					if(TechType.Defensive_Matrix.targetsPosition()){
+					if(TechType.EMP_Shockwave.targetsPosition()){
 						unit.useTech(TechType.EMP_Shockwave, enemy1.getPosition());
 					}
-					else if (TechType.Defensive_Matrix.targetsUnit()){
+					else if (TechType.EMP_Shockwave.targetsUnit()){
 						unit.useTech(TechType.EMP_Shockwave, enemy1);
 					}
 					else unit.useTech(TechType.EMP_Shockwave);
