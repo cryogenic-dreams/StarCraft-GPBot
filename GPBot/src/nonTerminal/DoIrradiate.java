@@ -61,10 +61,10 @@ public class DoIrradiate extends GPNode {
 						}
 					}
 					
-					if(TechType.Defensive_Matrix.targetsPosition()){
+					if(TechType.Irradiate.targetsPosition()){
 						unit.useTech(TechType.Irradiate, enemy1.getPosition());
 					}
-					else if (TechType.Defensive_Matrix.targetsUnit()){
+					else if (TechType.Irradiate.targetsUnit()){
 						unit.useTech(TechType.Irradiate, enemy1);
 					}
 					else unit.useTech(TechType.Irradiate);
