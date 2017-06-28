@@ -24,18 +24,20 @@ public class DoOpticalFlare extends GPNode {
 	}
 
 	public int expectedChildren() {
-		return 1;
+		return 2;
 	}
 
 		public void eval(final EvolutionState state, final int thread, final GPData input, final ADFStack stack,
 			final GPIndividual individual, final Problem problem) {
 
 		//this does:
-			//1 to 1 spell, casted from a medic to a single unit
+
 		GameData gd = ((GameData) (input));
 
-		children[0].eval(state, thread, input, stack, individual, problem);//enemy
-
+		children[0].eval(state, thread, input, stack, individual, problem);
+		children[1].eval(state, thread, input, stack, individual, problem);
+		
+		int q = gd.q;
 		if (!gd.squads.isEmpty()) {
 			for (Unit unit : gd.squads) {
 				if (unit.getType() == UnitType.Medic) {
@@ -56,6 +58,9 @@ public class DoOpticalFlare extends GPNode {
 						unit.useTech(TechType.Optical_Flare, enemy1);
 					}
 					else unit.useTech(TechType.Optical_Flare);
+					q--;
+				}
+				if (q <= 0) {
 					break;
 				}
 				
