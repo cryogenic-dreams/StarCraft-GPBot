@@ -42,7 +42,7 @@ gp.fs.1.name = f1
 gp.fs.2.name = f2
 
 #functionset2:
-gp.fs.1.size = 26
+gp.fs.2.size = 26
 gp.fs.2.func.0 = nonTerminal.Ini
 gp.fs.2.func.0.nc = nc2
 gp.fs.2.func.1 = nonTerminal.Hold
@@ -174,7 +174,7 @@ gp.fs.1.func.34.nc = nc0
 #what if a functionset includes another functionset?
 
 #functionset0:
-gp.fs.0.size = 82
+gp.fs.0.size = 83
 gp.fs.0.func.0 = terminals.InfWeapon
 gp.fs.0.func.0.nc = nc0
 gp.fs.0.func.1 = terminals.InfArmor
@@ -339,6 +339,8 @@ gp.fs.0.func.80 = nonTerminal.TechTree
 gp.fs.0.func.80.nc = nc1
 gp.fs.0.func.81 = terminals.Supply
 gp.fs.0.func.81.nc = nc0
+gp.fs.0.func.82 = terminals.Empty
+gp.fs.0.func.82.nc = nc0
 
 gp.problem.stack = ec.gp.ADFStack
 gp.adf-stack.context = ec.gp.ADFContext
