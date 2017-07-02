@@ -40,9 +40,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 		this.individualsQueue = individualsQueue;
 		hits = 0;
 		sum = 0;
-		this.workers = exe.getInput().workers;
-		this.squads = exe.getInput().squads;
-		this.buildings = exe.getInput().buildings;
 	}
 
 	@Override
@@ -99,7 +96,9 @@ public class Bot extends DefaultBWListener implements Runnable {
 	public void onStart() {
 		game = mirror.getGame();
 		self = game.self();
-
+		this.workers = exe.getInput().workers;
+		this.squads = exe.getInput().squads;
+		this.buildings = exe.getInput().buildings;
 		try {
 			exe = this.individualsQueue.take();
 		} catch (InterruptedException e) {
@@ -168,8 +167,8 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 				// build from build plan
 				executeBuildPlan();
-				exe.getInd().trees[1].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
-						exe.getInd(), exe.getStbot());
+			//	exe.getInd().trees[2].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
+			//			exe.getInd(), exe.getStbot());
 
 			}
 		} catch (Exception e) {
