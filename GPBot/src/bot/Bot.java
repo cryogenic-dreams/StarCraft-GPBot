@@ -89,6 +89,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		super.onUnitComplete(arg0);
 		if(arg0.getType() == UnitType.Terran_Supply_Depot) supply=false;
 		go_construct = false;
+		supply = false;
 		if (arg0.getType().isBuilding()) {
 			this.hits++;
 			
@@ -178,14 +179,18 @@ public class Bot extends DefaultBWListener implements Runnable {
 						go_construct = true;
 					}
 				}
-				if (self.supplyTotal() - self.supplyUsed() > 6)
-					trainUnit(UnitType.Terran_SCV, 1);
+				for (Unit com_center : buildings){
+					if(com_center.getType() == UniType.Terran_Command_Center) break;
+				}
+				if ((self.supplyTotal() - self.supplyUsed() > 6) && (com_center.isIdle()))
+					trainUnit(UnitType.Terran_SCV, 4);
 				else {
 					
 					if(!supply) {
 						supply = true;
 						buildBuilding(UnitType.Terran_Supply_Depot);
 					}
+					supply = false;
 				}
 				// build from build plan
 				
