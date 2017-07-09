@@ -34,9 +34,9 @@ public class GameData extends GPData {
 	public int s = 200; //erc
 	public int q; // yet another erc
 	public transient boolean condition;
-	public int at; //yet yet anothe erc
+	public int at; //yet yet another erc
 	public int x=0;
-	public int y=0;
+	public int y=0;//more erc
 	public int state=0;
 	public UnitType ut;
 	public List<Unit> enemies = new ArrayList<Unit>();

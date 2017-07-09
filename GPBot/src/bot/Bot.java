@@ -33,15 +33,15 @@ public class Bot extends DefaultBWListener implements Runnable {
 	private Mirror mirror = new Mirror();
 	private Game game;
 	private Player self;
-	int aux = 0;
-	private boolean supply = false;
-	
+	private int counter;// adds a little delay in the tree evaluation
+
 	public Bot(BlockingQueue<Tuple<Integer, Double>> fitnessQueue, BlockingQueue<ExeContext> individualsQueue) {
 		super();
 		this.fitnessQueue = fitnessQueue;
 		this.individualsQueue = individualsQueue;
 		hits = 0;
 		sum = 0;
+		counter = 0;
 	}
 
 	@Override
@@ -67,8 +67,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	@Override
-	public void onUnitDestroy(Unit arg0) {
-		// TODO Auto-generated method stub
+	public void onUnitDestroy(Unit arg0) {		
 		// eliminate the unit from its list
 		super.onUnitDestroy(arg0);
 	}
@@ -76,7 +75,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 	@Override
 	public void onUnitDiscover(Unit arg0) {
 		super.onUnitDiscover(arg0);
-		if(arg0.getType() == UnitType.Terran_Supply_Depot) supply=false;
 		if (arg0.getPlayer().isEnemy(game.self())) {
 			// found enemy, entering aggressive mode
 			exe.getInput().state = 1;
@@ -87,12 +85,10 @@ public class Bot extends DefaultBWListener implements Runnable {
 	@Override
 	public void onUnitComplete(Unit arg0) {
 		super.onUnitComplete(arg0);
-		if(arg0.getType() == UnitType.Terran_Supply_Depot) supply=false;
 		go_construct = false;
-		supply = false;
 		if (arg0.getType().isBuilding()) {
 			this.hits++;
-			
+
 		}
 		addList(arg0);
 	}
@@ -138,64 +134,15 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 	@Override
 	public void onFrame() {
+		// this used to be enormous
 		try {
 			if (exe != null) {
 
-				game.drawTextScreen(10, 10, "Playing as " + self.getName() + " - " + self.getRace());
-				for (Unit myUnit : self.getUnits()) {
-					// if it's a worker and it's idle, send it to the closest
-					// mineral patch
-					Unit closestMineral = null;
-					if (myUnit.getType().isRefinery()) {
-						closestMineral = myUnit;
-					}
-					if (myUnit.getType().isWorker() && myUnit.isIdle()) {
+				workYourAss();
 
-						// find the closest mineral
-						for (Unit neutralUnit : game.neutral().getUnits()) {
-							if (neutralUnit.getType().isMineralField()) {
-
-								if (closestMineral == null
-										|| myUnit.getDistance(neutralUnit) < myUnit.getDistance(closestMineral)) {
-									closestMineral = neutralUnit;
-								}
-
-							}
-						}
-
-						// if a mineral patch was found, send the worker to
-						// gather it
-						if (closestMineral != null) {
-							myUnit.gather(closestMineral, false);
-							// System.out.println("I'm collecting minerals and
-							// gas");
-						}
-					}
-
-				}
-				executeBuildPlan();
-				for(Unit unit : self.getUnits()){
-					if(unit.getRemainingBuildTime()>2){
-						go_construct = true;
-					}
-				}
-				for (Unit com_center : buildings){
-					if(com_center.getType() == UniType.Terran_Command_Center) break;
-				}
-				if ((self.supplyTotal() - self.supplyUsed() > 6) && (com_center.isIdle()))
-					trainUnit(UnitType.Terran_SCV, 4);
-				else {
-					
-					if(!supply) {
-						supply = true;
-						buildBuilding(UnitType.Terran_Supply_Depot);
-					}
-					supply = false;
-				}
-				// build from build plan
-				
-				exe.getInd().trees[2].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
-						exe.getInd(), exe.getStbot());
+				executeBuildPlan();// build from build plan mainly (macro)
+				executeMainLoopActions();//miscelaneous actions (miccro/macro)
+				executeSquadActions();//squad actions (micro)
 
 			}
 		} catch (Exception e) {
@@ -205,6 +152,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 	public void executeBuildPlan() {
 		// The ugly method to execute the buildplan stack
+		// gotta refactor it, it's ugly
 		try {
 
 			int sup = (int) exe.getInput().bp.peek().getY();
@@ -228,8 +176,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 						}
 					} else {
 						// squads
-						if ((self.minerals() >= (unit.mineralPrice() * 4))
-								&& (self.gas() >= (unit.gasPrice() * 4))) {
+						if ((self.minerals() >= (unit.mineralPrice() * 4)) && (self.gas() >= (unit.gasPrice() * 4))) {
 							go_construct = true;
 							trainUnit((UnitType) exe.getInput().bp.peek().getX(), (int) exe.getInput().bp.pop().getY());
 						}
@@ -280,7 +227,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public void gameSwitcher() {
-		// not yet used
+		// not yet used, but useful
 		if (game.isPaused())
 			game.resumeGame();
 		else
@@ -302,17 +249,17 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public void buildBuilding(UnitType building) {
-			for (Unit myUnit : workers) {
-				TilePosition tile = getBuildTile(myUnit, building, myUnit.getTilePosition());
-				if (tile != null) {
-					if ((myUnit.canBuild(building, tile)) & !(myUnit.isConstructing()) & !(myUnit.isGatheringGas())) {
-						myUnit.build(building, tile);
-						planToString();
-						break;
-					}
+		for (Unit myUnit : workers) {
+			TilePosition tile = getBuildTile(myUnit, building, myUnit.getTilePosition());
+			if (tile != null) {
+				if ((myUnit.canBuild(building, tile)) & !(myUnit.isConstructing()) & !(myUnit.isGatheringGas())) {
+					myUnit.build(building, tile);
+					planToString();
+					break;
 				}
-
 			}
+
+		}
 	}
 
 	public void upgrade(UpgradeType up) {
@@ -403,6 +350,48 @@ public class Bot extends DefaultBWListener implements Runnable {
 		if (ret == null)
 			game.printf("Unable to find suitable build position for " + buildingType.toString());
 		return ret;
+	}
+
+	public void executeMainLoopActions() {
+		if (counter > 15) {
+			exe.getInd().trees[1].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
+					exe.getInd(), exe.getStbot());
+			counter = 0;
+		}
+		counter++;
+	}
+
+	public void executeSquadActions() {
+		exe.getInd().trees[2].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
+				exe.getInd(), exe.getStbot());
+	}
+
+	public void workYourAss() {
+		//not going to be used in the future, probably
+		for (Unit myUnit : self.getUnits()) {
+			// if it's a worker and it's idle, send it to the closest mineral patch
+			Unit closestMineral = null;
+			if (myUnit.getType().isRefinery()) {
+				closestMineral = myUnit;
+			}
+			if (myUnit.getType().isWorker() && myUnit.isIdle()) {
+
+				// find the closest mineral
+				for (Unit neutralUnit : game.neutral().getUnits()) {
+					if (neutralUnit.getType().isMineralField()) {
+						if (closestMineral == null
+								|| myUnit.getDistance(neutralUnit) < myUnit.getDistance(closestMineral)) {
+							closestMineral = neutralUnit;
+						}
+
+					}
+				}
+				// if a mineral patch was found, send the worker to gather it
+				if (closestMineral != null) {
+					myUnit.gather(closestMineral, false);
+				}
+			}
+		}
 	}
 
 	public void planToString() {
