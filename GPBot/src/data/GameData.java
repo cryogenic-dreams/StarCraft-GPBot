@@ -28,9 +28,11 @@ public class GameData extends GPData {
 	public transient Game g; // return value
 	
 	public transient Stack<Tuple> bp = new Stack<Tuple>(); //here we'll save our building plan, it'll have a build and a supply number, just like our usual build plan
-	public List<Unit> workers = new ArrayList<Unit>();
-	public List<Unit> squads = new ArrayList<Unit>();
-	public List<Unit> buildings = new ArrayList<Unit>();
+	public transient List<Unit> workers = new ArrayList<Unit>();
+	public transient List<Unit> squads = new ArrayList<Unit>();
+	public transient List<Unit> buildings = new ArrayList<Unit>();
+	public transient List<Unit> enemies = new ArrayList<Unit>();
+	
 	public int s = 200; //erc
 	public int q; // yet another erc
 	public transient boolean condition;
@@ -38,8 +40,7 @@ public class GameData extends GPData {
 	public int x=0;
 	public int y=0;//more erc
 	public int state=0;
-	public UnitType ut;
-	public List<Unit> enemies = new ArrayList<Unit>();
+	public transient UnitType ut;
 	
 	public void copyTo(final GPData gpd) // copy my stuff to another GameData
 	{

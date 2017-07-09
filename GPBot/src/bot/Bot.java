@@ -130,7 +130,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 			this.buildings = exe.getInput().buildings;
 		} else {
 			System.err.println(
-					"===============================================================================\nexe nulo!!!\n===============================================================================");
+					"=================================\nexe nulo!!!\n================================");
 		}
 	}
 
@@ -143,7 +143,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 				workYourAss();
 
 				executeBuildPlan();// build from build plan mainly (macro)
-				executeMainLoopActions();//miscelaneous actions (miccro/macro)
+				executeMainLoopActions();//miscelaneous actions (miccro/macro) careful with this one as it might add units on each loop, delaying it can be a solution
 				executeSquadActions();//squad actions (micro)
 
 			}
@@ -315,7 +315,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 		int maxDist = 3;
 		int stopDist = 40;
 
-		// Refinery, Assimilator, Extractor
 		if (buildingType.isRefinery()) {
 			for (Unit n : game.neutral().getUnits()) {
 				if ((n.getType() == UnitType.Resource_Vespene_Geyser)
@@ -355,7 +354,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public void executeMainLoopActions() {
-		if (counter > 20) {
+		if (counter > 25) {
 			exe.getInd().trees[1].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
 					exe.getInd(), exe.getStbot());
 			counter = 0;
