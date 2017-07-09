@@ -34,6 +34,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	private Game game;
 	private Player self;
 	private int counter;// adds a little delay in the tree evaluation
+	private int counter2;
 
 	public Bot(BlockingQueue<Tuple<Integer, Double>> fitnessQueue, BlockingQueue<ExeContext> individualsQueue) {
 		super();
@@ -42,6 +43,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		hits = 0;
 		sum = 0;
 		counter = 0;
+		counter2 = 0;
 	}
 
 	@Override
@@ -353,7 +355,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public void executeMainLoopActions() {
-		if (counter > 15) {
+		if (counter > 20) {
 			exe.getInd().trees[1].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
 					exe.getInd(), exe.getStbot());
 			counter = 0;
@@ -362,8 +364,12 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public void executeSquadActions() {
-		exe.getInd().trees[2].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
-				exe.getInd(), exe.getStbot());
+		if (counter2 > 15) {
+			exe.getInd().trees[2].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
+					exe.getInd(), exe.getStbot());
+			counter2 = 0;
+		}
+		counter2++;
 	}
 
 	public void workYourAss() {
