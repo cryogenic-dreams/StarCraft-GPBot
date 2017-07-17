@@ -1,5 +1,9 @@
 package bot;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -13,6 +17,8 @@ import bwapi.Unit;
 import bwapi.UnitType;
 import bwapi.UpgradeType;
 import bwta.BWTA;
+import ec.gp.GPTree;
+import ec.util.Output;
 import support.ExeContext;
 import support.GimmeTheGame;
 import support.Tuple;
@@ -400,13 +406,29 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public void drawTree(GPTree tree){
-		tree.printTreeForHumans(exe.getState(), int log);//not sure how log works
+		try {
+		File f = new File("E:\\StarCraft-GPBot\\GPBot\\file.dot");
+		PrintStream pw = new PrintStream(f);
+		//int logPos = exe.getState().output.addLog(f, true);
+		//tree.printStyle = tree.PRINT_STYLE_DOT;
+		//tree.printTreeForHumans(exe.getState(), 0);
+		
+		pw.println(tree.child.makeGraphvizTree());
+		//exe.getState().output.removeLog(logPos);
+		//tree.printTree(exe.getState(), pw);//not sure how log works
+		pw.close();
 		Runtime rt = Runtime.getRuntime();
 		//open cmd and run graphviz
-		//rt.exec("cmd.exe /c cd \""+new_dir+"\" & start cmd.exe /k \"java -flag -flag -cp terminal-based-program.jar\"");
+		String new_dir = "C:\\Windows\\System32";
+		
+		rt.exec("dot -Tpng file.dot -o myDemo_dot.png");
 		//then open the image with an image viewer
 		//rt.exec("cmd.exe /c cd \""+new_dir+"\" & start cmd.exe /k \"java -flag -flag -cp terminal-based-program.jar\"");
-	}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
 	
 	public void planToString() {
 		Object o = exe.getInput().bp.peek().getX();

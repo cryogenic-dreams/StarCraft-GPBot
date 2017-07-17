@@ -31,6 +31,12 @@ pop.subpop.0.species.ind.tree.1.tc = tc1
 pop.subpop.0.species.ind.tree.2 = ec.gp.GPTree
 pop.subpop.0.species.ind.tree.2.tc = tc2
 
+#Define tree printing
+pop.subpop.0.species.ind.tree.0.print-style = dot
+pop.subpop.0.species.ind.tree.1.print-style = latex
+pop.subpop.0.species.ind.tree.2.print-style = latex
+
+
 # We have one function set, of class GPFunctionSet
 gp.fs.size = 3
 gp.fs.0 = ec.gp.GPFunctionSet
