@@ -124,7 +124,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 					exe.getInd(), exe.getStbot());
 			System.out.println("---The Build Plan size is AFTER: " + exe.getInput().bp.size());
 			sum = exe.getInput().bp.size();
-
+			drawTree(exe.getInd().trees[0]);
 			this.workers = exe.getInput().workers;
 			this.squads = exe.getInput().squads;
 			this.buildings = exe.getInput().buildings;
@@ -399,6 +399,15 @@ public class Bot extends DefaultBWListener implements Runnable {
 		}
 	}
 
+	public void drawTree(GPTree tree){
+		tree.printTreeForHumans(exe.getState(), int log);//not sure how log works
+		Runtime rt = Runtime.getRuntime();
+		//open cmd and run graphviz
+		//rt.exec("cmd.exe /c cd \""+new_dir+"\" & start cmd.exe /k \"java -flag -flag -cp terminal-based-program.jar\"");
+		//then open the image with an image viewer
+		//rt.exec("cmd.exe /c cd \""+new_dir+"\" & start cmd.exe /k \"java -flag -flag -cp terminal-based-program.jar\"");
+	}
+	
 	public void planToString() {
 		Object o = exe.getInput().bp.peek().getX();
 		int sup = (int) exe.getInput().bp.peek().getY();
