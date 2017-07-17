@@ -407,23 +407,19 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 	public void drawTree(GPTree tree){
 		try {
-		File f = new File("E:\\StarCraft-GPBot\\GPBot\\file.dot");
+		String fileName = "E:\\StarCraft-GPBot\\GPBot\\file.dot";
+		File f = new File(fileName);
 		PrintStream pw = new PrintStream(f);
-		//int logPos = exe.getState().output.addLog(f, true);
-		//tree.printStyle = tree.PRINT_STYLE_DOT;
-		//tree.printTreeForHumans(exe.getState(), 0);
-		
 		pw.println(tree.child.makeGraphvizTree());
-		//exe.getState().output.removeLog(logPos);
-		//tree.printTree(exe.getState(), pw);//not sure how log works
+
 		pw.close();
 		Runtime rt = Runtime.getRuntime();
 		//open cmd and run graphviz
-		String new_dir = "C:\\Windows\\System32";
 		
-		rt.exec("dot -Tpng file.dot -o myDemo_dot.png");
+		rt.exec("dot -Tpng "+fileName+" -o pic.png");
 		//then open the image with an image viewer
-		//rt.exec("cmd.exe /c cd \""+new_dir+"\" & start cmd.exe /k \"java -flag -flag -cp terminal-based-program.jar\"");
+		
+		rt.exec("C:\\Program Files\\Mozilla Firefox\\firefox.exe pic.png");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
