@@ -1,0 +1,12 @@
+perfect
+9999
+win
+1000
+building
+200
+research
+25
+squad training
+20
+kill
+30

@@ -21,6 +21,7 @@ import ec.gp.GPTree;
 import ec.util.Output;
 import support.ExeContext;
 import support.GimmeTheGame;
+import support.PointSystem;
 import support.Tuple;
 
 public class Bot extends DefaultBWListener implements Runnable {
@@ -41,6 +42,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	private Player self;
 	private int counter;// adds a little delay in the tree evaluation
 	private int counter2;
+	private PointSystem ps;
 
 	public Bot(BlockingQueue<Tuple<Integer, Double>> fitnessQueue, BlockingQueue<ExeContext> individualsQueue) {
 		super();
@@ -50,6 +52,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		sum = 0;
 		counter = 0;
 		counter2 = 0;
+		ps = new PointSystem();
 	}
 
 	@Override
@@ -75,9 +78,12 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	@Override
-	public void onUnitDestroy(Unit arg0) {		
+	public void onUnitDestroy(Unit arg0) {
 		// eliminate the unit from its list
 		super.onUnitDestroy(arg0);
+		if (arg0.getPlayer().isEnemy(game.self())) {
+			sum += this.ps.KILL_POINTS;
+		}
 	}
 
 	@Override
@@ -95,8 +101,10 @@ public class Bot extends DefaultBWListener implements Runnable {
 		super.onUnitComplete(arg0);
 		go_construct = false;
 		if (arg0.getType().isBuilding()) {
-			this.hits++;
-
+			sum += this.ps.BUILDING_POINTS;
+		}
+		else if (arg0.getType().isAddon()) {
+			sum += this.ps.BUILDING_POINTS;
 		}
 		addList(arg0);
 	}
@@ -135,8 +143,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 			this.squads = exe.getInput().squads;
 			this.buildings = exe.getInput().buildings;
 		} else {
-			System.err.println(
-					"=================================\nexe nulo!!!\n================================");
+			System.err.println("=================================\nexe nulo!!!\n================================");
 		}
 	}
 
@@ -149,8 +156,11 @@ public class Bot extends DefaultBWListener implements Runnable {
 				workYourAss();
 
 				executeBuildPlan();// build from build plan mainly (macro)
-				executeMainLoopActions();//miscelaneous actions (miccro/macro) careful with this one as it might add units on each loop, delaying it can be a solution
-				executeSquadActions();//squad actions (micro)
+				executeMainLoopActions();// miscelaneous actions (miccro/macro)
+											// careful with this one as it might
+											// add units on each loop, delaying
+											// it can be a solution
+				executeSquadActions();// squad actions (micro)
 
 			}
 		} catch (Exception e) {
@@ -227,6 +237,10 @@ public class Bot extends DefaultBWListener implements Runnable {
 		super.onEnd(arg0);
 		game.drawTextScreen(10, 25, "GG");
 		try {
+			// hits is the times it got done what we want
+			// sum will be the amount of points it got for doing certain actions
+			// like winning, killing or building
+			hits = (int) (sum / 10);
 			this.fitnessQueue.put(new Tuple<>(hits, sum));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -378,9 +392,10 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public void workYourAss() {
-		//not going to be used in the future, probably
+		// not going to be used in the future, probably
 		for (Unit myUnit : self.getUnits()) {
-			// if it's a worker and it's idle, send it to the closest mineral patch
+			// if it's a worker and it's idle, send it to the closest mineral
+			// patch
 			Unit closestMineral = null;
 			if (myUnit.getType().isRefinery()) {
 				closestMineral = myUnit;
@@ -405,27 +420,27 @@ public class Bot extends DefaultBWListener implements Runnable {
 		}
 	}
 
-	public void drawTree(GPTree tree){
+	public void drawTree(GPTree tree) {
 		try {
-		String fileName = "E:\\StarCraft-GPBot\\GPBot\\file.dot";
-		File f = new File(fileName);
-		PrintStream pw = new PrintStream(f);
-		pw.println(tree.child.makeGraphvizTree());
+			String fileName = "E:\\StarCraft-GPBot\\GPBot\\file.dot";
+			File f = new File(fileName);
+			PrintStream pw = new PrintStream(f);
+			pw.println(tree.child.makeGraphvizTree());
 
-		pw.close();
-		Runtime rt = Runtime.getRuntime();
-		//open cmd and run graphviz
-		
-		rt.exec("dot -Tpng "+fileName+" -o pic.png");
-		//then open the image with an image viewer
-		
-		rt.exec("C:\\Program Files\\Mozilla Firefox\\firefox.exe pic.png");
+			pw.close();
+			Runtime rt = Runtime.getRuntime();
+			// open cmd and run graphviz
+
+			rt.exec("dot -Tpng " + fileName + " -o pic.png");
+			// then open the image with an image viewer
+
+			rt.exec("C:\\Program Files\\Mozilla Firefox\\firefox.exe pic.png");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		}
-	
+	}
+
 	public void planToString() {
 		Object o = exe.getInput().bp.peek().getX();
 		int sup = (int) exe.getInput().bp.peek().getY();
