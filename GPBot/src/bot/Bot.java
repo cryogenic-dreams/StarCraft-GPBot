@@ -3,7 +3,6 @@ package bot;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -18,7 +17,6 @@ import bwapi.UnitType;
 import bwapi.UpgradeType;
 import bwta.BWTA;
 import ec.gp.GPTree;
-import ec.util.Output;
 import support.ExeContext;
 import support.GimmeTheGame;
 import support.PointSystem;
@@ -75,15 +73,14 @@ public class Bot extends DefaultBWListener implements Runnable {
 	public void onUnitCreate(Unit unit) {
 		super.onUnitCreate(unit);
 		// not used
+		go_construct = false;
 	}
 
 	@Override
 	public void onUnitDestroy(Unit arg0) {
 		// eliminate the unit from its list
 		super.onUnitDestroy(arg0);
-		if (arg0.getPlayer().isEnemy(game.self())) {
-			sum += this.ps.KILL_POINTS;
-		}
+
 	}
 
 	@Override
@@ -102,10 +99,10 @@ public class Bot extends DefaultBWListener implements Runnable {
 		go_construct = false;
 		if (arg0.getType().isBuilding()) {
 			sum += this.ps.BUILDING_POINTS;
-		}
-		else if (arg0.getType().isAddon()) {
+		} else if (arg0.getType().isAddon()) {
 			sum += this.ps.BUILDING_POINTS;
-		}
+		} else
+			sum += this.ps.TRAIN_POINTS;
 		addList(arg0);
 	}
 
@@ -236,11 +233,15 @@ public class Bot extends DefaultBWListener implements Runnable {
 	public void onEnd(boolean arg0) {
 		super.onEnd(arg0);
 		game.drawTextScreen(10, 25, "GG");
+		sum += self.killedUnitCount() * ps.KILL_POINTS;
+		if (self.isVictorious())
+			sum += ps.WIN_POINTS;
 		try {
 			// hits is the times it got done what we want
 			// sum will be the amount of points it got for doing certain actions
 			// like winning, killing or building
-			hits = (int) (sum / 10);
+			double diff = (sum / ps.PERFECT_POINTS);
+			if(diff > 0.7) hits++;
 			this.fitnessQueue.put(new Tuple<>(hits, sum));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -300,6 +301,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 			if (myUnit.canResearch(tech)) {
 				myUnit.research(tech);
 				planToString();
+				sum += this.ps.RESEARCH_POINTS;
 				break;
 			}
 		}
@@ -436,7 +438,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 			rt.exec("C:\\Program Files\\Mozilla Firefox\\firefox.exe pic.png");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
