@@ -376,7 +376,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public void executeMainLoopActions() {
-		if (counter > 25) {
+		if (counter > 100) {//executes this tree each 100 frames
 			exe.getInd().trees[1].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
 					exe.getInd(), exe.getStbot());
 			counter = 0;
@@ -385,7 +385,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public void executeSquadActions() {
-		if (counter2 > 15) {
+		if (counter2 > 50) {
 			exe.getInd().trees[2].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
 					exe.getInd(), exe.getStbot());
 			counter2 = 0;
