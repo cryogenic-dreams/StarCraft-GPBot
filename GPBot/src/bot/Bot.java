@@ -110,7 +110,8 @@ public class Bot extends DefaultBWListener implements Runnable {
 	public void onStart() {
 		game = mirror.getGame();
 		self = game.self();
-
+		hits = 0;
+		sum = 0;
 		try {
 			exe = this.individualsQueue.take();
 		} catch (InterruptedException e) {
@@ -134,7 +135,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 			exe.getInd().trees[0].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
 					exe.getInd(), exe.getStbot());
 			System.out.println("---The Build Plan size is AFTER: " + exe.getInput().bp.size());
-			sum = exe.getInput().bp.size();
 			drawTree(exe.getInd().trees[0]);
 			this.workers = exe.getInput().workers;
 			this.squads = exe.getInput().squads;

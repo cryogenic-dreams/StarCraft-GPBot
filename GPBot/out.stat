@@ -1,0 +1,66 @@
+
+Generation: 0
+Best Individual:
+Subpopulation 0:
+Evaluated: T
+Fitness: Standardized=21380.0 Adjusted=4.677049717038492E-5 Hits=1
+89 102 65 -99 116 -110 -110 74 29 4 -21 48 -85 64 -44 73 45 -52 -5 -6 -50 -10 -118 -119 -79
+Equivalent GP Individual:
+Tree 0:
+ (buildplan (buildings (nuclear_silo (covert_ops
+     (covert_ops_tech ocular_implants) (covert_ops_squads
+     (ghost quantity2)) (science_facility (science_facility_tech
+     emp_shockwave) (science_facility_squads (science_vessel
+     quantity1)) (starport (starport_squads (wraith
+     quantity5)) (factory (factory_squads (vulture
+     quantity2)) (barracks (barrack_squads (marine
+     quantity1)) supply87) supply101) supply176)
+     supply14) quantity1) supply157) (buildings
+     (science_facility (science_facility_tech
+         irradiate) (science_facility_squads (science_vessel
+         quantity9)) (starport (starport_squads (wraith
+         quantity0)) (factory (factory_squads (vulture
+         supply176)) (barracks (barrack_squads (marine
+         quantity0)) supply191) quantity5) supply17)
+         supply27) empty)) (basicbuildings supply_depot
+     empty))
+Tree 1:
+ (ifs (if (supply_at at94) (scv quantity1)
+     gather_gas) (ifs (if false (scv_explore (go_position
+     x194 quantity1)) empty) empty))
+Tree 2:
+ (ini unload (do_cloak quantity5))
+ERCs:     64 -> at94    65 -> supply27    -99 -> quantity2    -5 -> quantity1    4 -> quantity0    -6 -> quantity0    -10 -> supply191    -44 -> supply176    45 -> supply14    -110 -> x194    48 -> quantity2    -50 -> supply157    -21 -> supply87    -85 -> supply101    116 -> quantity9    -119 -> quantity5    89 -> supply17    29 -> quantity1
+
+Generation: 1
+Best Individual:
+Subpopulation 0:
+Evaluated: T
+Fitness: Standardized=21380.0 Adjusted=4.677049717038492E-5 Hits=1
+89 102 65 -99 116 -110 -110 74 29 4 -21 48 -85 64 -44 73 45 -52 -5 -6 -50 -10 -118 -119 -79
+Equivalent GP Individual:
+Tree 0:
+ (buildplan (buildings (nuclear_silo (covert_ops
+     (covert_ops_tech ocular_implants) (covert_ops_squads
+     (ghost quantity2)) (science_facility (science_facility_tech
+     emp_shockwave) (science_facility_squads (science_vessel
+     quantity1)) (starport (starport_squads (wraith
+     quantity5)) (factory (factory_squads (vulture
+     quantity2)) (barracks (barrack_squads (marine
+     quantity1)) supply87) supply101) supply176)
+     supply14) quantity1) supply157) (buildings
+     (science_facility (science_facility_tech
+         irradiate) (science_facility_squads (science_vessel
+         quantity9)) (starport (starport_squads (wraith
+         quantity0)) (factory (factory_squads (vulture
+         supply176)) (barracks (barrack_squads (marine
+         quantity0)) supply191) quantity5) supply17)
+         supply27) empty)) (basicbuildings supply_depot
+     empty))
+Tree 1:
+ (ifs (if (supply_at at94) (scv quantity1)
+     gather_gas) (ifs (if false (scv_explore (go_position
+     x194 quantity1)) empty) empty))
+Tree 2:
+ (ini unload (do_cloak quantity5))
+ERCs:     64 -> at94    65 -> supply27    -99 -> quantity2    -5 -> quantity1    4 -> quantity0    -6 -> quantity0    -10 -> supply191    -44 -> supply176    45 -> supply14    -110 -> x194    48 -> quantity2    -50 -> supply157    -21 -> supply87    -85 -> supply101    116 -> quantity9    -119 -> quantity5    89 -> supply17    29 -> quantity1
