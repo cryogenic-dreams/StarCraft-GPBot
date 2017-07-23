@@ -1,1 +1,1 @@
-	PointSystem [my_points=12050, WINNER=false]	PointSystem [my_points=12050, WINNER=false]	PointSystem [my_points=12500, WINNER=false]	PointSystem [my_points=11100, WINNER=false]		
+	PointSystem [my_points=12050, WINNER=false]	PointSystem [my_points=12050, WINNER=false]	PointSystem [my_points=12500, WINNER=false]	PointSystem [my_points=11100, WINNER=false]		PointSystem [my_points=11850, WINNER=false]	PointSystem [my_points=14950, WINNER=false]	PointSystem [my_points=14000, WINNER=false]	

@@ -1,9 +1,9 @@
 perfect
 99999
 win
-1000
+10000
 building
-100
+60
 research
 25
 squad training
