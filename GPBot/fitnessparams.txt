@@ -1,5 +1,5 @@
 perfect
-9999
+99999
 win
 1000
 building
