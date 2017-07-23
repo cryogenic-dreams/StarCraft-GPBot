@@ -98,11 +98,11 @@ public class Bot extends DefaultBWListener implements Runnable {
 		super.onUnitComplete(arg0);
 		go_construct = false;
 		if (arg0.getType().isBuilding()) {
-			sum += this.ps.BUILDING_POINTS;
+			ps.inc_points(1,0);
 		} else if (arg0.getType().isAddon()) {
-			sum += this.ps.BUILDING_POINTS;
+			ps.inc_points(1,0);
 		} else
-			sum += this.ps.TRAIN_POINTS;
+			ps.inc_points(4,0);
 		addList(arg0);
 	}
 
@@ -112,6 +112,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		self = game.self();
 		hits = 0;
 		sum = 0;
+		ps.reset();
 		try {
 			exe = this.individualsQueue.take();
 		} catch (InterruptedException e) {
@@ -233,15 +234,18 @@ public class Bot extends DefaultBWListener implements Runnable {
 	public void onEnd(boolean arg0) {
 		super.onEnd(arg0);
 		game.drawTextScreen(10, 25, "GG");
-		sum += self.killedUnitCount() * ps.KILL_POINTS;
+		
+		ps.inc_points(0, self.killedUnitCount());
 		if (self.isVictorious())
-			sum += ps.WIN_POINTS;
+			ps.inc_points(2,0);
 		try {
 			// hits is the times it got done what we want
 			// sum will be the amount of points it got for doing certain actions
 			// like winning, killing or building
+			sum = ps.getMy_points();
 			double diff = (sum / ps.PERFECT_POINTS);
 			if(diff > 0.7) hits++;
+			ps.writeResults();
 			this.fitnessQueue.put(new Tuple<>(hits, sum));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -301,7 +305,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 			if (myUnit.canResearch(tech)) {
 				myUnit.research(tech);
 				planToString();
-				sum += this.ps.RESEARCH_POINTS;
+				ps.inc_points(3,0);
 				break;
 			}
 		}
