@@ -97,13 +97,8 @@ public class Bot extends DefaultBWListener implements Runnable {
 	public void onUnitComplete(Unit arg0) {
 		super.onUnitComplete(arg0);
 		go_construct = false;
-		if (arg0.getType().isBuilding()) {
-			ps.inc_points(1,0);
-		} else if (arg0.getType().isAddon()) {
-			ps.inc_points(1,0);
-		} else
-			ps.inc_points(4,0);
-		addList(arg0);
+		//if ((arg0.getType().isBuilding()) && (arg0.getPlayer().equals(self))) 
+			addList(arg0);
 	}
 
 	@Override
@@ -113,6 +108,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		hits = 0;
 		sum = 0;
 		ps.reset();
+		go_construct = false;
 		try {
 			exe = this.individualsQueue.take();
 		} catch (InterruptedException e) {
@@ -141,7 +137,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 			this.squads = exe.getInput().squads;
 			this.buildings = exe.getInput().buildings;
 		} else {
-			System.err.println("=================================\nexe nulo!!!\n================================");
+			System.err.println("nexe nulo!!!");
 		}
 	}
 
@@ -174,9 +170,9 @@ public class Bot extends DefaultBWListener implements Runnable {
 			int sup = (int) exe.getInput().bp.peek().getY();
 			if (exe.getInput().bp.peek().getX().getClass() == UnitType.class) {
 				UnitType unit = (UnitType) exe.getInput().bp.peek().getX();
-				if ((self.minerals() >= (unit.mineralPrice() + 200)) && (self.gas() >= (unit.gasPrice() + 100))) {
-					go_construct = false;
-				}
+				//if ((self.minerals() >= (unit.mineralPrice() + 200)) && (self.gas() >= (unit.gasPrice() + 100))) {
+				//	go_construct = false;
+				//}
 				if (!go_construct) {
 					if (unit.isAddon() || unit.isBuilding()) {
 						// buildings
@@ -187,6 +183,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 								go_construct = true;
 								attachBuilding((UnitType) exe.getInput().bp.pop().getX());
 							} else if (unit.isBuilding()) {
+								go_construct = true;
 								buildBuilding((UnitType) exe.getInput().bp.pop().getX());
 							}
 						}
@@ -203,9 +200,9 @@ public class Bot extends DefaultBWListener implements Runnable {
 			else if (exe.getInput().bp.peek().getX().getClass() == TechType.class) {
 				// research tech
 				TechType tech = (TechType) exe.getInput().bp.peek().getX();
-				if ((self.minerals() >= (tech.mineralPrice() + 200)) && (self.gas() >= (tech.gasPrice() + 100))) {
-					go_construct = false;
-				}
+				//if ((self.minerals() >= (tech.mineralPrice() + 200)) && (self.gas() >= (tech.gasPrice() + 100))) {
+				//	go_construct = false;
+				//}
 				if (!go_construct) {
 					if ((self.minerals() >= (tech.mineralPrice())) && (self.gas() >= (tech.gasPrice()))) {
 						investigateTech((TechType) exe.getInput().bp.pop().getX());
@@ -214,9 +211,9 @@ public class Bot extends DefaultBWListener implements Runnable {
 			} else if (exe.getInput().bp.peek().getX().getClass() == UpgradeType.class) {
 				// upgrades
 				UpgradeType up = (UpgradeType) exe.getInput().bp.peek().getX();
-				if ((self.minerals() >= (up.mineralPrice() + 200)) && (self.gas() >= (up.gasPrice() + 100))) {
-					go_construct = false;
-				}
+				//if ((self.minerals() >= (up.mineralPrice() + 200)) && (self.gas() >= (up.gasPrice() + 100))) {
+				//	go_construct = false;
+				//}
 				if (!go_construct) {
 					if ((self.minerals() >= (up.mineralPrice())) && (self.gas() >= (up.gasPrice()))) {
 						upgrade((UpgradeType) exe.getInput().bp.pop().getX());
@@ -224,7 +221,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 				}
 			} else {
 				// do nothing (yet)
-				System.out.println("NOPE, NOTHING------------------------");
 			}
 		} catch (Exception e) {
 		}
@@ -282,6 +278,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 				if ((myUnit.canBuild(building, tile)) & !(myUnit.isConstructing()) & !(myUnit.isGatheringGas())) {
 					myUnit.build(building, tile);
 					planToString();
+					ps.inc_points(1,0);
 					break;
 				}
 			}
@@ -294,6 +291,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 			if (myUnit.canUpgrade(up)) {
 				myUnit.upgrade(up);
 				planToString();
+				ps.inc_points(1,0);
 				break;
 			}
 		}
@@ -324,12 +322,14 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public void trainUnit(UnitType unit, int number) {
+		int aux_num = number;
 		for (Unit myUnit : buildings) {
 			if (myUnit.canTrain(unit)) {
 				while (number > 0) {
 					myUnit.train(unit);
 					number--;
 				}
+				ps.inc_points(4,aux_num);
 				planToString();
 				break;
 			}
@@ -438,9 +438,11 @@ public class Bot extends DefaultBWListener implements Runnable {
 			// open cmd and run graphviz
 
 			rt.exec("dot -Tpng " + fileName + " -o pic.png");
+			
 			// then open the image with an image viewer
 
 			rt.exec("C:\\Program Files\\Mozilla Firefox\\firefox.exe pic.png");
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
