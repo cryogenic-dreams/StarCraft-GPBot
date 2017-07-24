@@ -8,3 +8,4 @@ ecj
 *.dll
 *.log
 results.txt
+GPBot/results.txt
