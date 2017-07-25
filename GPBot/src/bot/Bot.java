@@ -162,6 +162,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void executeBuildPlan() {
 		// The ugly method to execute the buildplan stack
 		// gotta refactor it, it's ugly
@@ -189,10 +190,11 @@ public class Bot extends DefaultBWListener implements Runnable {
 						}
 					} else {
 						// squads
-						if ((self.minerals() >= (unit.mineralPrice() * 4)) && (self.gas() >= (unit.gasPrice() * 4))) {
-							go_construct = true;
-							trainUnit((UnitType) exe.getInput().bp.peek().getX(), (int) exe.getInput().bp.pop().getY());
-						}
+							//go_construct = true;
+							
+							int remain = trainUnit((UnitType) exe.getInput().bp.peek().getX(), (int) exe.getInput().bp.peek().getY());
+							exe.getInput().bp.peek().setY(remain);
+							if((int) exe.getInput().bp.peek().getY()<=0) exe.getInput().bp.pop();
 					}
 				}
 			}
@@ -277,7 +279,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		for (Unit myUnit : workers) {
 			TilePosition tile = getBuildTile(myUnit, building, myUnit.getTilePosition());
 			if (tile != null) {
-				if ((myUnit.canBuild(building, tile)) & !(myUnit.isConstructing()) & !(myUnit.isGatheringGas())) {
+				if ((myUnit.canBuild(building, tile)) & !(myUnit.isConstructing()) & !(myUnit.isGatheringGas()) & !(myUnit.isMoving())) {
 					myUnit.build(building, tile);
 					planToString();
 					ps.inc_points(1,0);
@@ -323,20 +325,22 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 	}
 
-	public void trainUnit(UnitType unit, int number) {
+	public int trainUnit(UnitType unit, int number) {
 		int aux_num = number;
-		do{
+		
 			for (Unit myUnit : buildings) {
 				if (myUnit.canTrain(unit)) {
-					while (myUnit.getTrainingQueue().size() < 4 && number>0) {//i have to do this so the building can train more than 4 units
-						myUnit.train(unit);
-						number--;
+					while (myUnit.getTrainingQueue().size() < 5 && number > 0) { //i have to do this so the building can train more than 4 units
+						if(((self.minerals() >= unit.mineralPrice()) && (self.gas() >= unit.gasPrice()))){
+							myUnit.train(unit);
+							number--;
+						}
 					}			 
 				}
 			}
-		}while(number>0);
 		ps.inc_points(4,aux_num);
 		planToString();
+		return number;
 	}
 
 	public TilePosition getBuildTile(Unit builder, UnitType buildingType, TilePosition aroundTile) {
