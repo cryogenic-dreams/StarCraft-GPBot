@@ -29,6 +29,7 @@
 <control_tower_squads> ::= (control_tower_squads <valkyrie>) | (control_tower_squads <dropship>)
 <covert_ops_squads> ::= (covert_ops_squads <ghost>)
 <physics_lab_squads> ::= (physics_lab_squads <battlecruiser>)
+<scv> ::= (scv <quantity>)
 <marine> ::= (marine <quantity>)
 <vulture> ::= (vulture <quantity>)
 <medic> ::= (medic <quantity>)

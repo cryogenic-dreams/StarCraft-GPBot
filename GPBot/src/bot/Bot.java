@@ -238,9 +238,11 @@ public class Bot extends DefaultBWListener implements Runnable {
 			// hits is the times it got done what we want
 			// sum will be the amount of points it got for doing certain actions
 			// like winning, killing or building
-			sum = ps.getMy_points();
-			double diff = (sum / ps.PERFECT_POINTS);
-			if(diff > 0.7) hits++;
+			
+			//double diff = (sum / ps.PERFECT_POINTS);
+			int result = Math.abs(ps.PERFECT_POINTS - ps.getMy_points());
+			sum=result;
+			if(ps.win) hits++;
 			ps.writeResults();
 			this.fitnessQueue.put(new Tuple<>(hits, sum));
 		} catch (InterruptedException e) {

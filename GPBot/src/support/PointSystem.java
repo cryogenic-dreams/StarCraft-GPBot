@@ -14,7 +14,7 @@ public class PointSystem {
 	private int TRAIN_POINTS;// 4
 	public int PERFECT_POINTS;
 	private int my_points;
-	private boolean win;
+	public boolean win;
 	private String FILENAME = "fitnessparams.txt";
 	private String FILENAME2 = "results.txt";
 	
