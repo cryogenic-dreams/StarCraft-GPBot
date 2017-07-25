@@ -40,6 +40,8 @@ public class Bot extends DefaultBWListener implements Runnable {
 	private Player self;
 	private int counter;// adds a little delay in the tree evaluation
 	private int counter2;
+	private int counter3;
+
 	private PointSystem ps;
 
 	public Bot(BlockingQueue<Tuple<Integer, Double>> fitnessQueue, BlockingQueue<ExeContext> individualsQueue) {
@@ -50,6 +52,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		sum = 0;
 		counter = 0;
 		counter2 = 0;
+		counter3 = 0;
 		ps = new PointSystem();
 	}
 
@@ -109,6 +112,9 @@ public class Bot extends DefaultBWListener implements Runnable {
 		sum = 0;
 		ps.reset();
 		go_construct = false;
+		counter = 0;
+		counter2 = 0;
+		counter3 = 0;
 		try {
 			exe = this.individualsQueue.take();
 		} catch (InterruptedException e) {
@@ -162,8 +168,16 @@ public class Bot extends DefaultBWListener implements Runnable {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public void executeBuildPlan() {
+		if (counter3 > 100) {
+			buildPlan();
+			counter3 = 0;
+		}
+		counter3++;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void buildPlan() {
 		// The ugly method to execute the buildplan stack
 		// gotta refactor it, it's ugly
 		try {
@@ -326,7 +340,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public int trainUnit(UnitType unit, int number) {
-		int aux_num = number;
 		
 			for (Unit myUnit : buildings) {
 				if (myUnit.canTrain(unit)) {
@@ -334,11 +347,12 @@ public class Bot extends DefaultBWListener implements Runnable {
 						if(((self.minerals() >= unit.mineralPrice()) && (self.gas() >= unit.gasPrice()))){
 							myUnit.train(unit);
 							number--;
-						}
+							ps.inc_points(4,1);
+						} else return number;
 					}			 
 				}
 			}
-		ps.inc_points(4,aux_num);
+		
 		planToString();
 		return number;
 	}

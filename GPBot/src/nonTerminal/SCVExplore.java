@@ -30,9 +30,8 @@ public class SCVExplore extends GPNode {
 	public void eval(final EvolutionState state, final int thread, final GPData input, final ADFStack stack,
 			final GPIndividual individual, final Problem problem) {
 		GameData gd = (GameData) input;
-		for (Unit myUnit : gd.workers) {
-			myUnit.move(new Position(gd.x, gd.y));
-			break;
-		}
+		
+		gd.workers.get(2).move(new Position(gd.x, gd.y));
+	
 	}
 }
