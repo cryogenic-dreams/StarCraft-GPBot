@@ -21,6 +21,7 @@ import support.ExeContext;
 import support.GimmeTheGame;
 import support.PointSystem;
 import support.Tuple;
+import support.UnitTuple;
 
 public class Bot extends DefaultBWListener implements Runnable {
 
@@ -280,7 +281,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public void addList(Unit newUnit) {
-		if ((newUnit.getType().isBuilding()) || (newUnit.getType().isBuilding())) {
+		if ((newUnit.getType().isBuilding()) || (newUnit.getType().isAddon())) {
 			buildings.add(newUnit);
 		} else if (newUnit.getType().isWorker()) {
 			workers.add(newUnit);

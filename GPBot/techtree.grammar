@@ -3,7 +3,7 @@
 <basicbuildings> ::= (basicbuildings <basicbuilding> <empty>) | (basicbuildings <basicbuilding> <basicbuildings>)
 <basicbuilding> ::= (supply_depot) | (refinery) | (command_center) | <scv>
 <buildings> ::= (buildings <building> <empty>) | (buildings <building> <buildings>)
-<building> ::= <scv> | <barracks> | <engineering_bay> | <factory> | <bunker> | <academy> | <missile_turret> | <starport> | <armory> | <machine_shop> | <comsat_station> | <science_facility> | <control_tower> | <physics_lab> | <covert_ops> | <nuclear_silo>
+<building> ::= <scv> | (supply_depot) | (refinery) | <barracks> | <engineering_bay> | <factory> | <bunker> | <academy> | <missile_turret> | <starport> | <armory> | <machine_shop> | <comsat_station> | <science_facility> | <control_tower> | <physics_lab> | <covert_ops> | <nuclear_silo>
 <barracks> ::= (barracks <barrack_squads> <supply>)
 <engineering_bay> ::= (engineering_bay <e_bay_tech> <supply>)
 <factory> ::= (factory <factory_squads> <barracks> <supply>)
