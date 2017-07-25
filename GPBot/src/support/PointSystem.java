@@ -68,7 +68,7 @@ public class PointSystem {
 		this.my_points = my_points;
 	}
 
-	public void inc_points(int choice, int kills) {
+	public void inc_points(int choice, int num) {
 		switch (choice) {
 		// private int KILL_POINTS; --- 0
 		// private int BUILDING_POINTS; --- 1
@@ -77,7 +77,7 @@ public class PointSystem {
 		// private int TRAIN_POINTS; --- 4
 
 		case 0:
-			my_points += KILL_POINTS*kills;
+			my_points += KILL_POINTS*num;
 			break;
 		case 1:
 			my_points += BUILDING_POINTS;
@@ -90,7 +90,7 @@ public class PointSystem {
 			my_points += RESEARCH_POINTS;
 			break;
 		case 4:
-			my_points += TRAIN_POINTS;
+			my_points += TRAIN_POINTS*num;
 			break;
 		}
 	}

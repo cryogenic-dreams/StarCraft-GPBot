@@ -325,17 +325,18 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 	public void trainUnit(UnitType unit, int number) {
 		int aux_num = number;
-		for (Unit myUnit : buildings) {
-			if (myUnit.canTrain(unit)) {
-				while (number > 0) {
-					myUnit.train(unit);
-					number--;
+		do{
+			for (Unit myUnit : buildings) {
+				if (myUnit.canTrain(unit)) {
+					while (myUnit.getTrainingQueue().size() < 4 && number>0) {//i have to do this so the building can train more than 4 units
+						myUnit.train(unit);
+						number--;
+					}			 
 				}
-				ps.inc_points(4,aux_num);
-				planToString();
-				break;
 			}
-		}
+		}while(number>0);
+		ps.inc_points(4,aux_num);
+		planToString();
 	}
 
 	public TilePosition getBuildTile(Unit builder, UnitType buildingType, TilePosition aroundTile) {

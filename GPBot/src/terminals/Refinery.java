@@ -1,6 +1,5 @@
 ﻿package terminals;
 
-import bwapi.Unit;
 import bwapi.UnitType;
 import data.GameData;
 import ec.EvolutionState;
@@ -15,14 +14,13 @@ public class Refinery extends GPNode {
 
 	private static final long serialVersionUID = 1;
 
-
 	public String toString() {
 		return "refinery";// This is for the visual representation
 	}
 
 	@Override
 	public String name() {
-		return "refinery";//this is for the magic, aka the grammar
+		return "refinery";// this is for the magic, aka the grammar
 	}
 
 	public int expectedChildren() {
@@ -33,14 +31,7 @@ public class Refinery extends GPNode {
 			final GPIndividual individual, final Problem problem) {
 
 		GameData rd = ((GameData) (input));
-		boolean ref = false;
-		for (Unit build : rd.buildings){
-			if (build.getType() == UnitType.Terran_Refinery){
-				ref = true;
-			}
-		}
-		if (!ref){
-			rd.bp.push(new UnitTuple(UnitType.Terran_Refinery, 0)); // Push of yourself and your last node, which is the supply or the quantity
-		System.out.println("refinery");}
-    }
+
+		rd.bp.push(new UnitTuple(UnitType.Terran_Refinery, 0));
+	}
 }
