@@ -1,7 +1,6 @@
 ﻿package nonTerminal;
 
 import bwapi.Position;
-import bwapi.Unit;
 import data.GameData;
 import ec.EvolutionState;
 import ec.Problem;

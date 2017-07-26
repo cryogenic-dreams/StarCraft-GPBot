@@ -31,7 +31,8 @@ public class Refinery extends GPNode {
 			final GPIndividual individual, final Problem problem) {
 
 		GameData rd = ((GameData) (input));
-
+	
 		rd.bp.push(new UnitTuple(UnitType.Terran_Refinery, 0));
+		System.out.println(UnitType.Terran_Refinery);
 	}
 }

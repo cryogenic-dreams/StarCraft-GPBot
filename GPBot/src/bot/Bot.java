@@ -21,7 +21,6 @@ import support.ExeContext;
 import support.GimmeTheGame;
 import support.PointSystem;
 import support.Tuple;
-import support.UnitTuple;
 
 public class Bot extends DefaultBWListener implements Runnable {
 
@@ -42,6 +41,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	private int counter;// adds a little delay in the tree evaluation
 	private int counter2;
 	private int counter3;
+	private boolean ref_exists = false;
 
 	private PointSystem ps;
 
@@ -55,6 +55,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		counter2 = 0;
 		counter3 = 0;
 		ps = new PointSystem();
+		ref_exists = false;
 	}
 
 	@Override
@@ -92,6 +93,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		super.onUnitDiscover(arg0);
 		if (arg0.getPlayer().isEnemy(game.self())) {
 			// found enemy, entering aggressive mode
+			game.printf("Found ya!");
 			exe.getInput().state = 1;
 			// enemies.add(arg0);
 		}
@@ -101,8 +103,8 @@ public class Bot extends DefaultBWListener implements Runnable {
 	public void onUnitComplete(Unit arg0) {
 		super.onUnitComplete(arg0);
 		go_construct = false;
-		//if ((arg0.getType().isBuilding()) && (arg0.getPlayer().equals(self))) 
-			addList(arg0);
+		// if ((arg0.getType().isBuilding()) && (arg0.getPlayer().equals(self)))
+		addList(arg0);
 	}
 
 	@Override
@@ -116,6 +118,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		counter = 0;
 		counter2 = 0;
 		counter3 = 0;
+		ref_exists = false;
 		try {
 			exe = this.individualsQueue.take();
 		} catch (InterruptedException e) {
@@ -157,7 +160,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 				workYourAss();
 
 				executeBuildPlan();// build from build plan mainly (macro)
-				executeMainLoopActions();// miscelaneous actions (miccro/macro)
+				executeMainLoopActions();// miscelaneous actions (micro)
 											// careful with this one as it might
 											// add units on each loop, delaying
 											// it can be a solution
@@ -171,12 +174,13 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 	public void executeBuildPlan() {
 		if (counter3 > 100) {
+			go_construct = false;
 			buildPlan();
 			counter3 = 0;
 		}
 		counter3++;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void buildPlan() {
 		// The ugly method to execute the buildplan stack
@@ -186,9 +190,10 @@ public class Bot extends DefaultBWListener implements Runnable {
 			int sup = (int) exe.getInput().bp.peek().getY();
 			if (exe.getInput().bp.peek().getX().getClass() == UnitType.class) {
 				UnitType unit = (UnitType) exe.getInput().bp.peek().getX();
-				//if ((self.minerals() >= (unit.mineralPrice() + 200)) && (self.gas() >= (unit.gasPrice() + 100))) {
-				//	go_construct = false;
-				//}
+				// if ((self.minerals() >= (unit.mineralPrice() + 200)) &&
+				// (self.gas() >= (unit.gasPrice() + 100))) {
+				// go_construct = false;
+				// }
 				if (!go_construct) {
 					if (unit.isAddon() || unit.isBuilding()) {
 						// buildings
@@ -205,11 +210,12 @@ public class Bot extends DefaultBWListener implements Runnable {
 						}
 					} else {
 						// squads
-							//go_construct = true;
-							
-							int remain = trainUnit((UnitType) exe.getInput().bp.peek().getX(), (int) exe.getInput().bp.peek().getY());
-							exe.getInput().bp.peek().setY(remain);
-							if((int) exe.getInput().bp.peek().getY()<=0) exe.getInput().bp.pop();
+
+						int remain = trainUnit((UnitType) exe.getInput().bp.peek().getX(),
+								(int) exe.getInput().bp.peek().getY());
+						exe.getInput().bp.peek().setY(remain);
+						if ((int) exe.getInput().bp.peek().getY() <= 0)
+							exe.getInput().bp.pop();
 					}
 				}
 			}
@@ -217,9 +223,10 @@ public class Bot extends DefaultBWListener implements Runnable {
 			else if (exe.getInput().bp.peek().getX().getClass() == TechType.class) {
 				// research tech
 				TechType tech = (TechType) exe.getInput().bp.peek().getX();
-				//if ((self.minerals() >= (tech.mineralPrice() + 200)) && (self.gas() >= (tech.gasPrice() + 100))) {
-				//	go_construct = false;
-				//}
+				// if ((self.minerals() >= (tech.mineralPrice() + 200)) &&
+				// (self.gas() >= (tech.gasPrice() + 100))) {
+				// go_construct = false;
+				// }
 				if (!go_construct) {
 					if ((self.minerals() >= (tech.mineralPrice())) && (self.gas() >= (tech.gasPrice()))) {
 						investigateTech((TechType) exe.getInput().bp.pop().getX());
@@ -228,9 +235,10 @@ public class Bot extends DefaultBWListener implements Runnable {
 			} else if (exe.getInput().bp.peek().getX().getClass() == UpgradeType.class) {
 				// upgrades
 				UpgradeType up = (UpgradeType) exe.getInput().bp.peek().getX();
-				//if ((self.minerals() >= (up.mineralPrice() + 200)) && (self.gas() >= (up.gasPrice() + 100))) {
-				//	go_construct = false;
-				//}
+				// if ((self.minerals() >= (up.mineralPrice() + 200)) &&
+				// (self.gas() >= (up.gasPrice() + 100))) {
+				// go_construct = false;
+				// }
 				if (!go_construct) {
 					if ((self.minerals() >= (up.mineralPrice())) && (self.gas() >= (up.gasPrice()))) {
 						upgrade((UpgradeType) exe.getInput().bp.pop().getX());
@@ -246,20 +254,21 @@ public class Bot extends DefaultBWListener implements Runnable {
 	@Override
 	public void onEnd(boolean arg0) {
 		super.onEnd(arg0);
-		game.drawTextScreen(10, 25, "GG");
-		
+		game.printf("GG");
+
 		ps.inc_points(0, self.killedUnitCount());
 		if (self.isVictorious())
-			ps.inc_points(2,0);
+			ps.inc_points(2, 0);
 		try {
 			// hits is the times it got done what we want
 			// sum will be the amount of points it got for doing certain actions
 			// like winning, killing or building
-			
-			//double diff = (sum / ps.PERFECT_POINTS);
-			int result = Math.abs(ps.PERFECT_POINTS - ps.getMy_points());
-			sum=result;
-			if(ps.win) hits++;
+
+			// double diff = (sum / ps.PERFECT_POINTS);
+			int result = Math.max(ps.PERFECT_POINTS - ps.getMy_points(), 0);
+			sum = result;
+			if (ps.win)
+				hits++;
 			ps.writeResults();
 			this.fitnessQueue.put(new Tuple<>(hits, sum));
 		} catch (InterruptedException e) {
@@ -291,18 +300,23 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public void buildBuilding(UnitType building) {
-		for (Unit myUnit : workers) {
-			TilePosition tile = getBuildTile(myUnit, building, myUnit.getTilePosition());
-			if (tile != null) {
-				if ((myUnit.canBuild(building, tile)) & !(myUnit.isConstructing()) & !(myUnit.isGatheringGas()) & !(myUnit.isMoving())) {
-					myUnit.build(building, tile);
-					planToString();
-					ps.inc_points(1,0);
-					break;
-				}
-			}
-
+		int i = 0;
+		while ((workers.get(i).isGatheringGas() || workers.get(i).isConstructing()) && (i < workers.size()))
+			i++;
+		TilePosition tile = null;
+		int tries=0;
+		while ((tile == null) && (tries<10)) {
+			tile = getBuildTile(workers.get(i), building, workers.get(i).getTilePosition());
+			tries++;
 		}
+		if (tile != null) {
+			if ((workers.get(i).canBuild(building, tile)) & !(workers.get(i).isConstructing())) {
+				workers.get(i).build(building, tile);
+				planToString();
+				ps.inc_points(1, 0);
+			}
+		}
+
 	}
 
 	public void upgrade(UpgradeType up) {
@@ -310,7 +324,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 			if (myUnit.canUpgrade(up)) {
 				myUnit.upgrade(up);
 				planToString();
-				ps.inc_points(1,0);
+				ps.inc_points(1, 0);
 				break;
 			}
 		}
@@ -322,7 +336,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 			if (myUnit.canResearch(tech)) {
 				myUnit.research(tech);
 				planToString();
-				ps.inc_points(3,0);
+				ps.inc_points(3, 0);
 				break;
 			}
 		}
@@ -341,19 +355,33 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public int trainUnit(UnitType unit, int number) {
-		
-			for (Unit myUnit : buildings) {
-				if (myUnit.canTrain(unit)) {
-					while (myUnit.getTrainingQueue().size() < 5 && number > 0) { //i have to do this so the building can train more than 4 units
-						if(((self.minerals() >= unit.mineralPrice()) && (self.gas() >= unit.gasPrice()))){
-							myUnit.train(unit);
-							number--;
-							ps.inc_points(4,1);
-						} else return number;
-					}			 
+
+		for (Unit myUnit : buildings) {
+			if (myUnit.canTrain(unit)) {
+				while (myUnit.getTrainingQueue().size() < 5 && number > 0) { // i
+																				// have
+																				// to
+																				// do
+																				// this
+																				// so
+																				// the
+																				// building
+																				// can
+																				// train
+																				// more
+																				// than
+																				// 4
+																				// units
+					if (((self.minerals() >= unit.mineralPrice()) && (self.gas() >= unit.gasPrice()))) {
+						myUnit.train(unit);
+						number--;
+						ps.inc_points(4, 1);
+					} else
+						return number;
 				}
 			}
-		
+		}
+
 		planToString();
 		return number;
 	}
@@ -363,11 +391,12 @@ public class Bot extends DefaultBWListener implements Runnable {
 		int maxDist = 3;
 		int stopDist = 40;
 
-		if (buildingType.isRefinery()) {
+		if (buildingType.isRefinery() && (!ref_exists)) {
 			for (Unit n : game.neutral().getUnits()) {
 				if ((n.getType() == UnitType.Resource_Vespene_Geyser)
 						&& (Math.abs(n.getTilePosition().getX() - aroundTile.getX()) < stopDist)
 						&& (Math.abs(n.getTilePosition().getY() - aroundTile.getY()) < stopDist)) {
+					ref_exists = true;
 					return n.getTilePosition();
 				}
 			}
@@ -402,7 +431,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	}
 
 	public void executeMainLoopActions() {
-		if (counter > 100) {//executes this tree each 100 frames
+		if (counter > 100) {// executes this tree each 100 frames
 			exe.getInd().trees[1].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
 					exe.getInd(), exe.getStbot());
 			counter = 0;
@@ -460,10 +489,10 @@ public class Bot extends DefaultBWListener implements Runnable {
 			// open cmd and run graphviz
 
 			rt.exec("dot -Tpng " + fileName + " -o pic.png");
-			
+
 			// then open the image with an image viewer
 
-			rt.exec("C:\\Program Files\\Mozilla Firefox\\firefox.exe pic.png");
+			Runtime.getRuntime().exec("C:\\Program Files\\Mozilla Firefox\\firefox.exe pic.png");
 
 		} catch (IOException e) {
 			e.printStackTrace();

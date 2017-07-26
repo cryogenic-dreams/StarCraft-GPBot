@@ -1,10 +1,8 @@
-#This is my dear conf file
-#I completely forgot about it yesterday
-#Never again
-
 parent.0 = ecj\\ec\\gp\\ge\\ge.params
 parent.1 = ecj\\ec\\gp\\koza\\koza.params
 
+pop.subpop.0.size =	10
+generations = 300
 
 #here we turn on the checkpointing
 checkpoint = true
