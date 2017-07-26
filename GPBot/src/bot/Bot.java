@@ -41,6 +41,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	private int counter;// adds a little delay in the tree evaluation
 	private int counter2;
 	private int counter3;
+	private int counter4;
 	private boolean ref_exists = false;
 
 	private PointSystem ps;
@@ -54,6 +55,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		counter = 0;
 		counter2 = 0;
 		counter3 = 0;
+		counter4 = 0;
 		ps = new PointSystem();
 		ref_exists = false;
 	}
@@ -104,6 +106,8 @@ public class Bot extends DefaultBWListener implements Runnable {
 		super.onUnitComplete(arg0);
 		go_construct = false;
 		// if ((arg0.getType().isBuilding()) && (arg0.getPlayer().equals(self)))
+		if(arg0.getType()==UnitType.Terran_Refinery) ref_exists = true;
+
 		addList(arg0);
 	}
 
@@ -118,6 +122,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		counter = 0;
 		counter2 = 0;
 		counter3 = 0;
+		counter4 = 0;
 		ref_exists = false;
 		try {
 			exe = this.individualsQueue.take();
@@ -143,9 +148,15 @@ public class Bot extends DefaultBWListener implements Runnable {
 					exe.getInd(), exe.getStbot());
 			System.out.println("---The Build Plan size is AFTER: " + exe.getInput().bp.size());
 			drawTree(exe.getInd().trees[0]);
-			this.workers = exe.getInput().workers;
-			this.squads = exe.getInput().squads;
-			this.buildings = exe.getInput().buildings;
+			
+			this.workers = new ArrayList<Unit>();
+			this.squads = new ArrayList<Unit>();
+			this.buildings = new ArrayList<Unit>();
+			exe.getInput().workers = this.workers;
+			exe.getInput().squads = this.squads;
+			exe.getInput().buildings = this.buildings;
+
+			
 		} else {
 			System.err.println("nexe nulo!!!");
 		}
@@ -165,16 +176,22 @@ public class Bot extends DefaultBWListener implements Runnable {
 											// add units on each loop, delaying
 											// it can be a solution
 				executeSquadActions();// squad actions (micro)
-
+				switchConstruct();
 			}
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
 		}
 	}
+	
+	public void switchConstruct(){
+		if (counter4 > 400) {
+			go_construct = false;//in case something when wrong
+			counter4 = 0;}
+		counter4++;
+	}
 
 	public void executeBuildPlan() {
 		if (counter3 > 100) {
-			go_construct = false;
 			buildPlan();
 			counter3 = 0;
 		}
@@ -217,6 +234,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 						if ((int) exe.getInput().bp.peek().getY() <= 0)
 							exe.getInput().bp.pop();
 					}
+					counter4 = 0;
 				}
 			}
 
@@ -301,16 +319,17 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 	public void buildBuilding(UnitType building) {
 		int i = 0;
+		TilePosition tile = null;
 		while ((workers.get(i).isGatheringGas() || workers.get(i).isConstructing()) && (i < workers.size()))
 			i++;
-		TilePosition tile = null;
+		
 		int tries=0;
 		while ((tile == null) && (tries<10)) {
 			tile = getBuildTile(workers.get(i), building, workers.get(i).getTilePosition());
 			tries++;
 		}
 		if (tile != null) {
-			if ((workers.get(i).canBuild(building, tile)) & !(workers.get(i).isConstructing())) {
+			if ((workers.get(i).canBuild(building, tile)) & (!workers.get(i).isConstructing())) {
 				workers.get(i).build(building, tile);
 				planToString();
 				ps.inc_points(1, 0);
@@ -388,7 +407,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 	public TilePosition getBuildTile(Unit builder, UnitType buildingType, TilePosition aroundTile) {
 		TilePosition ret = null;
-		int maxDist = 3;
+		int maxDist = 2;
 		int stopDist = 40;
 
 		if (buildingType.isRefinery() && (!ref_exists)) {
@@ -396,7 +415,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 				if ((n.getType() == UnitType.Resource_Vespene_Geyser)
 						&& (Math.abs(n.getTilePosition().getX() - aroundTile.getX()) < stopDist)
 						&& (Math.abs(n.getTilePosition().getY() - aroundTile.getY()) < stopDist)) {
-					ref_exists = true;
 					return n.getTilePosition();
 				}
 			}
@@ -404,7 +422,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 		while ((maxDist < stopDist) && (ret == null)) {
 			for (int i = aroundTile.getX() - maxDist; i <= aroundTile.getX() + maxDist; i++) {
-				for (int j = aroundTile.getY() - maxDist; j <= aroundTile.getY() + maxDist; j++) {
+				for (int j =  aroundTile.getY() - maxDist; j <= aroundTile.getY() + maxDist; j++) {
 					if (game.canBuildHere(new TilePosition(i, j), buildingType, builder, false)) {
 						// units that are blocking the tile
 						boolean unitsInWay = false;
