@@ -1,7 +1,7 @@
 perfect
 9999
 win
-1000
+2000
 building
 30
 research

@@ -1,8 +1,10 @@
 parent.0 = ecj\\ec\\gp\\ge\\ge.params
 parent.1 = ecj\\ec\\gp\\koza\\koza.params
 
-pop.subpop.0.size =	100
+pop.subpop.0.size =	50
 generations = 300
+quit-on-run-complete = false
+
 
 #here we turn on the checkpointing
 checkpoint = true
@@ -251,6 +253,7 @@ gp.fs.0.func.45 = terminals.CommandCenter
 gp.fs.0.func.45.nc = nc0
 gp.fs.0.func.46 = terminals.SupplyDepot
 gp.fs.0.func.46.nc = nc0
+gp.fs.0.func.46.prob = 0.6
 gp.fs.0.func.47 = nonTerminal.Barracks
 gp.fs.0.func.47.nc = nc2
 gp.fs.0.func.48 = nonTerminal.Bunker
