@@ -3,7 +3,7 @@ perfect
 win
 1000
 building
-50
+30
 research
 25
 squad training

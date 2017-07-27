@@ -110,9 +110,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		if (arg0.getType() == UnitType.Terran_Refinery)
 			ref_exists = true;
 		if (arg0.getPlayer() == self) {
-			game.setScreenPosition(arg0.getPosition().getX() + arg0.getPosition().getX() / 2,
-					arg0.getPosition().getY() + arg0.getPosition().getY() / 2);// close
-																				// enough
+			game.setScreenPosition(arg0.getTilePosition().toPosition());
 			addList(arg0);
 		}
 	}
