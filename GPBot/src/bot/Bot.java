@@ -1,11 +1,12 @@
 package bot;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
+
 import bwapi.DefaultBWListener;
 import bwapi.Game;
 import bwapi.Mirror;
@@ -105,10 +106,15 @@ public class Bot extends DefaultBWListener implements Runnable {
 	public void onUnitComplete(Unit arg0) {
 		super.onUnitComplete(arg0);
 		go_construct = false;
-		// if ((arg0.getType().isBuilding()) && (arg0.getPlayer().equals(self)))
-		if(arg0.getType()==UnitType.Terran_Refinery) ref_exists = true;
 
-		addList(arg0);
+		if (arg0.getType() == UnitType.Terran_Refinery)
+			ref_exists = true;
+		if (arg0.getPlayer() == self) {
+			game.setScreenPosition(arg0.getPosition().getX() + arg0.getPosition().getX() / 2,
+					arg0.getPosition().getY() + arg0.getPosition().getY() / 2);// close
+																				// enough
+			addList(arg0);
+		}
 	}
 
 	@Override
@@ -148,7 +154,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 					exe.getInd(), exe.getStbot());
 			System.out.println("---The Build Plan size is AFTER: " + exe.getInput().bp.size());
 			drawTree(exe.getInd().trees[0]);
-			
+
 			this.workers = new ArrayList<Unit>();
 			this.squads = new ArrayList<Unit>();
 			this.buildings = new ArrayList<Unit>();
@@ -156,7 +162,6 @@ public class Bot extends DefaultBWListener implements Runnable {
 			exe.getInput().squads = this.squads;
 			exe.getInput().buildings = this.buildings;
 
-			
 		} else {
 			System.err.println("nexe nulo!!!");
 		}
@@ -182,11 +187,12 @@ public class Bot extends DefaultBWListener implements Runnable {
 			e.printStackTrace(System.err);
 		}
 	}
-	
-	public void switchConstruct(){
+
+	public void switchConstruct() {
 		if (counter4 > 400) {
-			go_construct = false;//in case something when wrong
-			counter4 = 0;}
+			go_construct = false;// in case something when wrong
+			counter4 = 0;
+		}
 		counter4++;
 	}
 
@@ -322,9 +328,9 @@ public class Bot extends DefaultBWListener implements Runnable {
 		TilePosition tile = null;
 		while ((workers.get(i).isGatheringGas() || workers.get(i).isConstructing()) && (i < workers.size()))
 			i++;
-		
-		int tries=0;
-		while ((tile == null) && (tries<10)) {
+
+		int tries = 0;
+		while ((tile == null) && (tries < 10)) {
 			tile = getBuildTile(workers.get(i), building, workers.get(i).getTilePosition());
 			tries++;
 		}
@@ -422,7 +428,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 		while ((maxDist < stopDist) && (ret == null)) {
 			for (int i = aroundTile.getX() - maxDist; i <= aroundTile.getX() + maxDist; i++) {
-				for (int j =  aroundTile.getY() - maxDist; j <= aroundTile.getY() + maxDist; j++) {
+				for (int j = aroundTile.getY() - maxDist; j <= aroundTile.getY() + maxDist; j++) {
 					if (game.canBuildHere(new TilePosition(i, j), buildingType, builder, false)) {
 						// units that are blocking the tile
 						boolean unitsInWay = false;
@@ -510,9 +516,11 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 			// then open the image with an image viewer
 
+			TimeUnit.SECONDS.sleep(1);// 1 second to go from .dot to png
+
 			Runtime.getRuntime().exec("C:\\Program Files\\Mozilla Firefox\\firefox.exe pic.png");
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

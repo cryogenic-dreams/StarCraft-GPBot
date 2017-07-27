@@ -1,7 +1,7 @@
 parent.0 = ecj\\ec\\gp\\ge\\ge.params
 parent.1 = ecj\\ec\\gp\\koza\\koza.params
 
-pop.subpop.0.size =	10
+pop.subpop.0.size =	100
 generations = 300
 
 #here we turn on the checkpointing
