@@ -1,0 +1,2 @@
+TO DO:
+- It'll be nice if the bot itself updated the file fitnessparams.txt to what it thinks has better scores.

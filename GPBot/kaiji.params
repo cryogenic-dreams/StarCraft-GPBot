@@ -73,6 +73,7 @@ gp.fs.2.func.10 = nonTerminal.DoCloak
 gp.fs.2.func.10.nc = nc1
 gp.fs.2.func.11 = nonTerminal.Attack
 gp.fs.2.func.11.nc = nc2
+gp.fs.2.func.11.prob = 0.8
 gp.fs.2.func.12 = nonTerminal.DoTank
 gp.fs.2.func.12.nc = nc1
 gp.fs.2.func.13 = nonTerminal.DoSiege

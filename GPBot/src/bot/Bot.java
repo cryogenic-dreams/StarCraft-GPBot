@@ -151,8 +151,8 @@ public class Bot extends DefaultBWListener implements Runnable {
 			exe.getInd().trees[0].child.eval(exe.getState(), exe.getThreadnum(), exe.getInput(), exe.getStack(),
 					exe.getInd(), exe.getStbot());
 			System.out.println("---The Build Plan size is AFTER: " + exe.getInput().bp.size());
-			drawTree(exe.getInd().trees[0]);
-
+			drawTree(exe.getInd().trees[2],2);
+			drawTree(exe.getInd().trees[0],0);
 			this.workers = new ArrayList<Unit>();
 			this.squads = new ArrayList<Unit>();
 			this.buildings = new ArrayList<Unit>();
@@ -499,9 +499,9 @@ public class Bot extends DefaultBWListener implements Runnable {
 		}
 	}
 
-	public void drawTree(GPTree tree) {
+	public void drawTree(GPTree tree, int num) {
 		try {
-			String fileName = "E:\\StarCraft-GPBot\\GPBot\\file.dot";
+			String fileName = "E:\\StarCraft-GPBot\\GPBot\\file"+num+".dot";
 			File f = new File(fileName);
 			PrintStream pw = new PrintStream(f);
 			pw.println(tree.child.makeGraphvizTree());
@@ -510,13 +510,13 @@ public class Bot extends DefaultBWListener implements Runnable {
 			Runtime rt = Runtime.getRuntime();
 			// open cmd and run graphviz
 
-			rt.exec("dot -Tpng " + fileName + " -o pic.png");
+			rt.exec("dot -Tpng " + fileName + " -o pic"+num+".png");
 
 			// then open the image with an image viewer
 
 			TimeUnit.SECONDS.sleep(1);// 1 second to go from .dot to png
 
-			Runtime.getRuntime().exec("C:\\Program Files\\Mozilla Firefox\\firefox.exe pic.png");
+			Runtime.getRuntime().exec("C:\\Program Files\\Mozilla Firefox\\firefox.exe pic"+num+".png");
 
 		} catch (Exception e) {
 			e.printStackTrace();

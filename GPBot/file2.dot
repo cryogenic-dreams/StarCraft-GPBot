@@ -1,0 +1,18 @@
+digraph g {
+graph [ordering=out];
+node [shape=rectangle];
+n[label = "ini"];
+n0[label = "move"];
+n00[label = "quantity18"];
+n0 -> n00;
+n01[label = "go_position"];
+n010[label = "quantity15"];
+n01 -> n010;
+n011[label = "supply0"];
+n01 -> n011;
+n0 -> n01;
+n -> n0;
+n1[label = "do_scanner"];
+n -> n1;
+}
+

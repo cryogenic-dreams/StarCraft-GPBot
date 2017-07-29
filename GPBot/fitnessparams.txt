@@ -7,6 +7,6 @@ building
 research
 25
 squad training
-50
+40
 kill
 100
