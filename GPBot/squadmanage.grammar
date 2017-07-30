@@ -1,8 +1,8 @@
 <ini> ::= (ini <passive> <aggressive>)
-<passive> ::= <passive_acts>
-<aggressive> ::= <aggressive_acts>
-<passive_acts> ::= <passive_act> <empty> | <passive_act> <passive_acts>
-<aggressive_acts> ::= <aggressive_act> <empty> | <aggressive_act> <aggressive_acts>
+<passive> ::= (passive <passive_acts>)
+<aggressive> ::= (aggressive <aggressive_acts>)
+<passive_acts> ::= (passive_acts <passive_act> <empty>) | (passive_acts <passive_act> <passive_acts>)
+<aggressive_acts> ::= (aggressive_acts <aggressive_act> <empty>) | (aggressive_acts <aggressive_act> <aggressive_acts>)
 <passive_act> ::= <hold> | <move> | <block> | <patrol> | <load> | <unload> | <do_scanner> | <do_cloak>
 <aggressive_act> ::= <attack> | <move> | <load> | <unload> | <do_tank> | <do_scanner> | <do_cloak> | <do_siege> | <do_stim_pack> | <do_spider_mines> | <do_restoration> | <do_optical_flare> | <do_nuclear_strike> | <do_yamato> | <do_lockdown> | <do_defensive_matrix> | <do_irradiate> | <do_EMP>
 <hold> ::= (hold <quantity>)

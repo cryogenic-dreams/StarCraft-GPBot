@@ -48,7 +48,7 @@ gp.fs.1.name = f1
 gp.fs.2.name = f2
 
 #functionset2:
-gp.fs.2.size = 28
+gp.fs.2.size = 34
 gp.fs.2.func.0 = nonTerminal.Ini
 gp.fs.2.func.0.nc = nc2
 gp.fs.2.func.1 = nonTerminal.Hold
