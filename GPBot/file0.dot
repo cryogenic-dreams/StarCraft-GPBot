@@ -17,7 +17,7 @@ n00 -> n001;
 n002[label = "starport"];
 n0020[label = "starport_squads"];
 n00200[label = "wraith"];
-n002000[label = "supply0"];
+n002000[label = "quantity8"];
 n00200 -> n002000;
 n0020 -> n00200;
 n002 -> n0020;

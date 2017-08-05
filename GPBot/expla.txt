@@ -14,4 +14,4 @@ so don't ask me questions in the chat, please, I won't see them.
 supply node is currently set at 0 or 1 because it caused malfunctioning (well... more or less)
 There are other 2 trees (the one shown is from the buildplan), they're for actions inside the game's loop
 
-Days running: 1
+Days running: 
