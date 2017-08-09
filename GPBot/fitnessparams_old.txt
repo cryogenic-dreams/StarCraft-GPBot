@@ -10,3 +10,17 @@ squad training
 40
 kill
 100
+
+
+perfect
+9999
+win
+2000
+building
+0
+research
+0
+squad training
+5
+kill
+50

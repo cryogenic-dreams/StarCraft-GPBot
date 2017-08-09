@@ -31,6 +31,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 	private List<Unit> workers = new ArrayList<Unit>();
 	private List<Unit> squads = new ArrayList<Unit>();
 	private List<Unit> buildings = new ArrayList<Unit>();
+	private List<Unit> enemies = new ArrayList<Unit>();
 	public double currentX;
 	public double currentY;
 	public boolean go_construct = false;
@@ -98,7 +99,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 			// found enemy, entering aggressive mode
 			game.printf("Found ya!");
 			exe.getInput().state = 1;
-			// enemies.add(arg0);
+			enemies.add(arg0);
 		}
 	}
 
@@ -128,6 +129,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		counter3 = 0;
 		counter4 = 0;
 		ref_exists = false;
+		
 		try {
 			exe = this.individualsQueue.take();
 		} catch (InterruptedException e) {
@@ -153,13 +155,15 @@ public class Bot extends DefaultBWListener implements Runnable {
 			System.out.println("---The Build Plan size is AFTER: " + exe.getInput().bp.size());
 			drawTree(exe.getInd().trees[2],2);
 			drawTree(exe.getInd().trees[0],0);
+			
 			this.workers = new ArrayList<Unit>();
 			this.squads = new ArrayList<Unit>();
 			this.buildings = new ArrayList<Unit>();
+			this.enemies = new ArrayList<Unit>();
 			exe.getInput().workers = this.workers;
 			exe.getInput().squads = this.squads;
 			exe.getInput().buildings = this.buildings;
-
+			exe.getInput().enemies = this.enemies;
 		} else {
 			System.err.println("nexe nulo!!!");
 		}
