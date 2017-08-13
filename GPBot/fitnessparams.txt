@@ -3,10 +3,10 @@ perfect
 win
 2000
 building
-0
-research
-0
-squad training
-0
-kill
 5
+research
+5
+squad training
+5
+kill
+15
