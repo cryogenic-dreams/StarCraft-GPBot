@@ -1,12 +1,12 @@
 perfect
 9999
 win
-2000
+4000
 building
 5
 research
 5
 squad training
-5
+10
 kill
-15
+20
