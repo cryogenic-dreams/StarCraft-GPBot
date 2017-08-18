@@ -1,7 +1,7 @@
 <techtree> ::= <buildplan>
 <buildplan> ::= (buildplan <buildings> <basicbuildings>)
 <basicbuildings> ::= (basicbuildings <basicbuilding> <empty>) | (basicbuildings <basicbuilding> <basicbuildings>)
-<basicbuilding> ::= (supply_depot) | (refinery) | (command_center) | <scv>
+<basicbuilding> ::= (supply_depot) | (refinery) | (command_center) | <scv> | (supply_depot)
 <buildings> ::= (buildings <building> <empty>) | (buildings <building> <buildings>)
 <building> ::= <scv> | (supply_depot) | (refinery) | <barracks> | <engineering_bay> | <factory> | <bunker> | <academy> | <missile_turret> | <starport> | <armory> | <machine_shop> | <comsat_station> | <science_facility> | <control_tower> | <physics_lab> | <covert_ops> | <nuclear_silo>
 <barracks> ::= (barracks <barrack_squads> <supply>)

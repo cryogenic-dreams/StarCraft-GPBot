@@ -22,6 +22,7 @@ import support.ExeContext;
 import support.GimmeTheGame;
 import support.PointSystem;
 import support.Tuple;
+import support.UnitTuple;
 
 public class Bot extends DefaultBWListener implements Runnable {
 
@@ -100,6 +101,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 			game.printf("Found ya!");
 			exe.getInput().state = 1;
 			enemies.add(arg0);
+			attack();
 		}
 	}
 
@@ -176,6 +178,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 			if (exe != null) {
 
 				workYourAss();
+				switchConstruct();
 
 				executeBuildPlan();// build from build plan mainly (macro)
 				executeMainLoopActions();// miscelaneous actions (micro)
@@ -183,7 +186,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 											// add units on each loop, delaying
 											// it can be a solution
 				executeSquadActions();// squad actions (micro)
-				switchConstruct();
+				if(!enemies.isEmpty()) attack();
 			}
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
@@ -329,7 +332,7 @@ public class Bot extends DefaultBWListener implements Runnable {
 		int i = 0;
 		TilePosition tile = null;
 		while ((workers.get(i).isGatheringGas() || workers.get(i).isConstructing()) && (i < workers.size()))
-			i++;
+			i++;//do not choose the one that is gathering gas
 
 		int tries = 0;
 		while ((tile == null) && (tries < 10)) {
@@ -385,21 +388,13 @@ public class Bot extends DefaultBWListener implements Runnable {
 
 		for (Unit myUnit : buildings) {
 			if (myUnit.canTrain(unit)) {
-				while (myUnit.getTrainingQueue().size() < 5 && number > 0) { // i
-																				// have
-																				// to
-																				// do
-																				// this
-																				// so
-																				// the
-																				// building
-																				// can
-																				// train
-																				// more
-																				// than
-																				// 4
-																				// units
-					if (((self.minerals() >= unit.mineralPrice()) && (self.gas() >= unit.gasPrice()))) {
+				while (myUnit.getTrainingQueue().size() < 5 && number > 0) {
+					if (((self.minerals() >= unit.mineralPrice()) && (self.gas() >= unit.gasPrice()))){ 
+							if (!(self.supplyTotal() - self.supplyUsed() < 1)){
+								supplyDepot();
+								return number;
+							}
+
 						myUnit.train(unit);
 						number--;
 						ps.inc_points(4, 1);
@@ -535,4 +530,36 @@ public class Bot extends DefaultBWListener implements Runnable {
 		System.out.println("Supply: " + sup);
 		System.err.println("B/S/T/U: " + o.toString());
 	}
+	
+	public void attack(){
+		//I'm desperate, ok?
+		if ((!enemies.isEmpty()) && (!squads.isEmpty())) {
+			for (Unit unit : squads) {
+				if ((!unit.isAttacking()) && (unit.canAttack())) {
+					Unit enemy1 = enemies.get(0);
+					int distance = unit.getDistance(enemies.get(0));
+					for (Unit enemy2 : enemies) {
+						// get nearest enemy
+						if (unit.getDistance(enemy2) < distance) {
+							distance = unit.getDistance(enemy2);
+							enemy1 = enemy2;
+						}
+					}
+					unit.attack(enemy1);
+					//q--;
+				}
+//				if (q <= 0) {
+//					break;
+//				}
+			}
+		}
+	}
+	
+	public void supplyDepot(){
+			//exe.getInput().bp.push(new UnitTuple(UnitType.Terran_Supply_Depot,0));
+		buildBuilding(UnitType.Terran_Supply_Depot);	
+		go_construct =true;
+	}
+	
+	
 }

@@ -9,4 +9,4 @@ research
 squad training
 10
 kill
-20
+40
