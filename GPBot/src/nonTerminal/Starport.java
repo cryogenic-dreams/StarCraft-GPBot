@@ -25,18 +25,16 @@ public class Starport extends GPNode {
 	}
 
 	public int expectedChildren() {
-		return 3;
+		return 2;
 	}
 
 	public void eval(final EvolutionState state, final int thread, final GPData input, final ADFStack stack,
 			final GPIndividual individual, final Problem problem) {
 
 		GameData rd = ((GameData) (input));
-		children[2].eval(state, thread, input, stack, individual, problem);//supply
 		children[0].eval(state, thread, input, stack, individual, problem);//tech
-		rd.bp.push(new UnitTuple(UnitType.Terran_Starport, rd.s)); // Push of yourself and your last node, which is the supply or the quantity
-		int supply = rd.s;
+		rd.bp.push(new UnitTuple(UnitType.Terran_Starport, 0)); // Push of yourself and your last node, which is the supply or the quantity
 		children[1].eval(state, thread, input, stack, individual, problem);//pre-building
-		System.out.println("starport | supply: " + supply);
+		System.out.println("starport");
     }
 }

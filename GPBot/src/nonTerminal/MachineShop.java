@@ -25,19 +25,17 @@ public class MachineShop extends GPNode {
 	}
 
 	public int expectedChildren() {
-		return 4;
+		return 3;
 	}
 
 	public void eval(final EvolutionState state, final int thread, final GPData input, final ADFStack stack,
 			final GPIndividual individual, final Problem problem) {
 
 		GameData rd = ((GameData) (input));
-		children[3].eval(state, thread, input, stack, individual, problem);//supply
 		children[0].eval(state, thread, input, stack, individual, problem);//tech
 		children[1].eval(state, thread, input, stack, individual, problem);//squads
-		rd.bp.push(new UnitTuple(UnitType.Terran_Machine_Shop, rd.s)); // Push of yourself and your last node, which is the supply or the quantity
-		int supply = rd.s;
+		rd.bp.push(new UnitTuple(UnitType.Terran_Machine_Shop, 0)); // Push of yourself and your last node, which is the supply or the quantity
 		children[2].eval(state, thread, input, stack, individual, problem);//pre-building
-		System.out.println("machine_shop | supply: " + supply);
+		System.out.println("machine_shop");
     }
 }

@@ -24,7 +24,7 @@ public class EngineeringBay extends GPNode {
 		return "engineering_bay";//this is for the magic, aka the grammar
 	}
 	public int expectedChildren() {
-		return 2;//this
+		return 1;//this
 	}
 
 
@@ -33,9 +33,7 @@ public class EngineeringBay extends GPNode {
 
 		GameData rd = ((GameData) (input));
 		children[0].eval(state, thread, input, stack, individual, problem);//tech
-		children[1].eval(state, thread, input, stack, individual, problem);//supply
-		rd.bp.push(new UnitTuple(UnitType.Terran_Engineering_Bay, rd.s)); // Push of yourself and your last node, which is the supply or the quantity
-		int supply = rd.s;
-		System.out.println("engineering_bay | supply: " + supply);
+		rd.bp.push(new UnitTuple(UnitType.Terran_Engineering_Bay, 0)); // Push of yourself and your last node, which is the supply or the quantity
+		System.out.println("engineering_bay");
     }
 }
