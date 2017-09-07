@@ -3,10 +3,10 @@ perfect
 win
 4000
 building
-5
+2
 research
 5
 squad training
-10
+5
 kill
 40

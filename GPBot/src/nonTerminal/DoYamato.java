@@ -34,7 +34,7 @@ public class DoYamato extends GPNode {
 		// this does:
 		// Given a number of bc, they use yamato on the nearest enemy
 		GameData gd = ((GameData) (input));
-
+		gd.q = 0;
 		children[0].eval(state, thread, input, stack, individual, problem);
 		children[1].eval(state, thread, input, stack, individual, problem);
 

@@ -49,8 +49,8 @@ gp.fs.2.name = f2
 
 # Inicialization
 gp.tc.0.init =  ec.gp.build.PTC1
-gp.tc.0.init.expected-size = 10
-gp.tc.0.init.max-depth = 5
+gp.tc.0.init.expected-size = 8
+gp.tc.0.init.max-depth = 4
 
 gp.tc.1.init =  ec.gp.build.PTC1
 gp.tc.1.init.expected-size = 10

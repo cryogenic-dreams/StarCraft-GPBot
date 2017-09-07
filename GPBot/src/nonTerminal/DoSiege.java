@@ -32,7 +32,7 @@ public class DoSiege extends GPNode {
 			final GPIndividual individual, final Problem problem) {
 
 		GameData gd = ((GameData) (input));
-
+		gd.q = 0;
 		children[0].eval(state, thread, input, stack, individual, problem);
 
 		int q = gd.q;

@@ -26,7 +26,7 @@
 <do_defensive_matrix> ::= (do_defensive_matrix <quantities>)
 <do_irradiate> ::= (do_irradiate <quantities> <enemy>)
 <do_EMP> ::= (do_EMP <quantities> <enemy>)
-<quantities> ::= (quantities <quantity0> <quantities>) | (quantities <quantity1> <quantities>) | (quantities <quantity5> <quantities>) | (quantities <quantity10> <quantities>) | (quantities <quantity20> <quantities>)
+<quantities> ::= (quantities <quantity0> <empty>) | (quantities <quantity0> <quantities>) | (quantities <quantity1> <quantities>) | (quantities <quantity5> <quantities>) | (quantities <quantity10> <quantities>) | (quantities <quantity20> <quantities>)
 <quantity0> ::= (quantity0)
 <quantity1> ::= (quantity1)
 <quantity5> ::= (quantity5)

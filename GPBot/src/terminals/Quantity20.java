@@ -24,7 +24,7 @@ public class Quantity20 extends GPNode{
 		return "quantity20";//this is for the magic, aka the grammar
 	}
 	public int expectedChildren() {
-		return 20;//this
+		return 0;//this
 	}
 
 

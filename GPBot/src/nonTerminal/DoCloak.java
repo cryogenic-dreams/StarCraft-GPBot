@@ -34,7 +34,7 @@ public class DoCloak extends GPNode {
 		//this does:
 			//Given a number of units, this node orders them to cloak
 		GameData gd = ((GameData) (input));
-
+		gd.q = 0;
 		children[0].eval(state, thread, input, stack, individual, problem);
 
 		int q = gd.q;

@@ -34,7 +34,7 @@ public class DoOpticalFlare extends GPNode {
 		// this does:
 		// given a number of medics, they cast flare to their nearest enemy
 		GameData gd = ((GameData) (input));
-
+		gd.q = 0;
 		children[0].eval(state, thread, input, stack, individual, problem);
 		children[1].eval(state, thread, input, stack, individual, problem);
 

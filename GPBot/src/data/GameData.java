@@ -72,5 +72,8 @@ public class GameData extends GPData {
 		if (buildings == null){
 			buildings = new ArrayList<Unit>();
 		}
+		if (enemies == null){
+			enemies = new ArrayList<Unit>();
+		}
 	}
 }

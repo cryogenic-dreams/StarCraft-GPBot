@@ -37,7 +37,7 @@ public class DoLockDown extends GPNode {
 		// this does:
 		// Given a number of Vessel units, this node orders them to cast lockdown
 		GameData gd = ((GameData) (input));
-
+		gd.q = 0;
 		children[0].eval(state, thread, input, stack, individual, problem);
 		children[1].eval(state, thread, input, stack, individual, problem);
 

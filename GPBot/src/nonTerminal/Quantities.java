@@ -36,6 +36,5 @@ public class Quantities extends GPNode{
 		((GameData) input).q = quantity + ((GameData) input).q;
 		children[1].eval(state, thread, input, stack, individual, problem);
 
-
     }
 }

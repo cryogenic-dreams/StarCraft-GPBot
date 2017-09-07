@@ -38,7 +38,7 @@ public class DoEMP extends GPNode {
 		// Given a number of Vessel units, this node orders them to cast a
 		// shockwave
 		GameData gd = ((GameData) (input));
-
+		gd.q = 0;
 		children[0].eval(state, thread, input, stack, individual, problem);
 		children[1].eval(state, thread, input, stack, individual, problem);
 
