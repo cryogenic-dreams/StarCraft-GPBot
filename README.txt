@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcryogenic-dreams%2FStarCraft-GPBot.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcryogenic-dreams%2FStarCraft-GPBot?ref=badge_shield)
+
 　　　　　　　|　　　　　　 /|ｲ､l_;;::::|ﾉ_,.ゝ.　ﾄ､ ﾄ､l
 　　　　　　　|　　　　 ,ｲ/`''‐､_,ﾘ::::;ﾘ,. -ﾍﾄ | ヽ! `
 　　　　　　　|　　, ‐､ r'＝=｡===;;;::::(=｡=＝|ヽ!　　　　　　　　　　　 v　 、
@@ -22,3 +24,7 @@ In order to make it work you'll need:
 7. GPBot folder (MightBeUseful is not necessary).
 
 I'll update with links, and more indications of how to install and make it work as soon as I can.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcryogenic-dreams%2FStarCraft-GPBot.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcryogenic-dreams%2FStarCraft-GPBot?ref=badge_large)
